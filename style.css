@@ -4,11 +4,19 @@
     header {
         padding: 0 36px;
     }
-} 
+}
 
 * {
     margin: 0;
     padding: 0;
+}
+
+:root {
+    --main-bg2-color: #070606;
+    --main-bg-color: green;
+    --secundary-bg-color: rgb(50, 167, 50);
+    --primary-border-color: green;
+    --secundary-border-color: rgb(50, 167, 50);
 }
 
 body {
@@ -18,9 +26,8 @@ body {
 li {
     list-style-type: none;
     display: flex;
-    padding: 0 10px;
-}   
-  
+}
+
 header {
     display: flex;
     justify-content: center;
@@ -33,7 +40,7 @@ header {
 .logo .imagem {
     display: inline-block;
     height: auto;
-    width: 100% ;
+    width: 100%;
     -webkit-user-drag: none;
     cursor: pointer;
 }
@@ -64,19 +71,21 @@ header {
     padding: 0 20px;
 }
 
+.navegacao_conteudo_link {
+    padding: 0 10px;
+}
+
 .navegacao_conteudo_link_texto {
-    color: black !important;
-    background-image: linear-gradient(
-      to right,
-      green,
-      green 50%,
-      #000 50%
-    );
+    color: var(--main-bg2-color) !important;
+    background-image: linear-gradient(to right,
+            var(--main-bg-color),
+            var(--main-bg-color) 50%,
+            var(--main-bg2-color) 50%);
     background-size: 200% 100%;
     background-position: -100%;
     display: flex;
     position: relative;
-    -webkit-background-clip: text; /* deve ser por causa que isso aqui é para scss e nao para css só ignora :V*/
+    -webkit-background-clip: text;     /* deve ser por causa que isso aqui é para scss e nao para css só ignora :V*/
     -webkit-text-fill-color: transparent;
     transition: all 0.3s ease-in-out;
     font-family: 'Inter', sans-serif;
@@ -85,11 +94,11 @@ header {
     user-select: none;
     -webkit-user-drag: none;
     letter-spacing: 0.05em;
-  }
-  
-  .navegacao_conteudo_link_texto:before {
+}
+
+.navegacao_conteudo_link_texto:before {
     content: '';
-    background: rgb(30, 158, 30);
+    background: var(--secundary-bg-color);
     display: block;
     position: absolute;
     bottom: -3px;
@@ -97,48 +106,70 @@ header {
     width: 0;
     height: 3px;
     transition: all 0.3s ease-in-out;
-  }
-  
-  .navegacao_conteudo_link_texto:hover {
-   background-position: 0;
-  }
-  
-  .navegacao_conteudo_link_texto:hover::before {
-    width:100%;
-  }
+}
 
-  .cadastro {
+.navegacao_conteudo_link_texto:hover {
+    background-position: 0;
+}
+
+.navegacao_conteudo_link_texto:hover::before {
+    width: 100%;
+}
+
+.navegacao_botao_conteudo_link {
+    padding: 0 24px;
+}
+
+.cadastro {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.05em;
     color: white;
     font-weight: 600;
-    text-decoration-color: white;
     border-radius: 2px;
-    border: 2px solid rgb(54, 199, 17); 
-    background-color: rgb(54, 199, 17);
+    border: 2px solid var(--secundary-border-color);
+    background-color: var(--secundary-bg-color);
     padding: 9px;
     width: 120px;
     outline: none;
-    box-shadow: none;
-    text-align: center; 
-    white-space: nowrap; 
-    overflow: hidden; 
+    text-align: center;
+    cursor: pointer;
 }
 
-.cadastro:focus {
+.cadastro:hover {
+    background-color: transparent;
+    color: var(--secundary-bg-color);
+    transition: color .2s ease-in-out, .2s ease-in-out, .2s ease-in-out;
+}
+
+.entrar {
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.05em;
+    color: var(--main-bg2-color);
+    font-weight: 600;
+    border-radius: 2px;
+    border: 2px solid var(--main-bg2-color);
+    background-color: transparent;
+    padding: 9px;
+    width: 120px;
     outline: none;
-    box-shadow: none;
+    text-align: center;
+    cursor: pointer;
 }
 
-
-/*começo do efeito carrosel(ou tentando)*/
-
-.ajeitado
-{
-    padding-left: 50%;
+.entrar:hover {
+    color: var(--secundary-bg-color);
+    border-color: var(--secundary-border-color);
+    transition: color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
+
+.ajeitado {
+    position: relative;
+    left: 40%;
+}
+
 
 .slider{
-    overflow: hidden;
-
+    overflow: hidden; 
 }
 .slider > .slider-content{
     display: flex;
@@ -163,5 +194,3 @@ header {
 .slider > input:nth-child(3):checked ~ .slider-content{
     transform: translateX(-200%);
 }
-
-
