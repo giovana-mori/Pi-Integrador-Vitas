@@ -26,6 +26,18 @@ header {
     justify-content: center;
 }
 
+.logo {
+    width: 90px;
+}
+
+.logo .imagem {
+    display: inline-block;
+    height: auto;
+    width: 100% ;
+    -webkit-user-drag: none;
+    cursor: pointer;
+}
+
 .cabecalho {
     display: flex;
     width: min-content;
@@ -39,6 +51,17 @@ header {
 
 .navegacao_conteudo {
     display: flex;
+}
+
+.navegacao_botao {
+    display: flex;
+    padding-left: 14px;
+    align-items: center;
+}
+
+.navegacao_botao_conteudo {
+    display: flex;
+    padding: 0 20px;
 }
 
 .navegacao_conteudo_link_texto {
@@ -84,14 +107,23 @@ header {
     width:100%;
   }
 
-.logo {
-    width: 90px;
+  .cadastro {
+    color: white;
+    font-weight: 600;
+    text-decoration-color: white;
+    border-radius: 2px;
+    border: 2px solid rgb(54, 199, 17); 
+    background-color: rgb(54, 199, 17);
+    padding: 9px;
+    width: 120px;
+    outline: none;
+    box-shadow: none;
+    text-align: center; 
+    white-space: nowrap; 
+    overflow: hidden; 
 }
 
-.logo .imagem {
-    display: inline-block;
-    height: auto;
-    width: 100% ;
-    -webkit-user-drag: none;
-    cursor: pointer;
+.cadastro:focus {
+    outline: none;
+    box-shadow: none;
 }
