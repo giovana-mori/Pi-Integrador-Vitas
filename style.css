@@ -164,44 +164,15 @@ header {
 
 .ajeitado {
     position: relative;
-    left: 40%;
+    left: 34%;
+    width: 700px;
+    height: 700px;
 }
 
-
-.slider{
-    overflow: hidden; 
-}
-.slider > .slider-content{
-    display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
-    transition: all 500ms ease;
-
+button, input, optgroup, select, textarea
+{
+     font-size:smaller; 
+     line-height: normal;
+     
 }
 
-/*teste pra ver se funciona*/
-/*teste pra ver se funciona*/
-/*teste pra ver se funciona*/
-/*teste pra ver se funciona*/
-/*teste pra ver se funciona*/
-
-/*teste pra ver se funciona*/
-/*teste pra ver se funciona*/
-/*teste pra ver se funciona*/
-
-
-.slider > .slider-content > .slider-item {
-    flex: 0 0 auto;
-    width: 100%;
-}
-
-.slider > input:nth-child(1):checked ~ .slider-content{
-    transform: translateX(0%);
-}
-
-.slider > input:nth-child(2):checked ~ .slider-content{
-    transform: translateX(-100%);
-}
-.slider > input:nth-child(3):checked ~ .slider-content{
-    transform: translateX(-200%);
-}
