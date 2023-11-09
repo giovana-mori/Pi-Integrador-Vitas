@@ -9,6 +9,11 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+dl, ol, ul {
+    margin-bottom: 0;
 }
 
 :root {
