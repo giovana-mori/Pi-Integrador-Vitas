@@ -1,6 +1,6 @@
 @font-face{
     font-family: mulish;
-    src: url(./static/fonts/Mulish-Black.ttf);
+    src: url(./static/fonts/Mulish-Regular.ttf);
 }
 * {
     margin: 0;
@@ -17,20 +17,42 @@ body{
     align-items: center;
     justify-content: space-around;
     width: 100%;
-    justify-self:center;
+    justify-self: center;
 }
 
 menu {
     display: flex;
     width: 60%;
+    justify-content: center;
 }
 
 menu > li {
     font-family: mulish;
     list-style-type: none;
-
-    margin: 0 4px;
-    width: 45px;
+    margin: 0 10px;
+    width: auto;
     height: 23px;
-    
+    flex-grow: 0;
 }
+
+menu > li > a {
+    font-weight: 400px;
+    line-height: 17px;
+    cursor: pointer;
+    color: #031C0C;
+}
+
+menu > li > a::after {
+    display: block;
+    content: '';
+    position: relative;
+    height: 1.8px;
+    width: 0%;
+    background-color: #031C0C;
+    transition: cubic-bezier(0.93,-0.07, 0.53, 1.42) 0.2s;
+}
+
+menu > li > a:hover::after {
+    width: 100%;
+}
+
