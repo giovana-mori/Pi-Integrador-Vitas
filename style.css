@@ -1,14 +1,15 @@
-@font-face{
+@font-face {
     font-family: mulish;
     src: url(./static/fonts/Mulish-Regular.ttf);
+}
+
+@font-face {
+    font-family: mulish_italic;
+    src: url(./static/fonts/Mulish-Italic.ttf);
 }
 * {
     margin: 0;
     padding: 0
-}
-
-body{
-    display: flex;
 }
 
 
@@ -17,7 +18,9 @@ body{
     align-items: center;
     justify-content: space-around;
     width: 100%;
-    justify-self: center;
+    justify-self:center;
+    height: 100px;
+
 }
 
 menu {
@@ -56,3 +59,64 @@ menu > li > a:hover::after {
     width: 100%;
 }
 
+
+.q > ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+}
+
+.q > ul > li {
+    margin: 0 10px;
+    
+}
+
+.q > ul > li > a {
+    font-family: mulish;
+    font-weight: 400 ;
+    display: flex;
+    align-items: center;
+}
+    
+
+.q > ul > li > a > img {
+    margin: 0 3px;
+} 
+
+
+.q button {
+    padding: 10px;
+    background: white;
+    border: 3px solid black;
+    font-size: 16px;
+    border-radius: 7px;
+}
+
+.container_2
+{
+    display: flex;
+    color:white;
+    width: 100%;
+    height: 267px;
+    background-color: #031C0C;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.contato {
+    width: 181px;
+    height: auto;
+}
+
+.contato li, .dados_empresa  li {
+    font-family: mulish_italic;
+    list-style-type: none;
+}
+
+.container_2 img {
+    height: auto;
+    width: 100px;
+    place-self: baseline;
+    margin-top: 43px;
+}
