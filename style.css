@@ -7,6 +7,12 @@
     font-family: mulish_italic;
     src: url(./static/fonts/Mulish-Italic.ttf);
 }
+
+@font-face {
+    font-family: mulish_black;
+    src: url(./static/fonts/Mulish-Black.ttf);
+}
+
 * {
     margin: 0;
     padding: 0
@@ -18,7 +24,7 @@
     align-items: center;
     justify-content: space-around;
     width: 100%;
-    justify-self:center;
+    justify-self: center;
     height: 100px;
 
 }
@@ -29,7 +35,7 @@ menu {
     justify-content: center;
 }
 
-menu > li {
+menu>li {
     font-family: mulish;
     list-style-type: none;
     margin: 0 10px;
@@ -38,64 +44,65 @@ menu > li {
     flex-grow: 0;
 }
 
-menu > li > a {
+menu>li>a {
     font-weight: 400px;
     line-height: 17px;
     cursor: pointer;
     color: #031C0C;
 }
 
-menu > li > a::after {
+menu>li>a::after {
     display: block;
     content: '';
     position: relative;
     height: 1.8px;
     width: 0%;
     background-color: #031C0C;
-    transition: cubic-bezier(0.93,-0.07, 0.53, 1.42) 0.2s;
+    transition: cubic-bezier(0.93, -0.07, 0.53, 1.42) 0.2s;
 }
 
-menu > li > a:hover::after {
+menu>li>a:hover::after {
     width: 100%;
 }
 
 
-.q > ul {
-    list-style-type: none;
+.header-info {
     display: flex;
     align-items: center;
 }
 
-.q > ul > li {
+.header-info>span {
     margin: 0 10px;
-    
-}
-
-.q > ul > li > a {
     font-family: mulish;
-    font-weight: 400 ;
+    font-weight: 400;
     display: flex;
-    align-items: center;
+    align-items: center
 }
-    
 
-.q > ul > li > a > img {
+
+.header-info>span>img {
     margin: 0 3px;
-} 
+}
 
 
-.q button {
+a {
+    color: unset;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.botao {
     padding: 10px;
     background: white;
     border: 3px solid black;
     font-size: 16px;
     border-radius: 7px;
+    cursor: pointer;
 }
 
-.container_2
-{
+.container_2 {
     display: flex;
-    color:white;
+    color: white;
     width: 100%;
     height: 267px;
     background-color: #031C0C;
@@ -109,7 +116,8 @@ menu > li > a:hover::after {
     height: auto;
 }
 
-.contato li, .dados_empresa  li {
+.contato li,
+.dados_empresa li {
     font-family: mulish_italic;
     list-style-type: none;
 }
@@ -119,4 +127,126 @@ menu > li > a:hover::after {
     width: 100px;
     place-self: baseline;
     margin-top: 43px;
+}
+
+.inicio-info {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(./static/images/Hero_Img.svg);
+    background-position: 90% 50%;
+    width: 100%;
+    height: 717px;
+    background-color: #F5F1E8;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.inicio-info > .reparo {
+    width: 43%;
+    padding: 6%;
+}
+
+
+.inicio-info > .reparo > span {
+    font-family: mulish_black;
+    width: 248px;
+    height: 32px;
+    flex-shrink: 0;
+    border-radius: 50px;
+    background: #F6EACF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inicio-info > .reparo > h2 {
+    font-family: mulish_black;
+    font-size: 323%;
+}
+
+.inicio-info > .reparo > p {
+    margin-right: 110px;
+    font-family: mulish;
+    font-size: 114%;
+}
+
+
+.botao_2 {
+    padding: 10px;
+    background: white;
+    border: 3px solid black;
+    font-size: 16px;
+    border-radius: 7px;
+    cursor: pointer;
+    background: #031C0C;
+    color: white;
+}
+
+.inicio-info > .reparo > span {
+    margin-top: 20px;
+}
+
+.inicio-info > .reparo > h2 {
+    margin-top: 20px;
+}
+
+.inicio-info > .reparo > p {
+    margin-top: 20px;
+}
+
+.inicio-info > .reparo > div  {
+    margin-top: 20px;
+}
+
+.funcionalidade {
+    width: 100%;
+    height: 997px;
+}
+
+.funcionalidade > .funcionalidade_conteudo {
+    padding: 10%;
+}
+
+.funcionalidade > .funcionalidade_conteudo > h1 {
+    padding-bottom: 27%;
+    font-family: mulish_black;
+    font-size: 47px;
+    text-align: center;
+}
+
+
+.funcionalidade > .funcionalidade_conteudo > .funcionalidade_conteudo_descricao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.funcionalidade > .funcionalidade_conteudo > .funcionalidade_conteudo_descricao > h2 {
+    font-family: mulish_black;
+    display: flex;
+}
+
+.funcionalidade > .funcionalidade_conteudo > .funcionalidade_conteudo_descricao > p {
+    font-family: mulish;
+}
+
+/*essa é a parte onde eu reposiciono cada uma*/
+.simbolo > img:nth-child(2) {
+    position: absolute;
+    left: 932px;                            
+    bottom: -595px;
+}
+
+.simbolo > img:nth-child(3) {
+    position: absolute;
+    left: 983px;
+    bottom: -548px;
+}
+
+.simbolo > img:nth-child(4) {
+    position: absolute;
+    left: 988px;
+    bottom: -542px;
 }
