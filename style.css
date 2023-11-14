@@ -18,6 +18,15 @@
     padding: 0
 }
 
+:root {
+    --c-black: #031c0c;
+    --c-white: #f5f1e8;
+    --c-brow: #F6EACF;
+    --c-white-sec: white; 
+    --c-black-sec: black;
+    --c-blue-romance: #C9F9DB;
+    --c-Eucalyptus: #1AA74E;
+}
 
 .container {
     display: flex;
@@ -26,7 +35,12 @@
     width: 100%;
     justify-self: center;
     height: 100px;
+}
 
+a {
+    color: unset;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 menu {
@@ -48,7 +62,7 @@ menu>li>a {
     font-weight: 400px;
     line-height: 17px;
     cursor: pointer;
-    color: #031C0C;
+    color: var(--c-black);
 }
 
 menu>li>a::after {
@@ -57,7 +71,7 @@ menu>li>a::after {
     position: relative;
     height: 1.8px;
     width: 0%;
-    background-color: #031C0C;
+    background-color: var(--c-black);
     transition: cubic-bezier(0.93, -0.07, 0.53, 1.42) 0.2s;
 }
 
@@ -65,6 +79,15 @@ menu>li>a:hover::after {
     width: 100%;
 }
 
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    justify-self: center;
+    height: 100px;
+
+}
 
 .header-info {
     display: flex;
@@ -80,53 +103,17 @@ menu>li>a:hover::after {
 }
 
 
-.header-info>span>img {
+.header-info > span > img {
     margin: 0 3px;
 }
 
-
-a {
-    color: unset;
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.botao {
+header > .header-info > a > .botao {
     padding: 10px;
-    background: white;
-    border: 3px solid black;
+    background: var(--c-white-sec);
+    border: 3px solid var(--c-black-sec);
     font-size: 16px;
     border-radius: 7px;
     cursor: pointer;
-}
-
-.container_2 {
-    display: flex;
-    color: white;
-    width: 100%;
-    height: 267px;
-    background-color: #031C0C;
-    align-items: center;
-    justify-content: space-around;
-}
-
-
-.contato {
-    width: 181px;
-    height: auto;
-}
-
-.contato li,
-.dados_empresa li {
-    font-family: mulish_italic;
-    list-style-type: none;
-}
-
-.container_2 img {
-    height: auto;
-    width: 100px;
-    place-self: baseline;
-    margin-top: 43px;
 }
 
 .inicio-info {
@@ -173,6 +160,15 @@ a {
 }
 
 
+.inicio-info > .reparo > div > a > .botao {
+    padding: 10px;
+    background: var(--c-white);
+    border: 4px solid var(--c-black);
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 .botao_2 {
     padding: 10px;
     background: white;
@@ -202,7 +198,7 @@ a {
 
 .funcionalidade {
     width: 100%;
-    height: 997px;
+    height: 750px;
 }
 
 .funcionalidade > .funcionalidade_conteudo {
@@ -210,43 +206,204 @@ a {
 }
 
 .funcionalidade > .funcionalidade_conteudo > h1 {
-    padding-bottom: 27%;
+    padding-bottom: 8%;
     font-family: mulish_black;
     font-size: 47px;
     text-align: center;
 }
 
+.funcionalidade > .funcionalidade_conteudo >.funcionalidade_conteudo_estilo {
+    display: flex;
+    justify-content: center;
+}
 
-.funcionalidade > .funcionalidade_conteudo > .funcionalidade_conteudo_descricao {
+
+.funcionalidade > .funcionalidade_conteudo > .funcionalidade_conteudo_estilo > .funcionalidade_conteudo_descricao  {
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 0 2%;
+
 }
 
-.funcionalidade > .funcionalidade_conteudo > .funcionalidade_conteudo_descricao > h2 {
+.funcionalidade > .funcionalidade_conteudo > .funcionalidade_conteudo_estilo > .funcionalidade_conteudo_descricao > h2 {
     font-family: mulish_black;
     display: flex;
+    text-align: center;
+    text-wrap: nowrap;  /*Experimental: This is an experimental technology */
 }
 
-.funcionalidade > .funcionalidade_conteudo > .funcionalidade_conteudo_descricao > p {
+.funcionalidade > .funcionalidade_conteudo > .funcionalidade_conteudo_estilo > .funcionalidade_conteudo_descricao > p {
+    font-family: mulish;
+    text-align: center;
+}
+
+
+
+.planos {
+    width: 100%;
+    height: 997px;
+    background-color: #F2F8F8;
+    ;
+}
+
+.planos > div > h1 {
+    display: flex;
+    font-family: mulish_black;
+    font-size: 40px;
+    justify-content: center;
+    padding-top: 150px;
+    padding-bottom: 100px;
+
+}
+
+.planos > div > span {
+    display: flex;
+    justify-content: center;
+    font-family: Mulish;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    
+}
+.planos > div > .planos_conteudo_descricao {
+    display: flex;
+    justify-content: space-evenly;
+}
+ 
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado {
+    background-color: var(--c-white-sec);
+    width: 301px;
+    height: 538px;
+    padding: 15px;
+    border: 1px solid var(--c-blue-romance);
+}
+
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > h2 {
+    font-family: mulish_black;
+}
+
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > h1 {
+    font-family: mulish_black;
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+    justify-content: space-evenly;
+}
+
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > h1 > span {
+    font-family: Mulish;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: -0.04em;
+    text-align: left;
+    width: 150px;
+}
+
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > ol {
+    padding-top: 18px;
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    flex-direction: column;
+    align-content: center;
+    font-family: Mulish;
+    font-size: 16px;
+    color: #000;
+    letter-spacing: -0.04em;
+    text-align: left;
+}
+
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > ol > li {
+    margin-top: 7px;
+}
+
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > ol > li > span {
+    color: var(--c-Eucalyptus);
+    stroke-width: 2px;
+    stroke: var(--c-Eucalyptus);
+}
+
+
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > a > .botao_1 {
+    padding: 11px;
+    width: 300px;
+    margin-top: 270px;
+    background: var(--c-white-sec);
+    border: 3px solid var(--c-black-sec);
+    font-size: 16px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > a > .botao_2 {
+    padding: 11px;
+    width: 300px;
+    margin-top: 213px;
+    background: var(--c-black);
+    border: 3px solid var(--c-white-sec);
+    font-size: 16px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > a > .botao_3 {
+    padding: 11px;
+    width: 300px;
+    margin-top: 156px;
+    background: var(--c-white-sec);
+    border: 3px solid var(--c-black-sec);
+    font-size: 16px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado:nth-child(2) {
+    border-radius: 4px;
+    border-top: 7px solid #6AEA99;
+    border-right: 2px solid #6AEA99;
+    border-bottom: 2px solid #6AEA99;
+    border-left: 2px solid #6AEA99;
+    background: #FFF;
+    box-shadow: 0px 8px 11px 0px rgba(0, 0, 0, 0.05);   
+}
+
+
+.container_2 {
+    display: flex;
+    color: var(--c-white-sec);
+    width: 100%;
+    height: 267px;
+    background-color: var(--c-black);
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.contato {
+    width: 181px;
+    height: auto;
+}
+
+
+footer .contato li,
+footer .dados_empresa li {
+    font-family: mulish_italic;
+    list-style-type: none;
+}
+
+footer .contato h2,
+footer .dados_empresa h2 {
     font-family: mulish;
 }
 
-/*essa é a parte onde eu reposiciono cada uma*/
-.simbolo > img:nth-child(2) {
-    position: absolute;
-    left: 932px;                            
-    bottom: -595px;
-}
-
-.simbolo > img:nth-child(3) {
-    position: absolute;
-    left: 983px;
-    bottom: -548px;
-}
-
-.simbolo > img:nth-child(4) {
-    position: absolute;
-    left: 988px;
-    bottom: -542px;
+.container_2 img {
+    height: auto;
+    width: 100px;
+    place-self: baseline;
+    margin-top: 43px;
 }
