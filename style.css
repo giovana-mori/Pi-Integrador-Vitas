@@ -24,8 +24,18 @@
     --c-brow: #F6EACF;
     --c-white-sec: white; 
     --c-black-sec: black;
-    --c-blue-romance: #C9F9DB;
-    --c-Eucalyptus: #1AA74E;
+    --c-azul-ver-claro: #C9F9DB;
+    --c-Eucalyptus-claro: #1AA74E;
+    --c-verde-bem-claro: #6AEA99;
+    --c-verde-escuro: #031C0C;
+    --C-azul_bem-claro: #F2F8F8
+}
+
+
+a {
+    color: unset;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .container {
@@ -37,19 +47,13 @@
     height: 100px;
 }
 
-a {
-    color: unset;
-    cursor: pointer;
-    text-decoration: none;
-}
-
 menu {
     display: flex;
     width: 60%;
     justify-content: center;
 }
 
-menu>li {
+menu > li {
     font-family: mulish;
     list-style-type: none;
     margin: 0 10px;
@@ -58,14 +62,14 @@ menu>li {
     flex-grow: 0;
 }
 
-menu>li>a {
+menu > li > a {
     font-weight: 400px;
     line-height: 17px;
     cursor: pointer;
     color: var(--c-black);
 }
 
-menu>li>a::after {
+menu > li > a::after {
     display: block;
     content: '';
     position: relative;
@@ -75,18 +79,8 @@ menu>li>a::after {
     transition: cubic-bezier(0.93, -0.07, 0.53, 1.42) 0.2s;
 }
 
-menu>li>a:hover::after {
+menu > li > a:hover::after {
     width: 100%;
-}
-
-.container {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    justify-self: center;
-    height: 100px;
-
 }
 
 .header-info {
@@ -94,7 +88,7 @@ menu>li>a:hover::after {
     align-items: center;
 }
 
-.header-info>span {
+.header-info > span {
     margin: 0 10px;
     font-family: mulish;
     font-weight: 400;
@@ -119,11 +113,11 @@ header > .header-info > a > .botao {
 .inicio-info {
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url(./static/images/Hero_Img.svg);
+    background-image: url(./static/images/Hero_Img.png);
     background-position: 90% 50%;
     width: 100%;
     height: 717px;
-    background-color: #F5F1E8;
+    background-color: var(--c-white);
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -142,21 +136,24 @@ header > .header-info > a > .botao {
     height: 32px;
     flex-shrink: 0;
     border-radius: 50px;
-    background: #F6EACF;
+    background: var(--c-brow);
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 20px;
 }
 
 .inicio-info > .reparo > h2 {
     font-family: mulish_black;
     font-size: 323%;
+    margin-top: 20px;
 }
 
 .inicio-info > .reparo > p {
     margin-right: 110px;
     font-family: mulish;
     font-size: 114%;
+    margin-top: 20px;
 }
 
 
@@ -166,30 +163,18 @@ header > .header-info > a > .botao {
     border: 4px solid var(--c-black);
     font-size: 16px;
     border-radius: 4px;
-    cursor: pointer;
+    cursor: pointer;    
 }
 
 .botao_2 {
     padding: 10px;
-    background: white;
-    border: 3px solid black;
+    background: var(--c-white-sec);
+    border: 3px solid var(--c-black-sec);
     font-size: 16px;
     border-radius: 7px;
     cursor: pointer;
-    background: #031C0C;
-    color: white;
-}
-
-.inicio-info > .reparo > span {
-    margin-top: 20px;
-}
-
-.inicio-info > .reparo > h2 {
-    margin-top: 20px;
-}
-
-.inicio-info > .reparo > p {
-    margin-top: 20px;
+    background: var(--c-black);
+    color: var(--c-white-sec);
 }
 
 .inicio-info > .reparo > div  {
@@ -238,13 +223,10 @@ header > .header-info > a > .botao {
     text-align: center;
 }
 
-
-
 .planos {
     width: 100%;
     height: 997px;
-    background-color: #F2F8F8;
-    ;
+    background-color: var(--C-azul_bem-claro);
 }
 
 .planos > div > h1 {
@@ -278,7 +260,7 @@ header > .header-info > a > .botao {
     width: 301px;
     height: 538px;
     padding: 15px;
-    border: 1px solid var(--c-blue-romance);
+    border: 2px solid var(--c-azul-ver-claro);
 }
 
 .planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > h2 {
@@ -287,9 +269,9 @@ header > .header-info > a > .botao {
 
 .planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > h1 {
     font-family: mulish_black;
+    font-size: 32px;
     display: flex;
     align-items: center;
-    padding-left: 40px;
     justify-content: space-evenly;
 }
 
@@ -300,7 +282,7 @@ header > .header-info > a > .botao {
     line-height: 18px;
     letter-spacing: -0.04em;
     text-align: left;
-    width: 150px;
+    width: 178px;
 }
 
 .planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > ol {
@@ -312,7 +294,7 @@ header > .header-info > a > .botao {
     align-content: center;
     font-family: Mulish;
     font-size: 16px;
-    color: #000;
+    color: var(--c-black-sec);
     letter-spacing: -0.04em;
     text-align: left;
 }
@@ -322,39 +304,16 @@ header > .header-info > a > .botao {
 }
 
 .planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > ol > li > span {
-    color: var(--c-Eucalyptus);
+    color: var(--c-Eucalyptus-claro);
     stroke-width: 2px;
-    stroke: var(--c-Eucalyptus);
+    stroke: var(--c-Eucalyptus-claro);
 }
 
-
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > a > .botao_1 {
+/*parte dos botão*/
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > a > .botao {
     padding: 11px;
     width: 300px;
-    margin-top: 270px;
-    background: var(--c-white-sec);
-    border: 3px solid var(--c-black-sec);
-    font-size: 16px;
-    border-radius: 7px;
-    cursor: pointer;
-}
-
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > a > .botao_2 {
-    padding: 11px;
-    width: 300px;
-    margin-top: 213px;
-    background: var(--c-black);
-    border: 3px solid var(--c-white-sec);
-    font-size: 16px;
-    border-radius: 7px;
-    cursor: pointer;
-}
-
-
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > a > .botao_3 {
-    padding: 11px;
-    width: 300px;
-    margin-top: 156px;
+    margin-top: 241px;
     background: var(--c-white-sec);
     border: 3px solid var(--c-black-sec);
     font-size: 16px;
@@ -364,14 +323,37 @@ header > .header-info > a > .botao {
 
 .planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado:nth-child(2) {
     border-radius: 4px;
-    border-top: 7px solid #6AEA99;
-    border-right: 2px solid #6AEA99;
-    border-bottom: 2px solid #6AEA99;
-    border-left: 2px solid #6AEA99;
-    background: #FFF;
+    border-top: 7px solid var(--c-verde-bem-claro);
+    border-right: 3px solid var(--c-verde-bem-claro);
+    border-bottom: 3px solid var(--c-verde-bem-claro);
+    border-left: 3px solid var(--c-verde-bem-claro);
+    background: var(--c-white-sec);
     box-shadow: 0px 8px 11px 0px rgba(0, 0, 0, 0.05);   
 }
 
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado:nth-child(2) > a > .botao {
+    padding: 11px;
+    width: 300px;
+    margin-top: 179px;
+    background: var(--c-verde-escuro);
+    border: 3px solid var(--c-verde-escuro);
+    color: var(--c-white-sec);
+    font-size: 16px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado:nth-child(3) > a > .botao {
+    padding: 11px;
+    width: 300px;
+    margin-top: 128px; 
+    background: var(--c-white-sec);
+    border: 3px solid var(--c-black-sec);
+    font-size: 16px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+/*parte dos botão*/
 
 .container_2 {
     display: flex;
@@ -401,9 +383,9 @@ footer .dados_empresa h2 {
     font-family: mulish;
 }
 
-.container_2 img {
+.container_2 > img {
     height: auto;
-    width: 100px;
+    width: 30px;
     place-self: baseline;
-    margin-top: 43px;
+    margin-top: 66px;
 }
