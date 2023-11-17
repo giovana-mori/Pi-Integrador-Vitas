@@ -28,7 +28,8 @@
     --c-Eucalyptus-claro: #1AA74E;
     --c-verde-bem-claro: #6AEA99;
     --c-verde-escuro: #031C0C;
-    --C-azul_bem-claro: #F2F8F8
+    --c-fundo_planos_azul_claro: #F2F8F8;
+    --c-fundo_depoimento_verde_claro: #E2EBE4;
 }
 
 
@@ -226,7 +227,7 @@ header > .header-info > a > .botao {
 .planos {
     width: 100%;
     height: 997px;
-    background-color: var(--C-azul_bem-claro);
+    background-color: var(--c-fundo_planos_azul_claro);
 }
 
 .planos > div > h1 {
@@ -246,7 +247,6 @@ header > .header-info > a > .botao {
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
-    letter-spacing: 0em;
     text-align: left;
     
 }
@@ -265,6 +265,7 @@ header > .header-info > a > .botao {
 
 .planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > h2 {
     font-family: mulish_black;
+    padding-left: 15px;
 }
 
 .planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > h1 {
@@ -355,7 +356,111 @@ header > .header-info > a > .botao {
 }
 /*parte dos botão*/
 
-.container_2 {
+.depoimento {
+    width: 100%;
+    height: 500px;
+    background-color: var(--c-fundo_depoimento_verde_claro);
+}
+
+.depoimento > div > h1 {
+    text-align: center;
+    font-family: mulish_black;
+    font-size: 34px;
+    padding: 60px;
+}
+
+.depoimento > div > .depoimento_conteudo_container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 60%;
+    margin-left: 20%;
+    
+}   
+
+.depoimento > div > .depoimento_conteudo_container > .depoimento_conteudo {
+    background-color: var(--c-white-sec);
+    width: 525px;
+    height: 250px;
+    border-radius: 3px;
+    display: flex;
+    flex-wrap: wrap;
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-image: url(./static/images/Ellipse_4.svg);
+    background-position: 11%;
+    
+}
+
+.depoimento > div > .depoimento_conteudo_container > .depoimento_conteudo > img {
+    position: absolute;
+    margin-top: 27px;
+    margin-left: 181px;
+    width: 19px;
+}
+
+.depoimento > div > .depoimento_conteudo_container > .depoimento_conteudo > .depoimento_conteudo_texto {
+    width: 273px;
+    margin-left: 210px;
+    position: absolute;
+    padding-top: 48px;
+    line-height: 21px;
+    font-family: mulish;
+}
+
+.depoimento > div > .depoimento_conteudo_container > .depoimento_conteudo > .depoimento_conteudo_texto > h3 {
+    margin-top: 19px;
+    font-size: 17px;
+    color: var(--c-black-sec);
+}
+
+
+.faq {
+    width: 100%;
+    height: 552px;
+    font-family: mulish;
+}
+
+.faq > div > h1 {
+    text-align: center;
+    padding: 60px;
+    font-size: 40px;
+    font-family: mulish_black;
+    letter-spacing: 0.06em;
+}
+
+.faq > div > .faq_conteudo {
+    margin-left: 16%;
+    width: 61%;
+}
+
+
+.faq > div > .faq_conteudo > .faq_conteudo_texto > h2 {
+    line-height: 60px;
+    font-size: 19px;
+    letter-spacing: 0.03em;
+    display: flex;
+    align-items: center;
+    width: 103%;
+    justify-content: space-between;
+}
+
+
+.faq > div > .faq_conteudo > .faq_conteudo_texto > p {
+    line-height: 20px;
+}
+
+.faq > div > .faq_conteudo > .faq_conteudo_texto:nth-child(1) > p {
+    margin-bottom: 25px;
+}
+
+.faq > div > .faq_conteudo > hr {
+    width: 107%;
+    border-width: 1px 0px 0px;
+    border-top-style: dashed;
+}
+
+/*rodapé*/
+.container_2 {      
     display: flex;
     color: var(--c-white-sec);
     width: 100%;
@@ -364,7 +469,6 @@ header > .header-info > a > .botao {
     align-items: center;
     justify-content: space-around;
 }
-
 
 .contato {
     width: 181px;
