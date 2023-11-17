@@ -32,6 +32,9 @@
     --c-fundo_depoimento_verde_claro: #E2EBE4;
 }
 
+html {
+    scroll-behavior: smooth;
+}
 
 a {
     color: unset;
