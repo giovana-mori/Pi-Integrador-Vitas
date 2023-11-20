@@ -4,13 +4,18 @@
 }
 
 @font-face {
-    font-family: mulish_italic;
+    font-family: mulish-italic;
     src: url(./static/fonts/Mulish-Italic.ttf);
 }
 
 @font-face {
-    font-family: mulish_black;
-    src: url(./static/fonts/Mulish-Black.ttf);
+    font-family: mulish-extrabold;
+    src: url(./static/fonts/Mulish-ExtraBold.ttf);
+}
+
+@font-face {
+    font-family: mulish-bold;
+    src: url(static/fonts/Mulish-Bold.ttf);
 }
 
 * {
@@ -36,6 +41,14 @@ html {
     scroll-behavior: smooth;
 }
 
+body {
+    font-family: mulish, sans-serif;
+}
+
+ul {
+    list-style-type: none;
+}
+
 a {
     color: unset;
     cursor: pointer;
@@ -43,9 +56,14 @@ a {
 }
 
 .container {
+    max-width: 1400px;
+    margin: auto;
+}
+
+header .container {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 100%;
     justify-self: center;
     height: 100px;
@@ -57,7 +75,7 @@ menu {
     justify-content: center;
 }
 
-menu > li {
+menu li {
     font-family: mulish;
     list-style-type: none;
     margin: 0 10px;
@@ -66,14 +84,14 @@ menu > li {
     flex-grow: 0;
 }
 
-menu > li > a {
+menu li a {
     font-weight: 400px;
     line-height: 17px;
     cursor: pointer;
     color: var(--c-black);
 }
 
-menu > li > a::after {
+menu li a::after {
     display: block;
     content: '';
     position: relative;
@@ -83,7 +101,7 @@ menu > li > a::after {
     transition: cubic-bezier(0.93, -0.07, 0.53, 1.42) 0.2s;
 }
 
-menu > li > a:hover::after {
+menu li a:hover::after {
     width: 100%;
 }
 
@@ -92,7 +110,7 @@ menu > li > a:hover::after {
     align-items: center;
 }
 
-.header-info > span {
+.header-info  span {
     margin: 0 10px;
     font-family: mulish;
     font-weight: 400;
@@ -101,23 +119,38 @@ menu > li > a:hover::after {
 }
 
 
-.header-info > span > img {
+.header-info span img {
     margin: 0 3px;
 }
 
-header > .header-info > a > .botao {
-    padding: 10px;
+.botao {
+    font-family: 'mulish', sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 12px 18px;
     background: var(--c-white-sec);
     border: 3px solid var(--c-black-sec);
     font-size: 16px;
     border-radius: 7px;
     cursor: pointer;
+    background: var(--c-black);
+    color: var(--c-white-sec);
 }
 
-.inicio-info {
+.botao-sfun {
+    font-family: 'mulish', sans-serif;
+    font-weight: bold;
+    padding: 12px 18px;
+    background-color: transparent;
+    border: 2px solid var(--c-black-sec);
+    font-size: 16px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.hero-section {
     background-size: contain;
     background-repeat: no-repeat;
-    background-image: url(./static/images/Hero_Img.png);
     background-position: 90% 50%;
     width: 100%;
     height: 717px;
@@ -126,16 +159,22 @@ header > .header-info > a > .botao {
     align-items: flex-start;
     flex-direction: column;
     justify-content: space-around;
+    padding: 40px 0;
 }
 
-.inicio-info > .reparo {
-    width: 43%;
-    padding: 6%;
+.hero-section .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hero-section .hero-text {
+    width: 50%;
 }
 
 
-.inicio-info > .reparo > span {
-    font-family: mulish_black;
+.hero-section .container .hero-text span {
+    font-family: mulish-extrabold;
     width: 248px;
     height: 32px;
     flex-shrink: 0;
@@ -147,139 +186,122 @@ header > .header-info > a > .botao {
     margin-top: 20px;
 }
 
-.inicio-info > .reparo > h2 {
-    font-family: mulish_black;
-    font-size: 323%;
+.hero-section .hero-text h2 {
+    font-family: mulish-extrabold;
+    font-size: 50px;
     margin-top: 20px;
+    line-height: 1.17;
 }
 
-.inicio-info > .reparo > p {
+.hero-section .hero-text p {
     margin-right: 110px;
     font-family: mulish;
     font-size: 114%;
     margin-top: 20px;
 }
 
-
-.inicio-info > .reparo > div > a > .botao {
-    padding: 10px;
-    background: var(--c-white);
-    border: 4px solid var(--c-black);
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;    
+.hero-section .hero-text div  {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 40px;
 }
 
-.botao_2 {
-    padding: 10px;
-    background: var(--c-white-sec);
-    border: 3px solid var(--c-black-sec);
-    font-size: 16px;
-    border-radius: 7px;
-    cursor: pointer;
-    background: var(--c-black);
-    color: var(--c-white-sec);
+.optimization-content {
+    padding: 80px 0;
 }
 
-.inicio-info > .reparo > div  {
-    margin-top: 20px;
-}
-
-.funcionalidade {
-    width: 100%;
-    height: 750px;
-}
-
-.funcionalidade > .funcionalidade_conteudo {
-    padding: 10%;
-}
-
-.funcionalidade > .funcionalidade_conteudo > h1 {
-    padding-bottom: 8%;
-    font-family: mulish_black;
+.optimization-content  h1 {
+    padding-bottom: 80px;
+    font-family: mulish-extrabold;
     font-size: 47px;
     text-align: center;
 }
 
-.funcionalidade > .funcionalidade_conteudo >.funcionalidade_conteudo_estilo {
+.optimization-content-style {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    gap: 20px;
 }
 
 
-.funcionalidade > .funcionalidade_conteudo > .funcionalidade_conteudo_estilo > .funcionalidade_conteudo_descricao  {
+.optimization-content-desc  {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 2%;
-
+    max-width: 250px;
 }
 
-.funcionalidade > .funcionalidade_conteudo > .funcionalidade_conteudo_estilo > .funcionalidade_conteudo_descricao > h2 {
-    font-family: mulish_black;
+.optimization-content-desc h2 {
+    font-family: mulish-extrabold;
     display: flex;
     text-align: center;
     text-wrap: nowrap;  /*Experimental: This is an experimental technology */
+    margin-bottom: 4px;
 }
 
-.funcionalidade > .funcionalidade_conteudo > .funcionalidade_conteudo_estilo > .funcionalidade_conteudo_descricao > p {
+.optimization-content-desc p {
     font-family: mulish;
     text-align: center;
 }
 
 .planos {
     width: 100%;
-    height: 997px;
     background-color: var(--c-fundo_planos_azul_claro);
+    padding: 60px 0;
 }
 
-.planos > div > h1 {
-    display: flex;
-    font-family: mulish_black;
+.planos .container h1 {
+    font-family: mulish-extrabold, sans-serif;
+    font-weight: bold;
     font-size: 40px;
-    justify-content: center;
-    padding-top: 150px;
-    padding-bottom: 100px;
-
+    margin: auto;
+    text-align: center;
+    margin-bottom: 60px;
 }
 
-.planos > div > span {
+.planos .container > span {
     display: flex;
     justify-content: center;
-    font-family: Mulish;
     font-size: 16px;
     font-weight: 700;
     line-height: 20px;
     text-align: left;
+    margin-bottom: 8px;
     
 }
-.planos > div > .planos_conteudo_descricao {
+.planos .planos_conteudo_descricao {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
  
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado {
+.planos .planos_conteudo_quadrado {
     background-color: var(--c-white-sec);
-    width: 301px;
-    height: 538px;
-    padding: 15px;
+    padding: 36px;
     border: 2px solid var(--c-azul-ver-claro);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 80px;
+    box-shadow: 0px 8px 11px 0 rgba(0, 0, 0, 0.05)
 }
 
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > h2 {
-    font-family: mulish_black;
-    padding-left: 15px;
+.planos .planos_conteudo_quadrado h2 {
+    font-family: mulish-bold, sans-serif;
+    font-weight: 1000;
+    margin-bottom: 40px;
 }
 
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > h1 {
-    font-family: mulish_black;
-    font-size: 32px;
+.planos .planos_conteudo_quadrado h3 {
+    font-size: 40px;
+    font-family: mulish-extrabold, sans-serif;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    gap: 8px;
+    margin-bottom: 40px;
 }
 
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > h1 > span {
+.planos h3 span {
     font-family: Mulish;
     font-size: 14px;
     font-weight: 400;
@@ -289,8 +311,7 @@ header > .header-info > a > .botao {
     width: 178px;
 }
 
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > ol {
-    padding-top: 18px;
+.planos .planos_conteudo_quadrado ul {
     display: flex;
     flex-wrap: wrap;
     list-style-type: none;
@@ -303,71 +324,32 @@ header > .header-info > a > .botao {
     text-align: left;
 }
 
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > ol > li {
-    margin-top: 7px;
+.planos .planos_conteudo_quadrado:nth-child(2){
+    border-width: 7px 2px 2px 2px;
+    border-color: var(--c-verde-bem-claro);
+    border-style: solid;
 }
 
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > ol > li > span {
-    color: var(--c-Eucalyptus-claro);
-    stroke-width: 2px;
-    stroke: var(--c-Eucalyptus-claro);
+.planos ul li {
+    margin-bottom: 8px;
 }
 
-/*parte dos botão*/
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado > a > .botao {
-    padding: 11px;
-    width: 300px;
-    margin-top: 241px;
-    background: var(--c-white-sec);
-    border: 3px solid var(--c-black-sec);
-    font-size: 16px;
-    border-radius: 7px;
-    cursor: pointer;
+.planos ul li img {
+    margin-right: 4px;
 }
 
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado:nth-child(2) {
-    border-radius: 4px;
-    border-top: 7px solid var(--c-verde-bem-claro);
-    border-right: 3px solid var(--c-verde-bem-claro);
-    border-bottom: 3px solid var(--c-verde-bem-claro);
-    border-left: 3px solid var(--c-verde-bem-claro);
-    background: var(--c-white-sec);
-    box-shadow: 0px 8px 11px 0px rgba(0, 0, 0, 0.05);   
-}
-
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado:nth-child(2) > a > .botao {
-    padding: 11px;
-    width: 300px;
-    margin-top: 179px;
-    background: var(--c-verde-escuro);
-    border: 3px solid var(--c-verde-escuro);
-    color: var(--c-white-sec);
-    font-size: 16px;
-    border-radius: 7px;
-    cursor: pointer;
-}
-
-.planos > div > .planos_conteudo_descricao > .planos_conteudo_quadrado:nth-child(3) > a > .botao {
-    padding: 11px;
-    width: 300px;
-    margin-top: 128px; 
-    background: var(--c-white-sec);
-    border: 3px solid var(--c-black-sec);
-    font-size: 16px;
-    border-radius: 7px;
-    cursor: pointer;
-}
-/*parte dos botão*/
-
-.depoimento {
+.planos button {
     width: 100%;
+}
+/* revisar daqui pra baixo */
+.depoimento {
     height: 500px;
     background-color: var(--c-fundo_depoimento_verde_claro);
 }
 
 .depoimento > div > h1 {
     text-align: center;
-    font-family: mulish_black;
+    font-family: mulish-extrabold;
     font-size: 34px;
     padding: 60px;
 }
@@ -416,6 +398,7 @@ header > .header-info > a > .botao {
     color: var(--c-black-sec);
 }
 
+/* faq */
 
 .faq {
     width: 100%;
@@ -423,54 +406,76 @@ header > .header-info > a > .botao {
     font-family: mulish;
 }
 
-.faq > div > h1 {
+.faq h1 {
     text-align: center;
     padding: 60px;
     font-size: 40px;
-    font-family: mulish_black;
+    font-family: mulish-extrabold;
     letter-spacing: 0.06em;
 }
 
-.faq > div > .faq_conteudo {
-    margin-left: 16%;
-    width: 61%;
-}
-
-
-.faq > div > .faq_conteudo > .faq_conteudo_texto > h2 {
+.faq_conteudo_texto summary {
     line-height: 60px;
-    font-size: 19px;
+    font-size: 1.5em;
+    font-weight: bold;
     letter-spacing: 0.03em;
     display: flex;
     align-items: center;
-    width: 103%;
     justify-content: space-between;
+    cursor: pointer;
 }
 
+.faq_conteudo_texto summary::after {
+    content: ''; 
+    display: flex;
+    width: 20px;
+    height: 20px;
+    background-image: url(static/images/vector_more.svg);
+    background-size: cover;
+}
 
-.faq > div > .faq_conteudo > .faq_conteudo_texto > p {
+details[open] summary::after {
+    content: ''; 
+    display: flex;
+    width: 26px;
+    height: 6px;
+    background-image: url(static/images/Vector_unless.svg);
+}
+
+details[open] summary ~ * {
+    animation: sweep .5s ease-in-out;
+}
+
+@keyframes sweep {
+    from {
+        opacity: 0; margin-top: -10px;
+    }
+    to {
+        opacity: 1; margin-top: 0;
+    }
+}
+
+.faq_conteudo_texto p {
     line-height: 20px;
-}
-
-.faq > div > .faq_conteudo > .faq_conteudo_texto:nth-child(1) > p {
     margin-bottom: 25px;
 }
 
-.faq > div > .faq_conteudo > hr {
-    width: 107%;
+.faq_conteudo hr {
     border-width: 1px 0px 0px;
     border-top-style: dashed;
 }
 
 /*rodapé*/
-.container_2 {      
+footer {
+    background-color: #031c0c;
+}
+
+footer .container {
     display: flex;
-    color: var(--c-white-sec);
-    width: 100%;
-    height: 267px;
-    background-color: var(--c-black);
-    align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 60px 0;
+    color: var(--c-white);
+    align-items: start;
 }
 
 .contato {
@@ -478,21 +483,6 @@ header > .header-info > a > .botao {
     height: auto;
 }
 
-
-footer .contato li,
-footer .dados_empresa li {
-    font-family: mulish_italic;
-    list-style-type: none;
-}
-
-footer .contato h2,
-footer .dados_empresa h2 {
-    font-family: mulish;
-}
-
-.container_2 > img {
-    height: auto;
-    width: 30px;
-    place-self: baseline;
-    margin-top: 66px;
+footer li {
+    font-family: mulish-italic;
 }

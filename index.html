@@ -7,69 +7,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="./static/images/logo_menorSvg.svg" type="image/x-icon" />
+    <script src="script.js" defer></script>
 </head>
 
 <body>
-    <header class="container">
-        <img src="static/images/Logo-vitas.svg" />
-        <menu>
-            <li><a>Home</a></li>
-            <li><a>Planos</a></li>
-            <li><a>F.A.Q</a></li>
-        </menu>
-        <div class="header-info">
-            <span><img src="static/images/zapp.svg" /><a href="tel:123-456-7890">123-456-7890</a></span>
-            <a href=""><button class="botao"><strong>Criar conta</strong></button></a>
+    <header>
+        <div class="container">
+            <img src="static/images/Logo-vitas.svg" />
+            <menu>
+                <li><a>Home</a></li>
+                <li><a data-target="planos">Planos</a></li>
+                <li><a>F.A.Q</a></li>
+            </menu>
+            <div class="header-info">
+                <span><img src="static/images/zapp.svg" /><a href="tel:123-456-7890">123-456-7890</a></span>
+                <a href=""><button class="botao-sfun">Criar conta</button></a>
+            </div>
         </div>
     </header>
 
     <main>
-        <section class="inicio-info">
-            <div class="reparo">
-                <span>Rapido, simples e eficiente</span>
-                <h2>Descubra Vitas: Seu software de gestão de clínicas e consultórios</h2>
-                <p>Com a Vitas, médicos podem dizer adeus às longas esperas telefônicas. Nossa plataforma
-                    de gestão de
-                    clínicas e consultórios simplifica o agendamento de consultas, poupando tempo e tornando o processo
-                    eficaz. Nós cuidamos dos detalhes para que você possa se concentrar no que realmente importa: o
-                    cuidado
-                    com seus pacientes.</p>
-                <div>
-                    <a href=""><button class="botao_2">Experimentar grátis</button></a>
-                    <a href=""><button class="botao">Ver planos</button></a>
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-text">
+                    <span>Rapido, simples e eficiente</span>
+                    <h2>Descubra Vitas: Seu software de gestão de clínicas e consultórios</h2>
+                    <p>Com a Vitas, médicos podem dizer adeus às longas esperas telefônicas. Nossa plataforma
+                        de gestão de
+                        clínicas e consultórios simplifica o agendamento de consultas, poupando tempo e tornando o
+                        processo
+                        eficaz. Nós cuidamos dos detalhes para que você possa se concentrar no que realmente importa: o
+                        cuidado
+                        com seus pacientes.</p>
+                    <div>
+                        <a href=""><button class="botao">Experimentar grátis</button></a>
+                        <a data-target="planos2"><button class="botao-sfun">Ver planos</button></a>
+                    </div>
                 </div>
+                <img src="static/images/Hero_Img.png" alt="">
             </div>
 
         </section>
 
-        <section class="funcionalidade">
-            <div class="funcionalidade_conteudo">
+        <section>
+            <div class="optimization-content container">
                 <h1>Otimização dos processos</h1>
-                <div class="funcionalidade_conteudo_estilo">
-                    <div class="funcionalidade_conteudo_descricao">
+                <div class="optimization-content-style">
+                    <div class="optimization-content-desc">
                         <div class="simbolo">
-                            <img src="static/images/calendar-check.svg">
+                            <img src="static/images/calendario.svg">
                         </div>
                         <h2>Agendamento Rápido</h2>
                         <p>Consultas marcadas com apenas alguns cliques</p>
                     </div>
-                    <div class="funcionalidade_conteudo_descricao">
+                    <div class="optimization-content-desc">
                         <div class="simbolo">
-                            <img src="static/images/activity-square.svg">
+                            <img src="static/images/atividade.svg">
                         </div>
                         <h2>Prontuário Digital</h2>
                         <p>Acesso fácil aos registros de pacientes</p>
                     </div>
-                    <div class="funcionalidade_conteudo_descricao">
+                    <div class="optimization-content-desc">
                         <div class="simbolo">
-                            <img src="static/images/bell-ring.svg">
+                            <img src="static/images/sino.svg">
                         </div>
                         <h2>Lembretes de Consultas</h2>
                         <p> Nunca perca uma consulta importante</p>
                     </div>
-                    <div class="funcionalidade_conteudo_descricao">
+                    <div class="optimization-content-desc">
                         <div class="simbolo">
-                            <img src="static/images/pill.svg">
+                            <img src="static/images/pilula.svg">
                         </div>
                         <h2>Prescrição Digital</h2>
                         <p>Sitema de prescrição eletrônica integrada ao sistema</p>
@@ -78,65 +85,50 @@
             </div>
         </section>
 
-        <section class="planos">
-            <div>
+        <section class="planos" id="planos">
+            <div class="container">
                 <h1>Planos</h1>
                 <span>*mais vendidos</span>
                 <div class="planos_conteudo_descricao">
 
                     <div class="planos_conteudo_quadrado">
-                        <h2>Básico</h2>
-                        <br>
-                        <br>
-                        <h1>R$ 49<span>por mês</span></h1>
-                        <ol>
-                            <li><span>&#10004;</span> Agendamento</li>
-                            <li><span>&#10004;</span> Cadastro de pacientes</li>
-                            <li><span>&#10004;</span> Confirmação de consultas por Whatsapp</li>
-                            <li><span>&#10004;</span> Lembretes de consultas</li>
-                        </ol>
-                        <a href=""><button class="botao">Assinar</button></a>
+                        <div>
+                            <h2>Básico</h2>
+                            <h3>R$ 49<span>por mês</span></h1>
+                                <ul id="ul-basic">
+                                    <!-- js render -->
+                                </ul>
+                        </div>
+                        <button class="botao-sfun">Assinar</button>
                     </div>
 
                     <div class="planos_conteudo_quadrado">
-                        <h2>Plus</h2>
-                        <br>
-                        <br>
-                        <h1>R$ 89<span>por mês</span></h1>
-                        <ol>
-                            <li><span>&#10004;</span> Agendamento</li>
-                            <li><span>&#10004;</span> Cadastro de pacientes</li>
-                            <li><span>&#10004;</span> Confirmação de consultas por Whatsapp</li>
-                            <li><span>&#10004;</span> Lembretes de consultas</li>
-                            <li><span>&#10004;</span> Pedidos de exames</li>
-                            <li><span>&#10004;</span> Prescrição digital</li>
-                        </ol>
-                        <a href=""><button class="botao">Assinar</button></a>
+                        <div>
+                            <h2>Plus</h2>
+                            <h3>R$ 89<span>por mês</span></h1>
+                                <ul id="ul-plus">
+                                    <!-- js render -->
+                                </ul>
+                        </div>
+                        <button class="botao">Assinar</button>
                     </div>
 
                     <div class="planos_conteudo_quadrado">
-                        <h2>Premium</h2>
-                        <br>
-                        <br>
-                        <h1>R$ 130<span>por mês</span></h1>
-                        <ol>
-                            <li><span>&#10004;</span> Agendamento</li>
-                            <li><span>&#10004;</span> Cadastro de pacientes</li>
-                            <li><span>&#10004;</span> Confirmação de consultas por Whatsapp</li>
-                            <li><span>&#10004;</span> Lembretes de consultas</li>
-                            <li><span>&#10004;</span> Pedidos de exames</li>
-                            <li><span>&#10004;</span> Prescrição digital</li>
-                            <li><span>&#10004;</span> Telemedicina</li>
-                            <li><span>&#10004;</span> Marketing digital para Médicos</li>
-                        </ol>
-                        <a href=""><button class="botao">Assinar</button></a>
+                        <div>
+                            <h2>Premium</h2>
+                            <h3>R$ 130<span>por mês</span></h1>
+                                <ul id="ul-premium">
+                                    <!-- js render -->
+                                </ul>
+                        </div>
+                        <button class="botao-sfun">Assinar</button>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="depoimento">
-            <div>
+            <div class="container">
                 <h1>Depoimentos de clientes</h1>
 
                 <div class="depoimento_conteudo_container">
@@ -165,11 +157,12 @@
         </section>
 
         <section class="faq">
-            <div>
+            <div class="container">
                 <h1>FAQ</h1>
                 <div class="faq_conteudo">
-                    <div class="faq_conteudo_texto">
-                        <h2>Como a Vitas pode ajudar na organização do meu consultório? <span><img src="./static/images/Vector_unless.svg"/></span></h2> 
+                    <details class="faq_conteudo_texto">
+                        <summary>Como a Vitas pode ajudar na organização do meu consultório? </summary>
+                        <div class="content">  
                         <p>A Vitas oferece uma variedade de recursos que ajudam a otimizar a administração do seu
                             consultório. Isso inclui agendamento simplificado, prontuário eletrônico, lembretes
                             automáticos
@@ -178,44 +171,54 @@
                             pacientes.
                         </p>
                     </div>
+                    </details>
                     <hr>
-                    <div class="faq_conteudo_texto">
-                        <h2>É difícil aprender a usar a plataforma Vitas? <span><img src="./static/images/vector_more.svg"/></span></h2>
-                    </div>
+                    <details class="faq_conteudo_texto">
+                        <summary>É difícil aprender a usar a plataforma Vitas?</summary>
+                        <div class="content">
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                             Facere labore autem facilis nihil iusto architecto officia fugit iste nostrum ullam.
+                            </p>
+                        </div>
+                    </details>
                     <hr>
-                    <div class="faq_conteudo_texto">
-                        <h2>Como posso ter certeza de que meus dados e os de meus pacientes estão seguros? <span><img src="./static/images/Vector_unless.svg"/></span></h2>
+                    <details class="faq_conteudo_texto">
+                        <summary>Como posso ter certeza de que meus dados e os de meus pacientes estão seguros?</summary>
+                        <div class="content">
                         <p>A segurança dos seus dados é nossa prioridade. A Vitas utiliza as mais recentes práticas de
                             segurança, incluindo criptografia de ponta a ponta e backups regulares. Nossos servidores
                             são
                             altamente seguros, e todas as informações são armazenadas com total confidencialidade. Todos
                             os
                             seus dados e os de seus pacientes estão sob total sigilo.</p>
-                    </div>
+                        </div>   
+                    </details>
                 </div>
             </div>
         </section>
     </main>
 
-    <footer class="container_2">
-        <div class="contato">
-            <h2>Contato</h2> </br>
-            <ul>
-                <li>contato@vitas.com</li>
-                <li>facebook.com/vitas</li>
-                <li>instagram.com/vitas</li>
-            </ul>
+    <footer>
+        <div class="container">
+            <div class="contato">
+                <h2>Contato</h2> </br>
+                <ul>
+                    <li>contato@vitas.com</li>
+                    <li>facebook.com/vitas</li>
+                    <li>instagram.com/vitas</li>
+                </ul>
+            </div>
+            <div class="dados_empresa">
+                <h2>Dados da empresa</h2> </br>
+                <ul>
+                    <li>Rua Ali Perto, 99</li>
+                    <li>Bairro Longe</li>
+                    <li>Brotas - SP CEP 17380-000</li>
+                    <li>CNPJ 66.765.988/0001-99</li>
+                </ul>
+            </div>
+            <img src="static/images/logo_menorSvg.svg" />
         </div>
-        <div class="dados_empresa">
-            <h2>Dados da empresa</h2> </br>
-            <ul>
-                <li>Rua Ali Perto, 99</li>
-                <li>Bairro Longe</li>
-                <li>Brotas - SP CEP 17380-000</li>
-                <li>CNPJ 66.765.988/0001-99</li>
-            </ul>
-        </div>
-        <img src="static/images/logo_menorSvg.svg" />
     </footer>
 </body>
 
