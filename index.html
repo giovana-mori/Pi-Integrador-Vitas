@@ -7,21 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" />
     <link rel="shortcut icon" href="./static/images/logo_menorSvg.svg" type="image/x-icon" />
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.css" integrity="sha512-YM6sLXVMZqkCspZoZeIPGXrhD9wxlxEF7MzniuvegURqrTGV2xTfqq1v9FJnczH+5OGFl5V78RgHZGaK34ylVg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
     <header>
         <div class="container">
-            <img src="static/images/Logo-vitas.svg" />
-            <menu>
-                <li><a>Home</a></li>
-                <li><a data-target="planos">Planos</a></li>
-                <li><a>F.A.Q</a></li>
-            </menu>
-            <div class="header-info">
-                <span><img src="static/images/zapp.svg" /><a href="tel:123-456-7890">123-456-7890</a></span>
-                <a href=""><button class="botao-sfun">Criar conta</button></a>
+            <div class="content_nav">
+                <div class="logo-top">
+                    <img src="static/images/Logo-vitas.svg" />
+                </div>
+                <menu>
+                    <li><a>Home</a></li>
+                    <li><a data-target="planos">Planos</a></li>
+                    <li><a>F.A.Q</a></li>
+                </menu>
+                <div class="header-info">
+                    <span><img src="static/images/zapp.svg" /><a href="tel:123-456-7890">123-456-7890</a></span>
+                    <a href=""><button class="botao-sfun">Criar conta</button></a>
+                </div>
             </div>
         </div>
     </header>
@@ -29,22 +33,24 @@
     <main>
         <section class="hero-section">
             <div class="container">
-                <div class="hero-text">
-                    <span>Rapido, simples e eficiente</span>
-                    <h2>Descubra Vitas: Seu software de gestão de clínicas e consultórios</h2>
-                    <p>Com a Vitas, médicos podem dizer adeus às longas esperas telefônicas. Nossa plataforma
-                        de gestão de
-                        clínicas e consultórios simplifica o agendamento de consultas, poupando tempo e tornando o
-                        processo
-                        eficaz. Nós cuidamos dos detalhes para que você possa se concentrar no que realmente importa: o
-                        cuidado
-                        com seus pacientes.</p>
-                    <div>
-                        <a href=""><button class="botao">Experimentar grátis</button></a>
-                        <a data-target="planos2"><button class="botao-sfun">Ver planos</button></a>
+                <div class="content_principal">
+                    <div class="hero-text">
+                        <span>Rapido, simples e eficiente</span>
+                        <h2>Descubra Vitas: Seu software de gestão de clínicas e consultórios</h2>
+                        <p>Com a Vitas, médicos podem dizer adeus às longas esperas telefônicas. Nossa plataforma
+                            de gestão de
+                            clínicas e consultórios simplifica o agendamento de consultas, poupando tempo e tornando o
+                            processo
+                            eficaz. Nós cuidamos dos detalhes para que você possa se concentrar no que realmente importa: o
+                            cuidado
+                            com seus pacientes.</p>
+                        <div>
+                            <a href=""><button class="botao">Experimentar grátis</button></a>
+                            <a data-target="planos2"><button class="botao-sfun">Ver planos</button></a>
+                        </div>
                     </div>
+                    <img src="static/images/Hero_Img.png" alt="">
                 </div>
-                <img src="static/images/Hero_Img.png" alt="">
             </div>
 
         </section>
@@ -85,56 +91,10 @@
             </div>
         </section>
 
-        <section class="planos" id="planos">
-            <div class="container">
-                <h1>Planos</h1>
-                <span>*mais vendidos</span>
-                <div class="planos_conteudo_descricao">
-
-                    <div class="planos_conteudo_quadrado">
-                        <div>
-                            <h2>Básico</h2>
-                            <h3>R$ 49<span>por mês</span></h1>
-                                <ul id="ul-basic">
-                                    <!-- js render -->
-                                </ul>
-                        </div>
-                        <button class="botao-sfun">Assinar</button>
-                    </div>
-
-                    <div class="planos_conteudo_quadrado">
-                        <div>
-                            <h2>Plus</h2>
-                            <h3>R$ 89<span>por mês</span></h1>
-                                <ul id="ul-plus">
-                                    <!-- js render -->
-                                </ul>
-                        </div>
-                        <button class="botao">Assinar</button>
-                    </div>
-
-                    <div class="planos_conteudo_quadrado">
-                        <div>
-                            <h2>Premium</h2>
-                            <h3>R$ 130<span>por mês</span></h1>
-                                <ul id="ul-premium">
-                                    <!-- js render -->
-                                </ul>
-                        </div>
-                        <button class="botao-sfun">Assinar</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section class="depoimento">
             <div class="container">
                 <h1>Depoimentos de clientes</h1>
                 <div class="depoimento_conteudo_container">
-                    <div class="botoes_carrosel">
-                    <img src="./static/images/Vector_seta.svg">
-                    <img src="./static/images/vector_seta_esquerda.svg">
-                </div>
                     <div class="depoimento_conteudo">
                         <img src="./static/images/aspas.svg" />
                         <div class="depoimento_conteudo_texto">
@@ -156,6 +116,12 @@
                             <h3>Jonh Doe</h3>
                             <p>Ortopedista </p>
                         </div>
+                    </div>
+                    <div class="glider-prev">
+                        <img src="./static/images/vector_seta_esquerda.svg">
+                    </div>
+                    <div class="glider-next">
+                        <img src="./static/images/Vector_seta.svg">
                     </div>
                 </div>
             </div>
@@ -231,7 +197,8 @@
             <img src="static/images/logo_menorSvg.svg" />
         </div>
     </footer>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/glider-js/1.7.8/glider.min.js" integrity="sha512-AZURF+lGBgrV0WM7dsCFwaQEltUV5964wxMv+TSzbb6G1/Poa9sFxaCed8l8CcFRTiP7FsCgCyOm/kf1LARyxA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="script.js" defer></script>
 </body>
 
 </html>

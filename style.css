@@ -20,21 +20,21 @@
 
 * {
     margin: 0;
-    padding: 0
+    padding: 0;
 }
 
 :root {
     --c-black: #031c0c;
     --c-white: #f5f1e8;
-    --c-brow: #F6EACF;
-    --c-white-sec: white; 
+    --c-brow: #f6eacf;
+    --c-white-sec: white;
     --c-black-sec: black;
-    --c-azul-ver-claro: #C9F9DB;
-    --c-Eucalyptus-claro: #1AA74E;
-    --c-verde-bem-claro: #6AEA99;
-    --c-verde-escuro: #031C0C;
-    --c-fundo_planos_azul_claro: #F2F8F8;
-    --c-fundo_depoimento_verde_claro: #E2EBE4;
+    --c-azul-ver-claro: #c9f9db;
+    --c-Eucalyptus-claro: #1aa74e;
+    --c-verde-bem-claro: #6aea99;
+    --c-verde-escuro: #031c0c;
+    --c-fundo_planos_azul_claro: #f2f8f8;
+    --c-fundo_depoimento_verde_claro: #e2ebe4;
 }
 
 html {
@@ -55,16 +55,20 @@ a {
     text-decoration: none;
 }
 
+img {
+    max-width: 100%;
+}
+
 .container {
     max-width: 1400px;
     margin: auto;
+    padding: 0 15px;
 }
 
 header .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
     justify-self: center;
     height: 100px;
 }
@@ -93,7 +97,7 @@ menu li a {
 
 menu li a::after {
     display: block;
-    content: '';
+    content: "";
     position: relative;
     height: 1.8px;
     width: 0%;
@@ -105,26 +109,40 @@ menu li a:hover::after {
     width: 100%;
 }
 
+header {
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    background-color: white;
+}
+
+.content_nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+}
+
 .header-info {
     display: flex;
     align-items: center;
 }
 
-.header-info  span {
+.header-info span {
     margin: 0 10px;
     font-family: mulish;
     font-weight: 400;
     display: flex;
-    align-items: center
+    align-items: center;
 }
-
 
 .header-info span img {
     margin: 0 3px;
 }
 
 .botao {
-    font-family: 'mulish', sans-serif;
+    font-family: "mulish", sans-serif;
     font-weight: bold;
     letter-spacing: 1px;
     padding: 12px 18px;
@@ -137,8 +155,12 @@ menu li a:hover::after {
     color: var(--c-white-sec);
 }
 
+.botao-sfun:hover {
+    color: white;
+    background-color: black;
+}
 .botao-sfun {
-    font-family: 'mulish', sans-serif;
+    font-family: "mulish", sans-serif;
     font-weight: bold;
     padding: 12px 18px;
     background-color: transparent;
@@ -146,6 +168,8 @@ menu li a:hover::after {
     font-size: 16px;
     border-radius: 7px;
     cursor: pointer;
+    color: black;
+    transition: all 0.3s;
 }
 
 .hero-section {
@@ -162,16 +186,15 @@ menu li a:hover::after {
     padding: 40px 0;
 }
 
-.hero-section .container {
+.content_principal {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: row;
+    align-items: flex-start;
 }
 
 .hero-section .hero-text {
     width: 50%;
 }
-
 
 .hero-section .container .hero-text span {
     font-family: mulish-extrabold;
@@ -200,7 +223,7 @@ menu li a:hover::after {
     margin-top: 20px;
 }
 
-.hero-section .hero-text div  {
+.hero-section .hero-text div {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -211,7 +234,7 @@ menu li a:hover::after {
     padding: 80px 0;
 }
 
-.optimization-content  h1 {
+.optimization-content h1 {
     padding-bottom: 80px;
     font-family: mulish-extrabold;
     font-size: 47px;
@@ -224,8 +247,7 @@ menu li a:hover::after {
     gap: 20px;
 }
 
-
-.optimization-content-desc  {
+.optimization-content-desc {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -236,7 +258,7 @@ menu li a:hover::after {
     font-family: mulish-extrabold;
     display: flex;
     text-align: center;
-    text-wrap: nowrap;  /*Experimental: This is an experimental technology */
+    text-wrap: nowrap; /*Experimental: This is an experimental technology */
     margin-bottom: 4px;
 }
 
@@ -268,13 +290,12 @@ menu li a:hover::after {
     line-height: 20px;
     text-align: left;
     margin-bottom: 8px;
-    
 }
 .planos .planos_conteudo_descricao {
     display: flex;
     justify-content: space-between;
 }
- 
+
 .planos .planos_conteudo_quadrado {
     background-color: var(--c-white-sec);
     padding: 36px;
@@ -283,7 +304,7 @@ menu li a:hover::after {
     flex-direction: column;
     justify-content: space-between;
     gap: 80px;
-    box-shadow: 0px 8px 11px 0 rgba(0, 0, 0, 0.05)
+    box-shadow: 0px 8px 11px 0 rgba(0, 0, 0, 0.05);
 }
 
 .planos .planos_conteudo_quadrado h2 {
@@ -324,7 +345,7 @@ menu li a:hover::after {
     text-align: left;
 }
 
-.planos .planos_conteudo_quadrado:nth-child(2){
+.planos .planos_conteudo_quadrado:nth-child(2) {
     border-width: 7px 2px 2px 2px;
     border-color: var(--c-verde-bem-claro);
     border-style: solid;
@@ -347,22 +368,22 @@ menu li a:hover::after {
     background-color: var(--c-fundo_depoimento_verde_claro);
 }
 
-.depoimento  h1 {
+.depoimento h1 {
     text-align: center;
     font-family: mulish-extrabold;
     font-size: 34px;
     padding: 60px;
 }
 
-.depoimento  .depoimento_conteudo_container {
+.depoimento .depoimento_conteudo_container {
     display: flex;
     justify-content: space-evenly;
     width: 80%;
     margin-left: 10%;
-    
-}   
+    position: relative;
+}
 
-.depoimento  .depoimento_conteudo {
+.depoimento .depoimento_conteudo {
     background-color: var(--c-white-sec);
     width: 600px;
     height: 250px;
@@ -373,10 +394,9 @@ menu li a:hover::after {
     background-repeat: no-repeat;
     background-image: url(./static/images/Ellipse_4.svg);
     background-position: 11%;
-    
 }
 
-.depoimento  img {
+.depoimento .depoimento_conteudo img {
     position: absolute;
     margin-top: 27px;
     margin-left: 181px;
@@ -384,16 +404,18 @@ menu li a:hover::after {
 }
 
 .botoes_carrosel img:nth-child(1) {
-    right: 361px;
-    bottom: -1570px;
+    right: 0;
+    bottom: 0;
+    margin: auto;
 }
 
 .botoes_carrosel img:nth-child(2) {
-    left: 180px;
-    bottom: -1570px;
+    left: 0;
+    bottom: 0;
+    margin: auto;
 }
 
-.depoimento  .depoimento_conteudo_texto {
+.depoimento .depoimento_conteudo_texto {
     width: 273px;
     margin-left: 210px;
     position: absolute;
@@ -402,24 +424,39 @@ menu li a:hover::after {
     font-family: mulish;
 }
 
-.depoimento  h3 {
+.depoimento h3 {
     margin-top: 19px;
     font-size: 17px;
     color: var(--c-black-sec);
 }
 
+.glider-prev,
+.glider-next {
+    border-radius: 100%;
+    background-color: white !important;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0px 0px 3px rgba(0, 0, 0, 0.1));
+    top: 0 !important;
+    bottom: 0 !important;
+    margin: auto;
+}
 
 /* faq */
 
 .faq {
     width: 100%;
-    height: 552px;
     font-family: mulish;
+    margin-bottom: 1em;
 }
 
 .faq h1 {
     text-align: center;
-    padding: 60px;
+    padding: 1em 0;
     font-size: 40px;
     font-family: mulish-extrabold;
     letter-spacing: 0.06em;
@@ -437,16 +474,18 @@ menu li a:hover::after {
 }
 
 .faq_conteudo_texto summary::after {
-    content: ''; 
+    content: "";
     display: flex;
     width: 20px;
     height: 20px;
     background-image: url(static/images/vector_more.svg);
     background-size: cover;
+    position: absolute;
+    right: 2px;
 }
 
 details[open] summary::after {
-    content: ''; 
+    content: "";
     display: flex;
     width: 26px;
     height: 6px;
@@ -454,21 +493,28 @@ details[open] summary::after {
 }
 
 details[open] summary ~ * {
-    animation: sweep .5s ease-in-out;
+    animation: sweep 0.5s ease-in-out;
 }
 
 @keyframes sweep {
     from {
-        opacity: 0; margin-top: -10px;
+        opacity: 0;
+        margin-top: -10px;
     }
     to {
-        opacity: 1; margin-top: 0;
+        opacity: 1;
+        margin-top: 0;
     }
 }
 
 .faq_conteudo_texto p {
     line-height: 20px;
     margin-bottom: 25px;
+}
+
+details.faq_conteudo_texto {
+    padding-right: 30px;
+    position: relative;
 }
 
 .faq_conteudo hr {
@@ -498,3 +544,59 @@ footer li {
     font-family: mulish-italic;
 }
 
+/* Media serve para deixar a pagina responsiva, quando a resolucao chegar a 991.98px todas as classes dentro do media serao aplicadas */
+/* A regra fica dentro dos parentes, quando é como se fosse: SE Resolucao for menor ou igual a 991.98px: aplique estas classes */
+@media (max-width: 991.98px) {
+    .depoimento {
+        display: none;
+    }
+    header .container {
+        height: auto;
+    }
+    header {
+        position: relative;
+    }
+    .content_principal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        align-content: center;
+    }
+    .content_nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        gap: 1em;
+        padding: 15px;
+        height: 250px;
+    }
+    .hero-section {
+        height: auto;
+    }
+    .optimization-content-style {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .hero-section .hero-text {
+        width: 100%;
+    }
+    footer .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        align-content: center;
+        flex-wrap: nowrap;
+        gap: 15px;
+    }
+    .faq_conteudo_texto summary {
+        font-size: 12pt;
+        line-height: inherit;
+        padding: 15px 0;
+    }
+}
