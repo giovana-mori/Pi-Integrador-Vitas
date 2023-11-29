@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitas - Login/Cadastro</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/admin/css/admin.css" />
+    <link rel="shortcut icon" href="./static/images/logo_menorSvg.svg"
+      type="image/x-icon" />
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <div class="content_nav">
+          <div class="logo-top">
+            <img src="static/images/Logo-vitas.svg" />
+          </div>
+          <div class="header-info">
+            <span>
+              <img src="static/images/zapp.svg" />
+              <a href="tel:123-456-7890">123-456-7890</a>
+            </span>
+            <span class="bem_vindo"><small>Bem vindo!</small>Fulano</span>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="panel">
+      <div class="container">
+        <div class="conteudo_admin">
+          <div class="menu_content">
+            <div class="menu">
+              <ul>
+                <li><a href="agendamentos.html" class="checked_link">Meus Agendamentos</a></li>
+                <li><a href="profissionais.html">Profissionais</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="content_">
+            <div>
+              <button class="btn_agendar" onclick="abrirModal()">Agendar+</button>
+            </div>
+            <div id="calendar"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="overlay" id="overlay" onclick="fecharModal()"></div>
+
+    <div class="modal_agendar">
+      <div class="modal_header">
+        <h3 class="header_form admin">
+          Agendar uma Consultar
+        </h3>
+      </div>
+      <div class="modal_content">
+        <div class="content_form">
+          <form id="consultaForm">
+            <div class="item_form">
+              <label for="nome">Nome:</label>
+              <input type="text" id="nome" value="Fulano" readonly required>
+            </div>
+
+            <div class="item_form">
+              <label for="dataHora">Data e Hora:</label>
+              <input type="datetime-local" id="dataHora" required>
+            </div>
+
+            <div class="item_form">
+              <label for="medico">Médico:</label>
+              <select id="medico" required>
+                <option value="medico1">Médico 1</option>
+                <option value="medico2">Médico 2</option>
+                <option value="medico3">Médico 3</option>
+              </select>
+            </div>
+
+            <button type="button" class="btn" onclick="agendarConsulta()">Agendar</button>
+          </form>
+        </div>
+      </div>
+      <div class="modal_footer"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/pt-br.js"></script>
+    <script src="assets/admin/js/script.js">
+ </script>
+  </body>
+
+</html>
