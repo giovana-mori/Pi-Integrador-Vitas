@@ -1,68 +1,64 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Vitas - Login/Cadastro</title>
-        <link rel="stylesheet" href="style.css" />
-        <link rel="stylesheet" href="assets/admin/css/style.css" />
-        <link rel="shortcut icon" href="./static/images/logo_menorSvg.svg"
-            type="image/x-icon" />
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vitas - Login/Cadastro</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/admin/css/style.css" />
+    <link rel="shortcut icon" href="./static/images/logo_menorSvg.svg" type="image/x-icon" />
+</head>
 
-    <body>
-        <header>
-            <div class="container">
-                <div class="content_nav">
-                    <div class="logo-top">
-                        <img src="static/images/Logo-vitas.svg" />
-                    </div>
-                    <menu>
-                        <li><a>Home</a></li>
-                        <li><a data-target="planos">Planos</a></li>
-                        <li><a>F.A.Q</a></li>
-                    </menu>
-                    <div class="header-info">
-                        <span><img src="static/images/zapp.svg" /><a
-                                href="tel:123-456-7890">123-456-7890</a></span>
-                        <a href="registro.html"><button class="botao-sfun">ENTRAR</button></a>
-                    </div>
+<body>
+    <header>
+        <div class="container">
+            <div class="content_nav">
+                <div class="logo-top">
+                    <img src="static/images/Logo-vitas.svg" />
+                </div>
+                <menu>
+                    <li><a>Home</a></li>
+                    <li><a data-target="planos">Planos</a></li>
+                    <li><a>F.A.Q</a></li>
+                </menu>
+                <div class="header-info">
+                    <span><img src="static/images/zapp.svg" /><a href="tel:123-456-7890">123-456-7890</a></span>
+                    <a href="registro.html"><button class="botao-sfun">ENTRAR</button></a>
                 </div>
             </div>
-        </header>
-        <div class="panel">
-            <div class="content_forms">
-                <div class="card register_card">
-                    <div class="flex_card">
-                        <div class="division_left">
-                            <h4>Ainda não tem conta?</h4>
-                            <a href="registro.html" class="btn_entrar_registro">Registrar</a>
-                        </div>
-                        <div class="dividir"></div>
-                        <div class="content_form">
-                            <h3 class="header_form">
-                                Entrar
-                            </h3>
-                            <form action="?" method="post">
-                                <div class="item_form">
-                                    <label for="email">E-mail</label>
-                                    <input type="email" name="email" id="email"
-                                        required>
-                                </div>
-                                <div class="item_form">
-                                    <label for="email">Senha</label>
-                                    <input type="password" name="senha"
-                                        id="senha"
-                                        required>
-                                </div>
-                                <button class="btn" type="submit">Cadastrar</button>
-                            </form>
-                        </div>
+        </div>
+    </header>
+    <div class="panel">
+        <div class="content_forms">
+            <div class="card register_card">
+                <div class="flex_card">
+                    <div class="division_left">
+                        <h4>Ainda não tem conta?</h4>
+                        <a href="registro.html" class="btn_entrar_registro">Registrar</a>
+                    </div>
+                    <div class="dividir"></div>
+                    <div class="content_form">
+                        <h3 class="header_form">
+                            Entrar
+                        </h3>
+                        <form id="login_form" method="get">
+                            <div class="item_form">
+                                <label for="email">E-mail</label>
+                                <input type="email" name="email" id="email" required>
+                            </div>
+                            <div class="item_form">
+                                <label for="email">Senha</label>
+                                <input type="password" name="senha" id="senha" required>
+                            </div>
+                            <button class="btn" onsubmit="performLogin()" type="submit">Cadastrar</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+    <script src="script.js "></script>
+</body>
 
 </html>

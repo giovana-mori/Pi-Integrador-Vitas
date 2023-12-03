@@ -39,67 +39,6 @@ function agendarConsulta() {
     fecharModal();
 }
 
-function performLogin() {
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
-
-    // Simulando credenciais válidas
-    var validUsername = 'user';
-    var validPassword = 'pass';
-
-    if (username === validUsername && password === validPassword) {
-        alert('Login successful!');
-    } else {
-        alert('Invalid username or password. Please try again.');
-    }
-}
-async function popularEstados() {
-    try {
-        const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
-        const estados = await response.json();
-        const selectEstados = document.getElementById('estadosSelect');
-
-        estados.forEach((estado) => {
-            const option = document.createElement('option');
-            option.value = estado.sigla;
-            option.text = estado.nome;
-            selectEstados.appendChild(option);
-        });
-
-        // Chama a função para popular as cidades quando o estado é selecionado
-        popularCidades();
-    } catch (error) {
-        console.error('Erro ao carregar estados:', error);
-    }
-}
-
-async function popularCidades() {
-    const estadoSelecionado = document.getElementById('estadosSelect').value;
-    const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estadoSelecionado}/municipios`;
-
-    try {
-        const response = await fetch(url);
-        const cidades = await response.json();
-        const selectCidades = document.getElementById('cidadesSelect');
-
-        // Limpa as opções existentes
-        selectCidades.innerHTML = '';
-
-        // Adiciona as cidades como opções no select
-        cidades.forEach((cidade) => {
-            const option = document.createElement('option');
-            option.value = cidade.id;
-            option.text = cidade.nome;
-            selectCidades.appendChild(option);
-        });
-    } catch (error) {
-        console.error('Erro ao carregar cidades:', error);
-    }
-}
-
-// document.addEventListener('DOMContentLoaded', popularEstados);
-
-
 // Função para abrir o modal
 function abrirModal() {
     document.querySelector('.modal_agendar').style.display = 'block';
