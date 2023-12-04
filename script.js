@@ -146,7 +146,7 @@ function registerUsersFromLocalStorage() {
 
   alert("Cadastro efetuado com sucesso!")
 
-  window.location.href = "/login.html";
+  window.location.href = "./login.html";
 }
 
 function getUsersFromLocalStorage() {
