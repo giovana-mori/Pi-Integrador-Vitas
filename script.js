@@ -132,7 +132,7 @@ function registerUsersFromLocalStorage() {
     estado: estado,
     cidade: cidade,
     email: email,
-    senha: senha,
+    senha: senha
   };
 
   // Verificar se já existe um array de usuarios no localStorage

@@ -1,393 +1,408 @@
 .menu_content {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-between;
-    max-width: 200px;
-    width: 100%;
-    height: 100%;
-    padding-top: 15px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  max-width: 200px;
+  width: 100%;
+  height: 100%;
+  padding-top: 15px;
 }
 
 body,
 html {
-    background-color: #f5f1e8;
+  background-color: #f5f1e8;
 }
 
 header {
-    position: sticky;
-    top: 0;
-    z-index: 9;
-    background-color: white;
-    display: flex;
-    box-shadow: 0 1px 8px -5px rgba(0, 0, 0, 0.3);
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  background-color: white;
+  display: flex;
+  box-shadow: 0 1px 8px -5px rgba(0, 0, 0, 0.3);
 }
 
 .menu {
-    max-width: 200px;
-    width: 100%;
+  max-width: 200px;
+  width: 100%;
 }
 
 .menu ul {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  gap: 15px;
 }
 
 .menu ul li {
-    display: flex;
+  display: flex;
 }
 
 .menu ul li a {
-    padding: 5px;
-    border-radius: 10px;
-    border: 1px solid #3bcd71;
-    transition: all 0.3s;
-    background-color: #fff;
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: 1px solid #3bcd71;
+  transition: all 0.3s;
+  background-color: #fff;
 }
 
 .menu ul li a:hover,
 .checked_link {
-    background-color: #3bcd71 !important;
-    color: white;
+  background-color: #3bcd71 !important;
+  color: white;
 }
 
 div#calendar .fc-button-group button.state-active {
-    background-color: #2dbd62;
+  background-color: #2dbd62;
 }
 
 .fc-today-button {
-    background-color: #3bcd71 !important;
-    background-image: unset !important;
-    text-shadow: none !important;
-    color: white;
+  background-color: #3bcd71 !important;
+  background-image: unset !important;
+  text-shadow: none !important;
+  color: white;
 }
 
 div#calendar .fc-button-group button {
-    background-color: #2dbd62;
-    text-shadow: none !important;
-    text-decoration: none;
-    background-image: unset;
-    color: white;
-    font-family: "mulish", sans-serif;
-    appearance: none;
+  background-color: #2dbd62;
+  text-shadow: none !important;
+  text-decoration: none;
+  background-image: unset;
+  color: white;
+  font-family: "mulish", sans-serif;
+  appearance: none;
 }
 
 .conteudo_admin {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .panel {
-    height: 100%;
-    padding: 15px;
+  height: 100%;
+  padding: 15px;
 }
 
-.panel>.container {
-    height: 100%;
+.panel > .container {
+  height: 100%;
 }
 
 button.btn_agendar {
-    display: table;
-    padding: 10px;
-    background-color: #3bcd71;
-    color: white;
-    font-size: 10pt;
-    text-transform: uppercase;
-    font-family: "mulish";
-    font-weight: 500;
-    border: 0;
-    border-radius: 10px;
-    width: 100%;
-    max-width: 200px;
+  display: table;
+  padding: 10px;
+  background-color: #3bcd71;
+  color: white;
+  font-size: 10pt;
+  text-transform: uppercase;
+  font-family: "mulish";
+  font-weight: 500;
+  border: 0;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 200px;
 }
 
 .bem_vindo {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    flex-wrap: nowrap;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: nowrap;
 }
 
 .item_form {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .fc-unthemed td.fc-today {
-    background: #e2ebe4 !important;
+  background: #e2ebe4 !important;
 }
 
 .content_ {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 15px;
-    background-color: white;
-    margin-right: -15px;
-    padding: 15px;
-    margin: 15px auto;
-    border-radius: 6px;
-    box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+  background-color: white;
+  margin-right: -15px;
+  padding: 15px;
+  margin: 15px auto;
+  border-radius: 6px;
+  box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+  height: auto !important;
+}
+
+.btn.contact_btn {
+    margin-left: auto;
+}
+
+#contato_form {
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: flex-start;
 }
 
 input,
+textarea,
 select {
-    display: block;
-    width: 100%;
-    padding: 0.175rem 0.45rem;
-    font-size: 10pt;
-    height: 25px;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition:
-        border-color 0.15s ease-in-out,
-        box-shadow 0.15s ease-in-out;
+  display: block;
+  width: 100%;
+  padding: 0.175rem 0.45rem;
+  font-size: 10pt;
+  height: 25px;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .btn {
-    background-color: #3bcd71;
-    display: inline-block;
-    color: white;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.5;
-    border-radius: 15px;
-    transition: all 0.3s;
-    cursor: pointer;
+  background-color: #3bcd71;
+  display: inline-block;
+  color: white;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  border-radius: 15px;
+  transition: all 0.3s;
+  cursor: pointer;
 }
 
 select {
-    height: calc(29px + 2px) !important;
+  height: calc(29px + 2px) !important;
 }
 
 .card form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 0.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5em;
 }
 
 .header_form.admin {
-    margin: 1em auto;
+  margin: 1em auto;
 }
 
 /* Estilo básico para o modal */
 .modal_agendar {
-    display: none;
-    /* O modal é oculto por padrão */
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    border-radius: 8px;
-    z-index: 1000;
+  display: none;
+  /* O modal é oculto por padrão */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 8px;
+  z-index: 1000;
 }
 
 /* Estilo para o cabeçalho do modal */
 .modal_header {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 /* Estilo para o conteúdo do modal */
 .modal_content {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 /* Estilo para o rodapé do modal */
 .modal_footer {
-    margin-top: 20px;
-    text-align: right;
+  margin-top: 20px;
+  text-align: right;
 }
 
 /* Estilo para um botão dentro do rodapé do modal (apenas um exemplo) */
 .modal_footer button {
-    padding: 10px 20px;
-    font-size: 14px;
-    background-color: #4caf50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 /* Estilo para o overlay (fundo escurecido ao redor do modal) */
 .overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 900;
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 900;
 }
 
 /* Adiciona um efeito de fade no modal e no overlay */
 .modal_agendar,
 .overlay {
-    animation: fadeIn 0.3s ease-out;
+  animation: fadeIn 0.3s ease-out;
 }
 
 #consultaForm {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
+  from {
+    opacity: 0;
+  }
 
-    to {
-        opacity: 1;
-    }
+  to {
+    opacity: 1;
+  }
 }
 
 .content_profissionals {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin: 1em auto 2em;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 1em auto 2em;
 }
 
 .card_profissional:before {
-    content: "";
-    background-color: #2dbd62;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: auto;
-    opacity: 0.3;
-    max-height: 200px;
-    height: 100%;
+  content: "";
+  background-color: #2dbd62;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: auto;
+  opacity: 0.3;
+  max-height: 200px;
+  height: 100%;
 }
 
 .card_profissional {
-    flex: 1 32%;
-    max-width: 32%;
-    position: relative;
-    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
-    border-radius: 5px 5px 0 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+  flex: 1 32%;
+  max-width: 32%;
+  position: relative;
+  box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .bloco_titulo {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    align-items: center;
-    gap: 10px;
-    margin: 15px auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+  margin: 15px auto;
 }
 
 .title_admin {
-    text-align: center;
-    font-size: 19pt;
-    margin: auto;
+  text-align: center;
+  font-size: 19pt;
+  margin: auto;
 }
 
 .text_content * {
-    text-align: center;
-    color: #444;
+  text-align: center;
+  color: #444;
 }
 
 .img_profissional {
-    border-radius: 50%;
-    overflow: hidden;
-    width: 200px;
-    height: 200px;
-    margin: 15px auto;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  margin: 15px auto;
 }
 
 .name_profissional .title_pro {
-    font-size: 15pt;
-    text-align: center;
+  font-size: 15pt;
+  text-align: center;
 }
 
 .name_profissional {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .node_card {
-    padding: 1em;
-    gap: 15px;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 2;
-    height: 100%;
-    justify-content: space-between;
+  padding: 1em;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  justify-content: space-between;
 }
 
 @media (max-width: 991.98px) {
-    .fc-today-button {
-        font-size: 10pt !important;
-    }
+  .fc-today-button {
+    font-size: 10pt !important;
+  }
 
-    div#calendar .fc-button-group button {
-        font-size: 10pt !important;
-        text-align: center !important;
-    }
+  div#calendar .fc-button-group button {
+    font-size: 10pt !important;
+    text-align: center !important;
+  }
 
-    .modal_agendar {
-        max-width: 300px;
-    }
+  .modal_agendar {
+    max-width: 300px;
+  }
 
-    .conteudo_admin {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex-wrap: nowrap;
-        align-content: center;
-        justify-content: flex-start;
-    }
+  .conteudo_admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: flex-start;
+  }
 
-    .menu_content {
-        height: auto;
-    }
+  .menu_content {
+    height: auto;
+  }
 
-    .content_ {
-        width: auto;
-    }
+  .content_ {
+    width: auto;
+  }
 }

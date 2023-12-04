@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vitas - Login/Cadastro</title>
+  <title>Vitas - Agendamento</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="assets/admin/css/admin.css" />
   <link rel="shortcut icon" href="./static/images/logo_menorSvg.svg" type="image/x-icon" />
@@ -16,19 +16,14 @@
     <div class="container">
       <div class="content_nav">
         <div class="logo-top">
-          <a href="/">
-            <img src="static/images/Logo-vitas.svg" />
-          </a>
+          <img src="static/images/Logo-vitas.svg" />
         </div>
-        <menu>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#profissionais">Profissionais</a></li>
-          <li><a href="#depoimentos">Depoimentos</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </menu>
         <div class="header-info">
-          <span><img src="static/images/zapp.svg" /><a href="tel:123-456-7890">123-456-7890</a></span>
-          <a href="login.html"><button class="botao-sfun">AGENDAR</button></a>
+          <span>
+            <img src="static/images/zapp.svg" />
+            <a href="tel:123-456-7890">123-456-7890</a>
+          </span>
+          <span class="bem_vindo"><small>Bem vindo!</small></span>
         </div>
       </div>
     </div>
@@ -41,6 +36,7 @@
             <ul>
               <li><a href="agendamentos.html" class="checked_link">Meus Agendamentos</a></li>
               <li><a href="profissionais.html">Profissionais</a></li>
+              <li><a href="contato.html">Contato</a></li>
             </ul>
           </div>
         </div>
@@ -66,7 +62,7 @@
         <form id="consultaForm">
           <div class="item_form">
             <label for="nome">Nome:</label>
-            <input type="text" id="nome" value="Fulano" readonly required>
+            <input type="text" id="nome" value="" placeholder="Digite o nome de quem sera atendido.." required>
           </div>
 
           <div class="item_form">
@@ -77,9 +73,11 @@
           <div class="item_form">
             <label for="medico">Médico:</label>
             <select id="medico" required>
-              <option value="medico1">Médico 1</option>
-              <option value="medico2">Médico 2</option>
-              <option value="medico3">Médico 3</option>
+              <option value="profissional1">Camila Santiago - Psicologa</option>
+              <option value="profissional2">Rodrigo Almeida - Enfermeiro</option>
+              <option value="profissional3">Dr. André Oliveira - Médico</option>
+              <option value="profissional4">Mariana Silva - Nutricionista</option>
+              <option value="profissional5">Beatriz Mendes - Fisioterapeuta</option>
             </select>
           </div>
 
@@ -89,7 +87,7 @@
     </div>
     <div class="modal_footer"></div>
   </div>
-<!-- 
+  <!-- 
   <footer>
     <p>© 2023 Clínica VITAS. Todos os direitos reservados.
       Rua Ali Perto, 99 Bairro Longe - Brotas - SP CEP 17380-000 | Email: contato@vitas.com</p>
