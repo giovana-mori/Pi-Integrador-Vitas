@@ -1,14 +1,3 @@
-// new Glider(document.querySelector('.glider'), {
-//   slidesToShow: 5,
-//   slidesToScroll: 5,
-//   draggable: true,
-//   dots: '.dots',
-//   arrows: {
-//     prev: '.glider-prev',
-//     next: '.glider-next'
-//   }
-// });
-
 document.addEventListener('DOMContentLoaded', function () {
   popularEstados();
   document.getElementById('register_form')?.addEventListener('submit', function (e) {
@@ -25,7 +14,38 @@ document.addEventListener('DOMContentLoaded', function () {
     // Chama a função para popular as cidades quando o estado é selecionado
     performLogin()
   })
+
+  document.querySelectorAll('[data-target]').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!e.currentTarget.dataset.target) {
+        return;
+      }
+      let positionY = document.querySelector(`#${e.currentTarget.dataset.target}`).getBoundingClientRect().top;
+      window.scrollTo(0, positionY);
+    })
+  })
+
+  $('.glider').slick({
+    infinite: false,
+    slidesToShow: 2,
+    arrows: false,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1100,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  });
 });
+
+function anchorScrolling(e) {
+    console.log(e.currentTarget.dataset.target);
+}
 
 async function popularEstados() {
   try {

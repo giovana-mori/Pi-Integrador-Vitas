@@ -90,12 +90,25 @@ function generateEventsFromLocalStorage() {
 function getRandomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
+
+function getCalHeight() {
+    // Defina a lógica conforme necessário. Pode depender do tamanho da janela ou de outros fatores.
+    return $(window).height() - 50; // Exemplo: altura da janela menos 50 pixels
+}
+
 $(document).ready(function () {
     var calendar = $('#calendar').fullCalendar({
         header: {
             left: 'prev,next today',
             center: 'title',
             right: 'month,basicWeek,basicDay'
+        },
+        aspectRatio: 1.35, // Ajuste este valor conforme necessário
+
+        windowResize: function (view) {
+            // Ajustar o FullCalendar quando a janela é redimensionada
+            // Você pode adicionar lógica personalizada aqui, se necessário
+            $('#calendar').fullCalendar('option', 'height', getCalHeight());
         },
         locale: 'pt-br',
         events: generateEventsFromLocalStorage(), // Adicione os eventos da localStorage

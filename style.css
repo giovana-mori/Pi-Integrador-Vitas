@@ -23,6 +23,10 @@
     padding: 0;
 }
 
+* {
+    scroll-behavior: smooth;
+}
+
 :root {
     --c-black: #031c0c;
     --c-white: #f5f1e8;
@@ -36,10 +40,12 @@
     --c-fundo_planos_azul_claro: #f2f8f8;
     --c-fundo_depoimento_verde_claro: #e2ebe4;
 }
+
 html,
 body {
     height: 100%;
 }
+
 html {
     scroll-behavior: smooth;
 }
@@ -65,8 +71,12 @@ img {
 .container {
     max-width: 1400px;
     margin: auto;
-    padding: 0 15px;
-    width: auto;
+    width: 100%;
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px;
 }
 
 header .container {
@@ -120,6 +130,7 @@ header {
     z-index: 9;
     background-color: white;
     display: flex;
+    padding: 0 15px;
 }
 
 .content_nav {
@@ -165,6 +176,7 @@ header {
     color: white;
     background-color: black;
 }
+
 .botao-sfun {
     font-family: "mulish", sans-serif;
     font-weight: bold;
@@ -183,7 +195,7 @@ header {
     background-repeat: no-repeat;
     background-position: 90% 50%;
     width: 100%;
-    height: 717px;
+    min-height: 70vh;
     background-color: var(--c-white);
     display: flex;
     align-items: flex-start;
@@ -196,6 +208,21 @@ header {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+
+.simbolo img {
+    border-radius: 50%;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    padding: 10vh 0;
 }
 
 .hero-section .hero-text {
@@ -236,10 +263,6 @@ header {
     margin-top: 40px;
 }
 
-.optimization-content {
-    padding: 80px 0;
-}
-
 .optimization-content h1 {
     padding-bottom: 80px;
     font-family: mulish-extrabold;
@@ -257,19 +280,29 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 250px;
+    max-width: 20%;
+    flex: 1;
 }
 
 .optimization-content-desc h2 {
     font-family: mulish-extrabold;
     display: flex;
     text-align: center;
-    text-wrap: nowrap; /*Experimental: This is an experimental technology */
+    text-wrap: nowrap;
+    font-size: 12pt;
+    /*Experimental: This is an experimental technology */
     margin-bottom: 4px;
+}
+
+.optimization-content-desc small {
+    font-weight: 600;
+    line-height: inherit;
+    margin-bottom: 1rem;
 }
 
 .optimization-content-desc p {
     font-family: mulish;
+    font-size: 10pt;
     text-align: center;
 }
 
@@ -288,7 +321,7 @@ header {
     margin-bottom: 60px;
 }
 
-.planos .container > span {
+.planos .container>span {
     display: flex;
     justify-content: center;
     font-size: 16px;
@@ -297,6 +330,7 @@ header {
     text-align: left;
     margin-bottom: 8px;
 }
+
 .planos .planos_conteudo_descricao {
     display: flex;
     justify-content: space-between;
@@ -368,45 +402,87 @@ header {
 .planos button {
     width: 100%;
 }
+
 /* revisar daqui pra baixo */
 .depoimento {
     height: 500px;
     background-color: var(--c-fundo_depoimento_verde_claro);
 }
 
-.depoimento h1 {
+.title_home {
     text-align: center;
     font-family: mulish-extrabold;
     font-size: 34px;
     padding: 60px;
 }
 
+.title_home_sobre {
+    font-family: mulish-extrabold;
+    font-size: 50px;
+}
+
+.paragraph {
+    font-family: mulish;
+    font-size: 19px;
+    text-align: justify;
+}
+
+.text_about {
+    max-width: 47%;
+    width: 100%;
+    text-align: justify;
+}
+
+.img_about {
+    box-shadow: 0 0 5px -1px rgba(0, 0, 0, .3);
+    border-radius: 49px 2px 50px 2px;
+    max-width: 50%;
+}
+
+.about_us {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    gap: 15px;
+    padding: 0 15px;
+    margin: 1em auto;
+}
+
+.depoimento h1 {
+    text-align: center;
+    font-family: mulish-extrabold;
+    font-size: 34px;
+    padding: 0 0 60px 0;
+}
+
 .depoimento .depoimento_conteudo_container {
     display: flex;
     justify-content: space-evenly;
-    width: 80%;
-    margin-left: 10%;
+    width: 100%;
     position: relative;
 }
 
 .depoimento .depoimento_conteudo {
     background-color: var(--c-white-sec);
     width: 600px;
-    height: 250px;
+    height: 250px !important;
     border-radius: 3px;
-    display: flex;
+    margin: auto 3px;
+    display: flex !important;
     flex-wrap: wrap;
-    background-size: auto;
-    background-repeat: no-repeat;
-    background-image: url(./static/images/Ellipse_4.svg);
-    background-position: 11%;
 }
 
-.depoimento .depoimento_conteudo img {
+.depoimento .depoimento_conteudo img.aspas {
     position: absolute;
-    margin-top: 27px;
-    margin-left: 181px;
+    top: 0;
+    left: 0;
     width: 19px;
+}
+
+.sobre_content {
+    background-color: var(--c-fundo_depoimento_verde_claro);
 }
 
 .botoes_carrosel img:nth-child(1) {
@@ -421,19 +497,34 @@ header {
     margin: auto;
 }
 
+.content_comment {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    gap: 15px;
+    padding: 15px;
+    width: 100%;
+}
+
 .depoimento .depoimento_conteudo_texto {
-    width: 273px;
-    margin-left: 210px;
-    position: absolute;
-    padding-top: 48px;
+    width: auto;
+    padding-top: 15px;
     line-height: 21px;
     font-family: mulish;
+    position: relative;
+    max-width: 300px;
 }
 
 .depoimento h3 {
     margin-top: 19px;
     font-size: 17px;
     color: var(--c-black-sec);
+}
+
+.content_glider {
+    position: relative;
 }
 
 .glider-prev,
@@ -468,6 +559,16 @@ header {
     letter-spacing: 0.06em;
 }
 
+.faq_conteudo {
+    padding: 0 15px;
+}
+
+.contato,
+.dados_empresa,
+.logo_foo {
+    padding: 0 15px;
+}
+
 .faq_conteudo_texto summary {
     line-height: 60px;
     font-size: 1.5em;
@@ -498,7 +599,7 @@ details[open] summary::after {
     background-image: url(static/images/Vector_unless.svg);
 }
 
-details[open] summary ~ * {
+details[open] summary~* {
     animation: sweep 0.5s ease-in-out;
 }
 
@@ -507,6 +608,7 @@ details[open] summary ~ * {
         opacity: 0;
         margin-top: -10px;
     }
+
     to {
         opacity: 1;
         margin-top: 0;
@@ -553,15 +655,39 @@ footer li {
 /* Media serve para deixar a pagina responsiva, quando a resolucao chegar a 991.98px todas as classes dentro do media serao aplicadas */
 /* A regra fica dentro dos parentes, quando é como se fosse: SE Resolucao for menor ou igual a 991.98px: aplique estas classes */
 @media (max-width: 991.98px) {
-    .depoimento {
-        display: none;
-    }
     header .container {
         height: auto;
     }
-    header {
-        position: relative;
+
+    .header-info {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-between;
     }
+
+    .optimization-content-desc {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 47%;
+        flex: 1 47%;
+        width: 100%;
+    }
+
+    .about_us {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    .img_about {
+        max-width: 100%;
+    }
+
     .content_principal {
         display: flex;
         flex-direction: column;
@@ -569,6 +695,7 @@ footer li {
         justify-content: center;
         align-content: center;
     }
+
     .content_nav {
         display: flex;
         justify-content: center;
@@ -576,21 +703,34 @@ footer li {
         flex-direction: column;
         width: 100%;
         gap: 1em;
-        padding: 15px;
-        height: 250px;
+        padding: 15px 0;
     }
+
     .hero-section {
         height: auto;
     }
+
     .optimization-content-style {
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
+
+    .hero-section .hero-text p {
+        margin: 15px auto;
+    }
+
+    .text_about {
+        max-width: 100%;
+        text-align: center;
+    }
+
     .hero-section .hero-text {
         width: 100%;
     }
+
     footer .container {
         display: flex;
         justify-content: center;
@@ -600,6 +740,7 @@ footer li {
         flex-wrap: nowrap;
         gap: 15px;
     }
+
     .faq_conteudo_texto summary {
         font-size: 12pt;
         line-height: inherit;
