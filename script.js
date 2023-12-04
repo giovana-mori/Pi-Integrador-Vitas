@@ -102,7 +102,7 @@ function performLogin() {
   var usuarioExists = usuarios.filter(us => us.email == username && us.senha == password);
 
   if (usuarioExists.length > 0) {
-    window.location.href = '/agendamentos.html';
+    window.location.href = './agendamentos.html';
   }
   else {
     alert('Usuario ou senha invalido!');
