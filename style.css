@@ -34,7 +34,7 @@
   --c-white-sec: white;
   --c-black-sec: black;
   --c-azul-ver-claro: #c9f9db;
-  --c-Eucalyptus-claro: #1aa74e;
+  --c-Eucalyptus-claro: #3bcd71;
   --c-verde-bem-claro: #6aea99;
   --c-verde-escuro: #031c0c;
   --c-fundo_planos_azul_claro: #f2f8f8;
@@ -662,7 +662,7 @@ details.faq_conteudo_texto {
 
 /*rodapé*/
 footer {
-  background-color: #f5f1e8;
+  background-color: var(--c-white);
 }
 
 footer .container .footer_contact {

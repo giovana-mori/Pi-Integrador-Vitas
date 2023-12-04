@@ -11,7 +11,7 @@
 
 body,
 html {
-  background-color: #f5f1e8;
+  background-color: var(--c-white);
 }
 
 header {
@@ -43,30 +43,30 @@ header {
 .menu ul li a {
   padding: 5px 10px;
   border-radius: 10px;
-  border: 1px solid #3bcd71;
+  border: 1px solid var(--c-Eucalyptus-claro);
   transition: all 0.3s;
   background-color: #fff;
 }
 
 .menu ul li a:hover,
 .checked_link {
-  background-color: #3bcd71 !important;
+  background-color: var(--c-Eucalyptus-claro) !important;
   color: white;
 }
 
 div#calendar .fc-button-group button.state-active {
-  background-color: #2dbd62;
+  background-color: var(--c-Eucalyptus-claro);
 }
 
 .fc-today-button {
-  background-color: #3bcd71 !important;
+  background-color: var(--c-Eucalyptus-claro) !important;
   background-image: unset !important;
   text-shadow: none !important;
-  color: white;
+  color: white !important;
 }
 
 div#calendar .fc-button-group button {
-  background-color: #2dbd62;
+  background-color: var(--c-Eucalyptus-claro);
   text-shadow: none !important;
   text-decoration: none;
   background-image: unset;
@@ -96,7 +96,7 @@ div#calendar .fc-button-group button {
 button.btn_agendar {
   display: table;
   padding: 10px;
-  background-color: #3bcd71;
+  background-color: var(--c-Eucalyptus-claro);
   color: white;
   font-size: 10pt;
   text-transform: uppercase;
@@ -176,7 +176,7 @@ select {
 }
 
 .btn {
-  background-color: #3bcd71;
+  background-color: var(--c-Eucalyptus-claro);
   display: inline-block;
   color: white;
   font-weight: 400;
@@ -303,7 +303,7 @@ select {
 
 .card_profissional:before {
   content: "";
-  background-color: #2dbd62;
+  background-color: var(--c-Eucalyptus-claro);
   position: absolute;
   bottom: 0;
   left: 0;

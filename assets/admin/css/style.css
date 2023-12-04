@@ -90,7 +90,7 @@ textarea {
 }
 
 .btn {
-    background-color: #3bcd71;
+    background-color: var(--c-Eucalyptus-claro);
     display: inline-block;
     color: white;
     font-weight: 400;
