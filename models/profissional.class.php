@@ -2,10 +2,20 @@
 
 class Profissional extends Pessoa
 {
-    public function __construct(private int $id_profissional = 0, private string $registroProfissional = "")
+    private $especialidades;
+    public function __construct(private int $id_profissional = 0, private Tipo_profissional $tipo_profissional, private string $registroProfissional = "")
     {
+        $this->id_profissional = $id_profissional;
         $this->registroProfissional = $registroProfissional;
-        $this->especialidades = [];
+        $this->tipo_profissional = $tipo_profissional;
+    }
+    public function getId_profissional()
+    {
+        return $this->id_profissional;
+    }
+    public function setId_profissional($id_profissional)
+    {
+        $this->id_profissional = $id_profissional;
     }
     public function getRegistroProfissional()
     {
@@ -15,18 +25,22 @@ class Profissional extends Pessoa
     {
         $this->registroProfissional = $registroProfissional;
     }
-    public function setEspecialidades($especialidades)
+    public function getTipo_profissional()
     {
-        $this->especialidades [] = $especialidades;
+        return $this->tipo_profissional;
     }
-    public function getEspecialidades()
+    public function setTipo_profissional($tipo_profissional)
+    {
+        $this->tipo_profissional = $tipo_profissional;
+    }
+    public function getEspecialidade()
     {
         return $this->especialidades;
     }
-    public function getIdProfissional()
+
+    public function setEspecialidade($descricao, $tipo)
     {
-        return $this->id_profissional;
+        $especialidade = new Especialidade($descricao, $tipo);
+        $this->especialidades = $especialidade;
     }
 }
-
-// Agregação 

@@ -9,12 +9,11 @@ class Telefone extends Conexao
 
     public function inserir($telefone)
     {
-        $sql = "INSERT INTO telefone (ddd, numero, id_pessoa) VALUES (?,?,?)";
+        $sql = "INSERT INTO telefone (ddd, numero) VALUES (?,?)";
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindParam(1, $telefone->ddd);
             $stm->bindParam(2, $telefone->numero);
-            $stm->bindParam(3, $telefone->id_pessoa);
             $stm->execute();
             $id_telefone = $this->db->lastInsertId();
             $this->db = null;
@@ -36,6 +35,32 @@ class Telefone extends Conexao
             return true;
         } catch (PDOException $e) {
             return false;
+        }
+    }
+    public function excluir($id_telefone)
+    {
+        $sql = "DELETE FROM telefone WHERE id_telefone = ?";
+        try {
+            $stm = $this->db->prepare($sql);
+            $stm->bindParam(1, $id_telefone);
+            $stm->execute();
+            $this->db = null;
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    public function buscar($id_telefone)
+    {
+        $sql = "SELECT * FROM telefone WHERE id_telefone = ?";
+        try {
+            $stm = $this->db->prepare($sql);
+            $stm->bindParam(1, $id_telefone);
+            $stm->execute();
+            $this->db = null;
+            return $stm->fetch(PDO::FETCH_OBJ);
+        } catch (PDOException $e) {
+            return [];
         }
     }
 

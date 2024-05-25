@@ -7,7 +7,7 @@ class ProfissionalDAO extends Conexao
         parent::__construct();
     }
 
-    public function cadastrarProfissional($profissional)
+    public function inserir(Profissional $profissional)
     {
         $sql = "INSERT INTO profissional (registroProfissional) VALUES (?)";
         try {

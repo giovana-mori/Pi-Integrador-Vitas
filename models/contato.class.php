@@ -2,11 +2,11 @@
 
 class Contato
 {
-    public function __construct(private int $id_paciente = 0, private int $id_contato = 0, private string $assunto = "", private string $descricao = "")
+    public function __construct(private int $id_contato = 0, private int $id_pessoa = 0, private string $assunto = "", private string $descricao = "")
     {
         $this->assunto = $assunto;
         $this->descricao = $descricao;
-        $this->id_paciente = $id_paciente;
+        $this->id_pessoa = $id_pessoa;
         $this->id_contato = $id_contato;
     }
     public function getAssunto()
@@ -25,17 +25,17 @@ class Contato
     {
         $this->descricao = $descricao;
     }
-    public function getIdPaciente()
+    public function getIdPessoa()
     {
-        return $this->id_paciente;
+        return $this->id_pessoa;
     }
     public function getIdContato()
     {
         return $this->id_contato;
     }
-    public function setIdPaciente($id_paciente)
+    public function setIdPessoa($id_pessoa)
     {
-        $this->id_paciente = $id_paciente;
+        $this->id_pessoa = $id_pessoa;
     }
     public function setIdContato($id_contato)
     {

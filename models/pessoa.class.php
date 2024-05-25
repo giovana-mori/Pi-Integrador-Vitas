@@ -2,6 +2,8 @@
 
 class Pessoa
 {
+    private $telefones;
+    private $convenios;
     public function __construct(private int $id_pessoa = 0, private string $nome = "", private string $cpf = "", private string $dataNasc = "", private string $genero = "", private string $email = "", private string $senha = "", private string $foto = "", private string $cep = "", private string $logradouro = "", private string $bairro = "", private string $estado = "", private string $cidade = "")
     {
         $this->id_pessoa = $id_pessoa;
@@ -75,6 +77,10 @@ class Pessoa
     {
         return $this->telefones;
     }
+    public function getConvenios()
+    {
+        return $this->convenios;
+    }
     public function setId_pessoa($id_pessoa)
     {
         $this->id_pessoa = $id_pessoa;
@@ -132,6 +138,11 @@ class Pessoa
     {
         $telefone = new Telefone($ddd, $numero);
         $this->telefones[] = $telefone;
+    }
+    public function setConvenios($nome)
+    {
+        $convenio = new Convenio($nome);
+        $this->convenios[] = $convenio;
     }
 
 }
