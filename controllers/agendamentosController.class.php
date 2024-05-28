@@ -4,6 +4,9 @@ class AgendamentosController extends layoutAdminController
 {
     public function index()
     {
-        $this->render('views/agendamentos');
+        $data['title'] = 'Agendamentos';
+        $profissionais = new ProfissionalDAO();
+        $data['profissionais'] = $profissionais->listarMedicos();
+        $this->render('views/agendamentos', $data);
     }
 }

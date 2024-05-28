@@ -175,11 +175,11 @@ ALTER TABLE AGENDAS ADD FOREIGN KEY (PESSOA_ID) REFERENCES PESSOAS(ID_PESSOA);
 ## INSERT PARA PESSOAS
 
 INSERT INTO PESSOAS (NOME,CPF,DATANASC,GENERO,EMAIL,SENHA,FOTO,CEP,LOGRADOURO,BAIRRO,ESTADO,CIDADE)
-VALUES("Giovana Mori", "4110763973017", "1993-09-03", "F", "giovana_mori@outlook.com", "12345", NULL, "17345-080", "", "", "", "");
+VALUES("Giovana Mori", "4110763973017", "1993-09-03", "F", "giovana_mori@outlook.com", "$2y$10$Kd1ZwMexhr4e7Ekmsty3oOjCAtJYNYVZE5jqsQIakuhDa/fwVqhmy", NULL, "17345-080", "", "", "", "");
 INSERT INTO PESSOAS (NOME,CPF,DATANASC,GENERO,EMAIL,SENHA,FOTO,CEP,LOGRADOURO,BAIRRO,ESTADO,CIDADE)
-VALUES("Fulano Bandeiras", "22562949005", "1991-11-23", "M", "fulano@gmail.com", "12345", NULL, "17345-080", "", "", "", "");
+VALUES("Fulano Bandeiras", "22562949005", "1991-11-23", "M", "fulano@gmail.com", "$2y$10$Kd1ZwMexhr4e7Ekmsty3oOjCAtJYNYVZE5jqsQIakuhDa/fwVqhmy", NULL, "17345-080", "", "", "", "");
 INSERT INTO PESSOAS (NOME,CPF,DATANASC,GENERO,EMAIL,SENHA,FOTO,CEP,LOGRADOURO,BAIRRO,ESTADO,CIDADE)
-VALUES("Jaiminho Arturito", "2210763973017", "1983-01-01", "M", "jaiminho_arturito@outlook.com", "12345", NULL, "17345-080", "", "", "", "");
+VALUES("Jaiminho Arturito", "2210763973017", "1983-01-01", "M", "jaiminho_arturito@outlook.com", "$2y$10$Kd1ZwMexhr4e7Ekmsty3oOjCAtJYNYVZE5jqsQIakuhDa/fwVqhmy", NULL, "17345-080", "", "", "", "");
 
 ## INSERT PARA CONVENIOS
 INSERT INTO CONVENIOS(DESCRITIVO, TIPO)

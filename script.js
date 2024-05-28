@@ -1,24 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
   popularEstados();
-  document
-    .getElementById("register_form")
-    ?.addEventListener("submit", function (e) {
-      e.preventDefault();
-      registerUsersFromLocalStorage();
-    });
   document.getElementById("estado")?.addEventListener("change", function (e) {
     e.preventDefault();
     // Chama a função para popular as cidades quando o estado é selecionado
     popularCidades(e.currentTarget.value);
   });
-  document
-    .getElementById("login_form")
-    ?.addEventListener("submit", function (e) {
-      e.preventDefault();
-      // Chama a função para popular as cidades quando o estado é selecionado
-      performLogin();
-    });
-
   document.querySelectorAll("[data-target]").forEach((el) => {
     el.addEventListener("click", (e) => {
       e.preventDefault();
@@ -111,7 +97,7 @@ function performLogin() {
   );
 
   if (usuarioExists.length > 0) {
-    window.location.href = "./agendamentos.html";
+    window.location.href = "./agendamentos";
   } else {
     alert("Usuario ou senha invalido!");
   }
@@ -162,7 +148,7 @@ function registerUsersFromLocalStorage() {
 
   alert("Cadastro efetuado com sucesso!");
 
-  window.location.href = "./login.html";
+  window.location.href = "./login";
 }
 
 function getUsersFromLocalStorage() {

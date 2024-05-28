@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vitas - Agendamento</title>
+    <title>Vitas - Login</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="assets/admin/css/style.css" />
     <link rel="shortcut icon" href="./static/images/logo_menorSvg.svg" type="image/x-icon" />
@@ -27,7 +27,7 @@
                 </menu>
                 <div class="header-info">
                     <span><img src="static/images/zapp.svg" /><a href="tel:123-456-7890">123-456-7890</a></span>
-                    <a href="login.html"><button class="botao-sfun">AGENDAR</button></a>
+                    <a href="login"><button class="botao-sfun">AGENDAR</button></a>
                 </div>
             </div>
         </div>

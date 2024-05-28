@@ -1,7 +1,12 @@
 <?php
 
-abstract class layoutAdminController
+abstract class layoutAdminController extends AuthController
 {
+    public function __construct()
+    {
+        parent::checkLoggedUser();
+    }
+
     public function render($nameView, $data = array())
     {
         extract($data);

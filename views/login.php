@@ -1,3 +1,4 @@
+
 <div class="panel">
     <div class="content_forms">
         <div class="card register_card">
@@ -11,16 +12,16 @@
                     <h3 class="header_form">
                         Entrar
                     </h3>
-                    <form id="login_form" method="get">
+                    <form id="login_form" method="GET">
                         <div class="item_form">
                             <label for="email">E-mail</label>
                             <input type="email" name="email" id="email" required>
                         </div>
                         <div class="item_form">
                             <label for="email">Senha</label>
-                            <input type="password" name="senha" id="senha" required>
+                            <input type="password" name="password" id="password" required>
                         </div>
-                        <button class="btn" onsubmit="performLogin()" type="submit">Login</button>
+                        <button class="btn" type="submit">Login</button>
                     </form>
                 </div>
             </div>

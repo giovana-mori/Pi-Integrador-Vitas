@@ -23,7 +23,7 @@
                         <img src="static/images/zapp.svg" />
                         <a href="tel:123-456-7890">123-456-7890</a>
                     </span>
-                    <span class="bem_vindo"><small>Bem vindo!</small></span>
+                    <span class="bem_vindo"><small>Bem vindo! <u><?= $_SESSION['user_name']?></u> <a href="logout">(sair)</a></small></span>
                 </div>
             </div>
         </div>
@@ -34,8 +34,8 @@
                 <div class="menu_content">
                     <div class="menu">
                         <ul>
-                            <li><a href="agendamentos.html" class="checked_link">Meus Agendamentos</a></li>
-                            <li><a href="contato.html">Contato</a></li>
+                            <li><a href="agendamentos" class="checked_link">Meus Agendamentos</a></li>
+                            <li><a href="contato">Contato</a></li>
                         </ul>
                     </div>
                 </div>

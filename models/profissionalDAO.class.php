@@ -22,9 +22,15 @@ class ProfissionalDAO extends Conexao
         }
     }
 
-    public function listarProfissionais()
+    public function listarMedicos()
     {
-        $sql = "SELECT * FROM profissional";
+        $sql = "SELECT PROF.id_profissional, PE.nome, PROF.registroclasseprofissional, TPROF.nome AS tipo, ESP.descritivo
+                FROM PESSOAS PE
+                LEFT JOIN PROFISSIONAIS PROF ON PROF.PESSOA_ID = PE.ID_PESSOA
+                LEFT JOIN TIPO_PROFISSIONAL TPROF ON TPROF.ID_TIPO_PROFISSIONAL = PROF.TIPO_PROFISSIONAL_ID
+                LEFT JOIN PROFISSIONAL_ESPECIALISTA PROFE ON PROFE.PROFISSIONAL_ID = PROF.ID_PROFISSIONAL
+                LEFT JOIN ESPECIALIDADES ESP ON ESP.ID_ESPECIALIDADE = PROFE.ESPECIALIDADE_ID
+                WHERE PROF.TIPO_PROFISSIONAL_ID = 2";
         try {
             $stmt = $this->db->prepare($sql);
             $stmt->execute();
@@ -35,21 +41,7 @@ class ProfissionalDAO extends Conexao
             return [];
         }
     }
-    public function loginProfissional($profissional)
-    {
-        try {
-            $sql = "SELECT * FROM pessoa INNER JOIN profissional ON pessoa.id_pessoa = profissional.id_pessoa WHERE pessoa.email = ? AND pessoa.senha = ?";
-            $stm = $this->db->prepare($sql);
-            $stm->bindValue(1, $profissional->getEmail());
-            $stm->bindValue(2, $profissional->getSenha());
-            $stm->execute();
-            $result = $stm->fetchAll(PDO::FETCH_OBJ);
-            $this->db = null;
-            return $result;
-        } catch (PDOException $e) {
-            return false;
-        }
-    }
+
     public function listarConvenios($paciente)
     {
         try {

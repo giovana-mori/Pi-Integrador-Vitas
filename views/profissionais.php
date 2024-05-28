@@ -34,9 +34,9 @@
                 <div class="menu_content">
                     <div class="menu">
                         <ul>
-                            <li><a href="agendamentos.html">Meus Agendamentos</a></li>
-                            <li><a href="profissionais.html" class="checked_link">Profissionais</a></li>
-                            <li><a href="contato.html">Contato</a></li>
+                            <li><a href="agendamentos">Meus Agendamentos</a></li>
+                            <li><a href="profissionais" class="checked_link">Profissionais</a></li>
+                            <li><a href="contato">Contato</a></li>
                         </ul>
                     </div>
                 </div>

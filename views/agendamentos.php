@@ -18,7 +18,7 @@
       <form id="consultaForm">
         <div class="item_form">
           <label for="nome">Nome:</label>
-          <input type="text" id="nome" value="" placeholder="Digite o nome de quem sera atendido.." required>
+          <input type="text" id="nome" readonly value="<?= $_SESSION['user_name'] ?>" placeholder="Digite o nome de quem sera atendido.." required>
         </div>
 
         <div class="item_form">
@@ -29,11 +29,11 @@
         <div class="item_form">
           <label for="medico">Médico:</label>
           <select id="medico" required>
-            <option value="profissional1">Camila Santiago - Psicologa</option>
-            <option value="profissional2">Rodrigo Almeida - Enfermeiro</option>
-            <option value="profissional3">Dr. André Oliveira - Médico</option>
-            <option value="profissional4">Mariana Silva - Nutricionista</option>
-            <option value="profissional5">Beatriz Mendes - Fisioterapeuta</option>
+            <?php
+            foreach ($profissionais as $key => $value) {
+              echo "<option value='$value->id_profissional'>$value->nome - $value->descritivo</option>";
+            };
+            ?>
           </select>
         </div>
 

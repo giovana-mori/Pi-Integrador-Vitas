@@ -1,17 +1,24 @@
 <?php
 require_once "rotas.php";
 
-// Serve para carregar automaticamente as classes necessárias.
+// Função para carregar automaticamente as classes necessárias.
 spl_autoload_register(function ($class) {
-	if (file_exists('controllers/' . $class . '.class.php'))
-		require_once 'controllers/' . $class . '.class.php';
-	else
-		require_once 'models/' . $class . '.class.php';
+    $controllerPath = 'controllers/' . $class . '.class.php';
+    $modelPath = 'models/' . $class . '.class.php';
+    
+    if (file_exists($controllerPath)) {
+        require_once $controllerPath;
+    } elseif (file_exists($modelPath)) {
+        require_once $modelPath;
+    } else {
+        throw new Exception("Class $class not found.");
+    }
 });
 
 // Serve para pegar o caminho da rota da url.
 
-$uri = parse_url($_SERVER["REQUEST_URI"])["path"];
+// $uri = parse_url($_SERVER["REQUEST_URI"])["path"];
+$uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
 $uri = substr($uri, strpos($uri, '/', 1));
 
