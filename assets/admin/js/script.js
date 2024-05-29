@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector('#contato_form').addEventListener("submit", function(e){
-        e.preventDefault();
-        validarFormulario(e);
-    });
+  document.querySelector('#contato_form').addEventListener("submit", function (e) {
+    e.preventDefault();
+    validarFormulario(e);
+  });
 })
 
 function agendarConsulta() {
@@ -132,9 +132,25 @@ $(document).ready(function () {
     header: {
       left: "prev,next today",
       center: "title",
-      right: "month,basicWeek,basicDay",
+      right: "basicWeek,basicDay",
     },
+    initialView: 'timeGridWeek', // Visualização semanal com intervalo de horas
+    slotDuration: '00:30:00', // Intervalos de 30 minutos
+    slotLabelInterval: '01:00', // Rótulos de hora a cada 1 hora
     aspectRatio: 1.35, // Ajuste este valor conforme necessário
+    events: [
+      {
+        title: 'Evento 1',
+        start: '2024-05-28T10:00:00',
+        end: '2024-05-28T12:00:00'
+      },
+      {
+        title: 'Evento 2',
+        start: '2024-05-29T14:00:00',
+        end: '2024-05-29T16:00:00'
+      }
+      // Adicione mais eventos conforme necessário
+    ],
 
     windowResize: function (view) {
       // Ajustar o FullCalendar quando a janela é redimensionada
@@ -148,9 +164,9 @@ $(document).ready(function () {
       // Lidar com o clique em um evento (você pode personalizar essa parte conforme necessário)
       alert(
         "Clique no evento:\n\nTítulo: " +
-          calEvent.title +
-          "\nData: " +
-          calEvent.start.format("YYYY-MM-DD")
+        calEvent.title +
+        "\nData: " +
+        calEvent.start.format("YYYY-MM-DD")
       );
     },
   });

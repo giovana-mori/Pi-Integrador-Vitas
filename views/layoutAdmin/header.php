@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/admin/css/admin.css" />
     <link rel="shortcut icon" href="./static/images/logo_menorSvg.svg" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
+    
 </head>
 
 <body>

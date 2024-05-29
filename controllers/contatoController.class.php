@@ -4,6 +4,6 @@ class ContatoController extends layoutAdminController
 {
     public function index()
     {
-        $this->render('views/contato');
+        $this->render('views/admin/contato');
     }
 }
