@@ -20,10 +20,10 @@
                     </a>
                 </div>
                 <menu>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#profissionais">Profissionais</a></li>
-                    <li><a href="#depoimentos">Depoimentos</a></li>
-                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="./#sobre">Sobre</a></li>
+                    <li><a href="./#profissionais">Profissionais</a></li>
+                    <li><a href="./#depoimentos">Depoimentos</a></li>
+                    <li><a href="./#faq">FAQ</a></li>
                 </menu>
                 <div class="header-info">
                     <span><img src="static/images/zapp.svg" /><a href="tel:123-456-7890">123-456-7890</a></span>
