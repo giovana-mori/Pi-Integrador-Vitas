@@ -53,8 +53,12 @@ $router->post("/registro", [RegisterController::class, "registrar"]);
 
 $router->get("/agendamentos", [AgendamentosController::class, "index"]);
 $router->get("/contato", [ContatoController::class, "index"]);
+$router->get("/perfil", [PerfilController::class, "index"]);
+$router->post("/perfil", [PerfilController::class, "update"]);
 
 
 //API Rotas
 $router->get("/api/pessoas", [APIController::class, "Pessoas"]);
+$router->post("/api/alterarpessoa", [APIController::class, "alterarPessoa"]);
+$router->post("/api/upload", [APIController::class, "uploadAvatar"]);
 // $router->get("/api/categorias/:id", [CategoriaController::class, "show"]);

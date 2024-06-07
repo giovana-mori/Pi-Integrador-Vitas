@@ -37,6 +37,7 @@
                         <ul>
                             <li><a href="agendamentos" class="checked_link">Meus Agendamentos</a></li>
                             <li><a href="contato">Contato</a></li>
+                            <li><a href="perfil">Perfil</a></li>
                         </ul>
                     </div>
                 </div>

@@ -1,9 +1,53 @@
 document.addEventListener("DOMContentLoaded", function () {
-  document.querySelector('#contato_form').addEventListener("submit", function (e) {
+  document.querySelector('#contato_form')?.addEventListener("submit", function (e) {
     e.preventDefault();
     validarFormulario(e);
   });
+
+  document.getElementById('profileImage').addEventListener('change', function (event) {
+    debugger;
+    //send image with uploadAvatar and after call reader.onload
+    uploadAvatar(this, document.querySelector('#id_pessoa').value);
+    //show image preview
+    var output = document.querySelector('.imagePreview');
+    output.style.display = 'block';
+    //read image with FileReader
+    var reader = new FileReader();
+    reader.onload = function () {
+      var output = document.querySelector('.imagePreview');
+      output.src = reader.result;
+      output.style.display = 'block';
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  });
 })
+
+function uploadAvatar(inputFile, id_pessoa) {
+  if (!inputFile.files[0]) {
+    alert("Por favor, selecione uma imagem para fazer o upload.");
+    return;
+  }
+
+  if (!id_pessoa) {
+    alert("Por favor, selecione uma pessoa para fazer o upload.");
+    return;
+  }
+
+  const formdata = new FormData();
+  formdata.append("profileImage", inputFile.files[0]);
+  formdata.append("id_pessoa", id_pessoa);
+
+  const requestOptions = {
+    method: "POST",
+    body: formdata,
+    redirect: "follow"
+  };
+
+  fetch("api/upload", requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
+}
 
 function agendarConsulta() {
   // Obter os valores do formulário

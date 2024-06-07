@@ -1,10 +1,12 @@
 <?php
 require_once "rotas.php";
-
+require_once 'helpers/utils.class.php';
 // Função para carregar automaticamente as classes necessárias.
 spl_autoload_register(function ($class) {
     $controllerPath = 'controllers/' . $class . '.class.php';
     $modelPath = 'models/' . $class . '.class.php';
+
+    Utils::loadEnv(__DIR__ . '/.env');
     
     if (file_exists($controllerPath)) {
         require_once $controllerPath;

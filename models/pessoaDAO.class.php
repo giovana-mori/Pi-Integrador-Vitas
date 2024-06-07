@@ -33,7 +33,7 @@ class PessoaDAO extends Conexao
     }
     public function alterar($usuario)
     {
-        $sql = "UPDATE pessoa SET nome = ?, cpf = ?, dataNasc = ?, genero = ?, email = ?, senha = ?, foto = ?, cep = ?, logradouro = ?, bairro = ?, estado = ?, cidade = ? WHERE id_pessoa = ?";
+        $sql = "UPDATE pessoas SET nome = ?, cpf = ?, dataNasc = ?, genero = ?, email = ?, cep = ?, logradouro = ?, bairro = ?, estado = ?, cidade = ? WHERE id_pessoa = ?";
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $usuario->getNome());
@@ -41,14 +41,12 @@ class PessoaDAO extends Conexao
             $stm->bindValue(3, $usuario->getDataNasc());
             $stm->bindValue(4, $usuario->getGenero());
             $stm->bindValue(5, $usuario->getEmail());
-            $stm->bindValue(6, $usuario->getSenha());
-            $stm->bindValue(7, $usuario->getFoto());
-            $stm->bindValue(8, $usuario->getCep());
-            $stm->bindValue(9, $usuario->getLogradouro());
-            $stm->bindValue(10, $usuario->getBairro());
-            $stm->bindValue(11, $usuario->getEstado());
-            $stm->bindValue(12, $usuario->getCidade());
-            $stm->bindValue(13, $usuario->getId_pessoa());
+            $stm->bindValue(6, $usuario->getCep());
+            $stm->bindValue(7, $usuario->getLogradouro());
+            $stm->bindValue(8, $usuario->getBairro());
+            $stm->bindValue(9, $usuario->getEstado());
+            $stm->bindValue(10, $usuario->getCidade());
+            $stm->bindValue(11, $usuario->getId_pessoa());
             $stm->execute();
             $this->db = null;
             return true;
@@ -56,9 +54,39 @@ class PessoaDAO extends Conexao
             return false;
         }
     }
+
+    public function updateAvatar($id_pessoa, $urlImage)
+    {
+        $sql = "UPDATE pessoas SET foto = ? WHERE id_pessoa = ?";
+        try {
+            $stm = $this->db->prepare($sql);
+            $stm->bindValue(1, $urlImage);
+            $stm->bindValue(2, $id_pessoa);
+            $stm->execute();
+            $this->db = null;
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function buscarID($id)
+    {
+        $sql = "SELECT * FROM pessoas WHERE id_pessoa = ?";
+        try {
+            $stm = $this->db->prepare($sql);
+            $stm->bindValue(1, $id);
+            $stm->execute();
+            $this->db = null;
+            return $stm->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
     public function buscar($usuario)
     {
-        $sql = "SELECT * FROM pessoa WHERE nome = ? OR cpf = ? OR dataNasc = ? OR genero = ? OR email = ? OR senha = ? OR foto = ? OR cep = ? OR logradouro = ? OR bairro = ? OR estado = ? OR cidade = ?";
+        $sql = "SELECT * FROM pessoas WHERE nome = ? OR cpf = ? OR dataNasc = ? OR genero = ? OR email = ? OR senha = ? OR foto = ? OR cep = ? OR logradouro = ? OR bairro = ? OR estado = ? OR cidade = ?";
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $usuario->getNome());
@@ -80,6 +108,7 @@ class PessoaDAO extends Conexao
             return false;
         }
     }
+
     public function listar()
     {
         $sql = "SELECT * FROM pessoas";
