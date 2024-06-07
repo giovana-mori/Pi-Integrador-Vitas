@@ -25,5 +25,4 @@ $uri = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 $uri = substr($uri, strpos($uri, '/', 1));
 
 $router->instancia_rota($_SERVER["REQUEST_METHOD"], $uri);
-
 ?>

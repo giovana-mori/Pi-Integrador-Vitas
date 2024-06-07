@@ -34,6 +34,7 @@
   --c-white-sec: white;
   --c-black-sec: black;
   --c-azul-ver-claro: #c9f9db;
+  --c-verde-forte: #4caf50;
   --c-Eucalyptus-claro: #3bcd71;
   --c-verde-bem-claro: #6aea99;
   --c-verde-escuro: #031c0c;
@@ -152,10 +153,16 @@ header {
   font-weight: 400;
   display: flex;
   align-items: center;
+  font-size: 0.9975rem;
 }
 
 .header-info span img {
   margin: 0 3px;
+}
+
+.header-info span small u {
+  text-decoration: none;
+  font-weight: bolder;
 }
 
 .botao {

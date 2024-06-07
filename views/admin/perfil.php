@@ -13,7 +13,7 @@
                     <label class="imagem">
                         <input type="file" name="profileImage" id="profileImage">
                         <div class="img_perfil">
-                            <img src="<?= $pessoa['FOTO'] ? Utils::base_url('uploads/') . $pessoa['FOTO'] : 'https://cdn.vectorstock.com/i/1000v/48/06/image-preview-icon-picture-placeholder-vector-31284806.jpg' ?>" class="imagePreview" alt="imagem do perfil">
+                            <img src="<?= $pessoa['FOTO'] ? Utils::base_url('uploads/') . $pessoa['FOTO'] : 'https://static.vecteezy.com/system/resources/previews/013/042/571/original/default-avatar-profile-icon-social-media-user-photo-in-flat-style-vector.jpg' ?>" class="imagePreview" alt="imagem do perfil">
                             <p>Carregar Imagem</p>
                         </div>
                     </label>

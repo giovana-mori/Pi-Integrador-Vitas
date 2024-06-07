@@ -1,3 +1,9 @@
+<?php
+$uri = explode("/", $_SERVER['REQUEST_URI']);
+$currentpage = $uri[sizeof($uri) -1];
+?>
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -35,9 +41,9 @@
                 <div class="menu_content">
                     <div class="menu">
                         <ul>
-                            <li><a href="agendamentos" class="checked_link">Meus Agendamentos</a></li>
-                            <li><a href="contato">Contato</a></li>
-                            <li><a href="perfil">Perfil</a></li>
+                            <li><a href="agendamentos" class="<?php echo $currentpage == 'agendamentos' ? 'checked_link' : ''; ?>">Meus Agendamentos</a></li>
+                            <li><a href="contato" class=" <?php echo $currentpage == 'contato' ? 'checked_link' : ''; ?>">Contato</a></li>
+                            <li><a href="perfil" class="<?php echo $currentpage == 'perfil' ? 'checked_link' : ''; ?>">Perfil</a></li> 
                         </ul>
                     </div>
                 </div>
