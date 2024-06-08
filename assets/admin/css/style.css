@@ -45,8 +45,20 @@ nav {
     border-radius: 4px;
     background: #e2ebe4;
     box-shadow: 0px 0 11px 0px rgba(0, 0, 0, 0.05);
-    max-width: 700px;
+    max-width: 950px;
     width: 100%;
+}
+
+.register_card {
+    max-width: 700px;
+}
+
+.login_card {
+    max-width: 950px;
+}
+
+.login_flex {
+    gap: 2px !important;
 }
 .content_form {
     padding: 15px;

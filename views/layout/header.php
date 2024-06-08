@@ -28,7 +28,10 @@
                     </menu>
                     <div class="header-info">
                         <span><img src="static/images/zapp.svg" /><a href="tel:123-456-7890">123-456-7890</a></span>
-                        <a href="login"><button class="botao-sfun">AGENDAR</button></a>
+                        <div class="link-nav">
+                        <a href="login"><button class="botao-sfun">ENTRAR</button></a>
+                        <a href="registro"><button class="botao">CADASTRAR</button></a>
+                        </div>
                     </div>
                 </div>
             </div>

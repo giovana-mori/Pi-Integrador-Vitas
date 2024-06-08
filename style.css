@@ -171,12 +171,18 @@ header {
   letter-spacing: 1px;
   padding: 12px 18px;
   background: var(--c-white-sec);
-  border: 3px solid var(--c-black-sec);
+  border: 2px solid var(--c-black-sec);
   font-size: 16px;
   border-radius: 7px;
   cursor: pointer;
-  background: var(--c-black);
+  background: var(--c-black-sec);
   color: var(--c-white-sec);
+  transition: all 0.3s;
+}
+
+.botao:hover {
+  color: var(--c-black-sec);
+  background-color: var(--c-white-sec);
 }
 
 .botao-sfun:hover {

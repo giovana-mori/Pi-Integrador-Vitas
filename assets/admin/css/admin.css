@@ -237,6 +237,10 @@ label.imagem {
   box-shadow: 0 0 15px -5px rgba(0, 0, 0, 0.1);
 }
 
+.content_perfil {
+  gap: 0px !important;
+}
+
 textarea {
   height: auto !important;
 }
@@ -252,6 +256,11 @@ textarea {
 .btn.center {
   margin-left: auto;
   margin-right: auto;
+  transition: ease-in 0.1s;
+}
+
+.btn.center:hover {
+  background-color: var(--c-verde-escuro);
 }
 
 #contato_form {

@@ -1,4 +1,4 @@
-<div class="container_admin">
+<div class="content_ content_perfil">
     <div class="bloco_titulo">
         <h3 class="title_admin">
             Meu Perfil
