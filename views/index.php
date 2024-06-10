@@ -14,7 +14,6 @@
             <img src="static/images/Hero_Img.png" alt="">
         </div>
     </div>
-
 </section>
 
 <section id="sobre" class="sobre_content">

@@ -75,7 +75,7 @@ div#calendar .fc-button-group button {
   appearance: none;
   transition: ease-in 0.1s;
 }
-div#calendar .fc-button-group button:hover{ 
+div#calendar .fc-button-group button:hover {
   background-color: var(--c-verde-escuro);
 }
 
@@ -144,6 +144,24 @@ button.btn_agendar:hover {
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
+  position: relative;
+}
+
+.result {
+  width: 100%;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  display: none;
+}
+
+.result ul li {
+  cursor: pointer;
 }
 
 .content_item_form {
@@ -172,7 +190,7 @@ button.btn_agendar:hover {
   z-index: 1;
   border-radius: 100%;
   overflow: hidden;
-    box-shadow: 1px 1px 0px 2px rgb(59 205 113), -1px -1px 0px 2px rgb(59 205 113);
+  box-shadow: 1px 1px 0px 2px rgb(59 205 113), -1px -1px 0px 2px rgb(59 205 113);
 }
 
 #imagePreview {
@@ -191,10 +209,10 @@ button.btn_agendar:hover {
 }
 
 .img_perfil:hover {
-opacity: 0.5;
+  opacity: 0.5;
 }
 
-.img_perfil p{
+.img_perfil p {
   visibility: hidden;
   position: absolute;
   top: 0;
@@ -205,7 +223,7 @@ opacity: 0.5;
   display: table;
 }
 
-.img_perfil:hover p{
+.img_perfil:hover p {
   visibility: visible;
 }
 
@@ -213,7 +231,8 @@ label.imagem {
   position: relative;
 }
 
-#profileImage {
+#profileImage,
+#profileLogo {
   visibility: hidden;
   width: 0;
   z-index: -1;
@@ -286,16 +305,14 @@ select {
   width: 100%;
   padding: 0.175rem 0.45rem;
   font-size: 10pt;
-  height: 25px;
+  height: 35px;
   line-height: 1.5;
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
-  transition:
-    border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .btn {
@@ -498,6 +515,93 @@ select {
   justify-content: space-between;
 }
 
+.table_admin,
+.table_admin tr {
+  width: 100%;
+}
+
+.table_admin tbody tr:nth-child(odd) {
+  background-color: var(--c-white);
+}
+.table_admin tbody tr:nth-child(even) {
+  background-color: var(--c-fundo_depoimento_verde_claro);
+}
+
+.table_admin tr td,
+.table_admin tr th {
+  padding: 10px 2px;
+  text-align: left;
+}
+
+.block {
+  display: block;
+}
+.w-100 {
+  width: 100%;
+}
+.text-center {
+  text-align: center;
+}
+
+.box_forms {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.box_item {
+  width: 100%;
+}
+.item_form_check {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+}
+.item_form_check input {
+  text-align: left;
+  max-width: 25px;
+}
+.timeFormat {
+  text-align: center;
+  font-weight: 600;
+}
+.timeFormat[readonly] {
+  background-color: var(--c-white);
+}
+.item_time label {
+  font-weight: 600;
+}
+.box_time {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  gap: 1em;
+  margin: 10px auto;
+}
+.box_all_item_time {
+  border: 1px dashed #000;
+  padding: 10px;
+  border-radius: 2px;
+}
+.item_time {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.content_inputs_time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 200px;
+}
+.content_times {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
 @media (max-width: 991.98px) {
   .fc-today-button {
     font-size: 10pt !important;

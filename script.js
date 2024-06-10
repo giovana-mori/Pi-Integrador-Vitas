@@ -59,7 +59,8 @@ async function popularEstados() {
 }
 
 async function popularCidades(estadoSelecionado) {
-  const url = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${estadoSelecionado}/municipios`;
+  debugger;
+  const url = `http://localhost/Pi-Integrador-Vitas/api/cidades/${estadoSelecionado}`;
 
   try {
     const response = await fetch(url);

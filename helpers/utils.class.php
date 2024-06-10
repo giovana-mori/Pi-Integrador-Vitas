@@ -38,6 +38,42 @@ class Utils
         return $estados;
     }
 
+    public static function splitHourClinica($dataClinica)
+    {
+        if ($dataClinica == null || !isset($dataClinica) || empty($dataClinica)) {
+            return null;
+        }
+        //As dataClinica vem no formato 08:00|12:00;12:00|13:00;13:00|17:00
+        $horarios = explode(';', $dataClinica);
+        $horarios = array_map(function ($h) {
+            return explode('|', $h);
+        }, $horarios);
+        //return array
+        return $horarios;
+    }
+
+    public static function loadCidades($estado)
+    {
+        $json = file_get_contents('static/data/estados-cidades.json');
+        $cidades = json_decode($json, true);
+        $cidades = array_filter($cidades['estados'], function ($cidade) use ($estado) {
+            return strtolower($cidade['sigla']) == strtolower($estado);
+        });
+
+        usort($cidades, function ($a, $b) {
+            return strcmp($a['nome'], $b['nome']);
+        });
+
+        //return object
+        return isset($cidades[0]) ? $cidades[0] : $cidades;
+    }
+
+    public static function formatarData($data)
+    {
+        $data = new DateTime($data);
+        return (string)$data->format('d/m/Y');
+    }
+
     public static function base_url($path = null)
     {
         if ($path) {

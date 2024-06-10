@@ -1,24 +1,27 @@
 <?php
 
-
-class PerfilController extends layoutAdminController
+class PessoasController extends layoutAdminController
 {
     public function index()
     {
-        $data['title'] = 'Perfil';
+        $data['title'] = 'Lista de Clientes';
         $pessoa = new PessoaDAO();
-        $data['pessoa'] = $pessoa->buscarID($_SESSION['user_id']);
-        $data['estados'] = Utils::loadEstados();
-        $this->render('views/admin/perfil', $data);
+        $data['pessoas'] = $pessoa->listar();
+        // $data['estados'] = Utils::loadEstados();
+        $this->render('views/admin/listaPessoas', $data);
     }
-
-    public function update()
+    public function cadastro()
+    {
+        $data['title'] = 'Cadastrar Cliente';
+        $data['estados'] = Utils::loadEstados();
+        $this->render('views/admin/cadastrarPessoa', $data);
+    }
+    public function inserir()
     {
         //post data from PessoaDAO
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //check if data form is valid
             $pessoa = new Pessoa();
-            $pessoa->setId_pessoa($_POST['id_pessoa']);
             $pessoa->setNome($_POST['name']);
             $pessoa->setCpf($_POST['cpf']);
             $pessoa->setDataNasc($_POST['datanasc']);
@@ -31,11 +34,23 @@ class PerfilController extends layoutAdminController
             $pessoa->setEmail($_POST['email']);
 
             $pessoaDAO = new PessoaDAO();
-            if ($pessoaDAO->alterar($pessoa))
+            if ($pessoaDAO->inserir($pessoa))
                 // header location for current path
                 header('Location: ' . $_SERVER['REQUEST_URI']);
             else
                 echo 'Erro ao atualizar dados!';
         }
+    }
+
+    public function editar($id = null)
+    {
+        if (!$id) {
+            header('Location: perfil');
+        }
+        $data['title'] = 'Editar Cliente';
+        $pessoa = new PessoaDAO();
+        $data['pessoa'] = $pessoa->buscarID((int)$id);
+        $data['estados'] = Utils::loadEstados();
+        $this->render('views/admin/perfil', $data);
     }
 }

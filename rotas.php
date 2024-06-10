@@ -15,6 +15,7 @@ class Rotas
 
     private function extrairParametros($caminhoConfigurado, $caminhoRequisitado)
     {
+        // Transforma {id} em (?P<id>[a-zA-Z0-9_-]+)
         $regex = preg_replace('/\{([a-zA-Z0-9_]+)\}/', '(?P<\1>[a-zA-Z0-9_-]+)', $caminhoConfigurado);
         $regex = str_replace('/', '\/', $regex);
         $regex = '/^' . $regex . '$/';
@@ -33,7 +34,7 @@ class Rotas
             if ($parametros !== false) {
                 $classe = new $dados_rota[0];
                 $metodo = $dados_rota[1];
-                return $classe->$metodo($parametros);
+                return $classe->$metodo(...array_values($parametros)); // Passa os parâmetros como argumentos
             }
         }
         exit("Rota Invalida");
@@ -51,14 +52,27 @@ $router->get("/logout", [LoginController::class, "logout"]);
 $router->get("/registro", [RegisterController::class, "index"]);
 $router->post("/registro", [RegisterController::class, "registrar"]);
 
+$router->get("/clinica", [ClinicaController::class, "index"]);
+$router->post("/clinica", [ClinicaController::class, "update"]);
+
 $router->get("/agendamentos", [AgendamentosController::class, "index"]);
 $router->get("/contato", [ContatoController::class, "index"]);
 $router->get("/perfil", [PerfilController::class, "index"]);
 $router->post("/perfil", [PerfilController::class, "update"]);
+$router->get("/clientes", [PessoasController::class, "index"]);
+$router->get("/novocadastro", [PessoasController::class, "cadastro"]);
+$router->post("/novocadastro", [PessoasController::class, "inserir"]);
+$router->get("/editarcadastro/{id}", [PessoasController::class, "editar"]);
+$router->post("/editarcadastro/{id}", [PerfilController::class, "update"]);
 
+$router->get("/profissionais", [ProfissionaisController::class, "index"]);
+$router->get("/novoprofissional", [ProfissionaisController::class, "cadastro"]);
+$router->get("/editarprofissional/{id}", [ProfissionaisController::class, "editar"]);
 
 //API Rotas
 $router->get("/api/pessoas", [APIController::class, "Pessoas"]);
+$router->get("/api/pessoas/{nome}", [APIController::class, "Pessoas"]);
+$router->get("/api/cidades/{uf}", [APIController::class, "cidades"]);
 $router->post("/api/alterarpessoa", [APIController::class, "alterarPessoa"]);
 $router->post("/api/upload", [APIController::class, "uploadAvatar"]);
-// $router->get("/api/categorias/:id", [CategoriaController::class, "show"]);
+$router->post("/api/uploadlogo", [APIController::class, "uploadLogo"]);

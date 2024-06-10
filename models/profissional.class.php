@@ -3,7 +3,7 @@
 class Profissional extends Pessoa
 {
     private $especialidades;
-    public function __construct(private int $id_profissional = 0, private Tipo_profissional $tipo_profissional, private string $registroProfissional = "")
+    public function __construct(private int $id_profissional = 0, private $tipo_profissional = null, private string $registroProfissional = "")
     {
         $this->id_profissional = $id_profissional;
         $this->registroProfissional = $registroProfissional;
@@ -38,9 +38,9 @@ class Profissional extends Pessoa
         return $this->especialidades;
     }
 
-    public function setEspecialidade($descricao, $tipo)
+    public function setEspecialidade($id_especialidade)
     {
-        $especialidade = new Especialidade($descricao, $tipo);
+        $especialidade = new Especialidade($id_especialidade);
         $this->especialidades = $especialidade;
     }
 }

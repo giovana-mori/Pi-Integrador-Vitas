@@ -53,7 +53,7 @@ class Tipo_profissionalDAO extends Conexao
         try {
             $stm = $this->db->prepare($sql);
             $stm->execute();
-            return $stm->fetchAll(PDO::FETCH_OBJ);
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
         } catch (\Throwable $th) {
             return [];
         }

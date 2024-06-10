@@ -17,7 +17,8 @@ class PessoaDAO extends Conexao
             $stm->bindValue(3, $usuario->getDataNasc());
             $stm->bindValue(4, $usuario->getGenero());
             $stm->bindValue(5, $usuario->getEmail());
-            $stm->bindValue(6, $usuario->getSenha());
+            //Se o campo senha estiver vazio, o valor padrão é a senha padrão 12345
+            $stm->bindValue(6, $usuario->getSenha() == null || $usuario->getSenha() == '' ? '$2y$10$Kd1ZwMexhr4e7Ekmsty3oOjCAtJYNYVZE5jqsQIakuhDa/fwVqhmy' : $usuario->getSenha());
             $stm->bindValue(7, $usuario->getCep());
             $stm->bindValue(8, $usuario->getLogradouro());
             $stm->bindValue(9, $usuario->getBairro());
@@ -86,26 +87,15 @@ class PessoaDAO extends Conexao
 
     public function buscar($usuario)
     {
-        $sql = "SELECT * FROM pessoas WHERE nome = ? OR cpf = ? OR dataNasc = ? OR genero = ? OR email = ? OR senha = ? OR foto = ? OR cep = ? OR logradouro = ? OR bairro = ? OR estado = ? OR cidade = ?";
+        $sql = "SELECT * FROM pessoas WHERE nome LIKE ? ";
         try {
             $stm = $this->db->prepare($sql);
-            $stm->bindValue(1, $usuario->getNome());
-            $stm->bindValue(2, $usuario->getCpf());
-            $stm->bindValue(3, $usuario->getDataNasc());
-            $stm->bindValue(4, $usuario->getGenero());
-            $stm->bindValue(5, $usuario->getEmail());
-            $stm->bindValue(6, $usuario->getSenha());
-            $stm->bindValue(7, $usuario->getFoto());
-            $stm->bindValue(8, $usuario->getCep());
-            $stm->bindValue(9, $usuario->getLogradouro());
-            $stm->bindValue(10, $usuario->getBairro());
-            $stm->bindValue(11, $usuario->getEstado());
-            $stm->bindValue(12, $usuario->getCidade());
+            $stm->bindValue(1, "%{$usuario->getNome()}%");
             $stm->execute();
             $this->db = null;
-            return $stm->fetchAll(PDO::FETCH_OBJ);
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return false;
+            return [];
         }
     }
 
@@ -117,7 +107,7 @@ class PessoaDAO extends Conexao
             $stm = $this->db->prepare($sql);
             $stm->execute();
             $this->db = null;
-            return $stm->fetchAll(PDO::FETCH_OBJ);
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
             return [];
         }

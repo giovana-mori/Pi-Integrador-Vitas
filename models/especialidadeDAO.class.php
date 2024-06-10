@@ -9,7 +9,7 @@ class EspecialidadeDAO extends Conexao
 
     public function inserir($especialidade)
     {
-        $sql = "INSERT INTO especialidade (descritivo, tipo) VALUES (?,?)";
+        $sql = "INSERT INTO especialidades (descritivo, tipo) VALUES (?,?)";
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $especialidade->getDescricao());
@@ -26,10 +26,10 @@ class EspecialidadeDAO extends Conexao
     public function listar()
     {
         try {
-            $sql = "SELECT * FROM especialidade";
+            $sql = "SELECT * FROM especialidades";
             $stm = $this->db->prepare($sql);
             $stm->execute();
-            return $stm->fetchAll(PDO::FETCH_OBJ);
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
         } catch (Exception $e) {
             return [];
         }

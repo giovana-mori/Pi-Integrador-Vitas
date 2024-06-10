@@ -10,10 +10,16 @@ class APIController
         header('Access-Control-Allow-Headers: Content-Type');
         header('Content-Type: application/json');
     }
-    public function pessoas()
+    public function pessoas($nome = null)
     {
         try {
             $pessoas = new PessoaDAO();
+            if ($nome) {
+                $pessoa = new Pessoa();
+                $pessoa->setNome($nome);
+                echo json_encode($pessoas->buscar($pessoa));
+                exit;
+            }
             echo json_encode($pessoas->listar());
         } catch (Exception $e) {
             echo $e->getMessage();
@@ -103,5 +109,79 @@ class APIController
                 }
             }
         }
+    }
+
+    public function uploadLogo()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $targetDir = "uploads/";
+            $targetFile = $targetDir . basename($_FILES["profileLogo"]["name"]);
+            $uploadOk = 0;
+            $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+            // Verifica se o arquivo é uma imagem real ou uma imagem falsa
+            $check = getimagesize($_FILES["profileLogo"]["tmp_name"]);
+            if ($check !== false) {
+                // echo "Arquivo é uma imagem - " . $check["mime"] . ".";
+                $uploadOk = 1;
+            } else {
+                // echo "Arquivo não é uma imagem.";
+                echo json_encode(["error" => "Arquivo não é uma imagem"]);
+                exit;
+            }
+
+            // Verifica se o arquivo já existe
+            if (file_exists($targetFile)) {
+                echo json_encode(["error" => "Arquivo já existe"]);
+                exit;
+            }
+
+            // Verifica o tamanho do arquivo
+            if ($_FILES["profileLogo"]["size"] > 500000) {
+                echo json_encode(["error" => "Arquivo muito grande"]);
+            }
+
+            // Permite determinados formatos de arquivo
+            if (
+                $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif"
+            ) {
+                echo json_encode(["error" => "Desculpe, apenas arquivos JPG, JPEG, PNG e GIF são permitidos."]);
+                exit;
+            }
+
+            // Verifica se $uploadOk é 0 por causa de um erro
+            if ($uploadOk == 0) {
+                echo json_encode(["error" => "Desculpe, seu arquivo não foi enviado."]);
+                exit;
+            } else {
+                if (move_uploaded_file($_FILES["profileLogo"]["tmp_name"], $targetFile)) {
+                    $clinica = new ClinicaDAO();
+                    //concatenar no Files o caminho completo da url até a pasta uploads
+                    $clinica->updateLogo($_POST['id_clinica'], $_FILES["profileLogo"]["name"]);
+                    echo json_encode(["success" => "Arquivo "  . htmlspecialchars(basename($_FILES["profileLogo"]["name"])) . " enviado com sucesso"]);
+                    exit;
+                } else {
+                    echo json_encode(["error" => "Desculpe, houve um erro ao enviar seu arquivo."]);
+                    exit;
+                }
+            }
+        }
+    }
+
+    public function cidades($uf = null)
+    {
+        if ($uf == null) {
+            echo json_encode(["error" => "UF não informada"]);
+            exit;
+        }
+        $cidades = Utils::loadCidades($uf);
+
+        if ($cidades == null || count($cidades) == 0) {
+            echo json_encode(["error" => "Estado não encontrado"]);
+            exit;
+        }
+
+        echo json_encode(Utils::loadCidades($uf));
     }
 }
