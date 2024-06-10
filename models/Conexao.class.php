@@ -1,7 +1,8 @@
 <?php
 abstract class Conexao
 {
-	public function __construct(protected $db = null)
+	protected $db;
+	public function __construct()
 	{
 		$parametros = "mysql:host=" . $_ENV['DB_HOST'] .  ";dbname=" . $_ENV['DB_NAME'] . ";charset=utf8mb4";
 

@@ -4,7 +4,20 @@ class Pessoa
 {
     private $telefones;
     private $convenios;
-    public function __construct(private int $id_pessoa = 0, private string $nome = "", private string $cpf = "", private string $dataNasc = "", private string $genero = "", private string $email = "", private string $senha = "", private string $foto = "", private string $cep = "", private string $logradouro = "", private string $bairro = "", private string $estado = "", private string $cidade = "")
+    private int $id_pessoa;
+    private string $nome;
+    private string $cpf ;
+    private string $dataNasc ;
+    private string $genero ;
+    private string $email ;
+    private string $senha ;
+    private string $foto ;
+    private string $cep ;
+    private string $logradouro ;
+    private string $bairro ;
+    private string $estado ;
+    private string $cidade ;
+    public function __construct(int $id_pessoa = 0, string $nome = "", string $cpf = "", string $dataNasc = "", string $genero = "", string $email = "", string $senha = "", string $foto = "", string $cep = "", string $logradouro = "", string $bairro = "", string $estado = "", string $cidade = "")
     {
         $this->id_pessoa = $id_pessoa;
         $this->nome = $nome;

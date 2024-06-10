@@ -8,10 +8,12 @@
         <input type="hidden" name="id_pessoa" id="id_pessoa" readonly required value="">
         <div class="item_form">
             <label for="id_pessoa">Pessoa Referente</label>
-            <input type="text" name="nome_pessoa" id="nome_pessoa" value="">
-            <div class="result">
-                <ul class="listPessoas">
-                </ul>
+            <div class="relative">
+                <input type="text" name="nome_pessoa" readonly id="nome_pessoa" value="">
+                <div class="result">
+                    <input type="text" name="search_people" id="search_people" value="">
+                    <ul class="listPessoas"></ul>
+                </div>
             </div>
         </div>
         <div class="item_form">
@@ -33,10 +35,14 @@
             <select name="especialidade" id="especialidade" required>
                 <?php
                 foreach ($especialidades as $especialidade) {
-                    echo "<option value='{$especialidade['ID_ESPECIALIDADE']}'>{$especialidade['DESCRITIVO']}</option>";
+                    echo "<option value='{$especialidade['ID_ESPECIALIDADE']}'>{$especialidade['DESCRITIVO']} - {$especialidade['TIPO']}</option>";
                 }
                 ?>
             </select>
+        </div>
+        <div class="item_form">
+            <label for="duracao">Duração Atendimento (minutos)</label>
+            <input type="number" name="duracao" id="duracao" value="60" required>
         </div>
 
         <h3 class="block text-center w-100">Configurações de Horários</h3>
@@ -252,12 +258,27 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        document.querySelector('#nome_pessoa').addEventListener('keyup', function(e) {
+        document.querySelector('#nome_pessoa').addEventListener('click', (e) => {
+            e.preventDefault;
+            //inicializar o ponteiro de digitacao no #search_people
+            document.querySelector('#search_people').value = '';
+            //mostrar o .result
+            document.querySelector('.result').style.display = 'block';
+            //inicializar o ponteiro de digitacao no #search_people
+            document.querySelector('#search_people').focus();
+        });
+
+        //se clicar fora do #nome_pessoa, #search_people ou .result, fechar o .result   
+        document.addEventListener('click', (e) => {
+            //ou se apertar esc tambem sai
+            if (e.target.id !== 'nome_pessoa' && e.target.id !== 'search_people' && e.target.className !== 'result') {
+                document.querySelector('.result').style.display = 'none';
+            }
+        });
+
+        document.querySelector('#search_people').addEventListener('keyup', function(e) {
             e.preventDefault();
             let nome = e.target.value;
-
-            document.querySelector('.result').style.display = 'block';
-
             const requestOptions = {
                 method: "GET",
                 redirect: "follow"
@@ -282,8 +303,8 @@
         const nome = e.target.innerText;
         document.querySelector('#id_pessoa').value = id;
         document.querySelector('#nome_pessoa').value = nome;
+        document.querySelector('#search_people').value = nome;
         document.querySelector('.listPessoas').innerHTML = '';
         document.querySelector('.result').style.display = 'none';
     };
-
 </script>

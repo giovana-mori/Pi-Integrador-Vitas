@@ -2,11 +2,20 @@
 
 class Horario_profissional
 {
-    public function __construct(private int $id_horario = 0, private string $dia_semana = "", private string $horario_inicio = "", private string $horario_fim = "", private int $duracao, private int $profissional_id = 0)
+    private $id_horario;
+    private $dia_semana;
+    private $periodo;
+    private $horario_inicio;
+    private $horario_fim;
+    private $duracao;
+    private $profissional_id;
+    //construtor    
+    public function __construct(int $id_horario = 0, string $dia_semana = "", string $periodo = "", string $horario_inicio = "", string $horario_fim = "", int $duracao = null, int $profissional_id = 0)
     {
         $this->dia_semana = $dia_semana;
         $this->horario_inicio = $horario_inicio;
         $this->horario_fim = $horario_fim;
+        $this->periodo = $periodo;
         $this->duracao = $duracao;
         $this->profissional_id = $profissional_id;
     }
@@ -58,6 +67,12 @@ class Horario_profissional
     {
         $this->profissional_id = $profissional_id;
     }
+    public function getPeriodo()
+    {
+        return $this->periodo;
+    }
+    public function setPeriodo($periodo)
+    {
+        $this->periodo = $periodo;
+    }
 }
-
-// Agregação

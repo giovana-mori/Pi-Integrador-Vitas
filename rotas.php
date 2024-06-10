@@ -67,6 +67,7 @@ $router->post("/editarcadastro/{id}", [PerfilController::class, "update"]);
 
 $router->get("/profissionais", [ProfissionaisController::class, "index"]);
 $router->get("/novoprofissional", [ProfissionaisController::class, "cadastro"]);
+$router->post("/novoprofissional", [ProfissionaisController::class, "inserir"]);
 $router->get("/editarprofissional/{id}", [ProfissionaisController::class, "editar"]);
 
 //API Rotas

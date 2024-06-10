@@ -75,6 +75,7 @@ div#calendar .fc-button-group button {
   appearance: none;
   transition: ease-in 0.1s;
 }
+
 div#calendar .fc-button-group button:hover {
   background-color: var(--c-verde-escuro);
 }
@@ -93,7 +94,7 @@ div#calendar .fc-button-group button:hover {
   padding: 15px;
 }
 
-.panel > .container {
+.panel>.container {
   height: 100%;
 }
 
@@ -137,30 +138,41 @@ button.btn_agendar:hover {
   flex-wrap: nowrap;
 }
 
+.relative {
+  position: relative;
+}
+
 .item_form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: flex-start;
   position: relative;
 }
 
 .result {
-  width: 100%;
   position: absolute;
-  top: 100%;
+  top: 0;
   left: 0;
   right: 0;
   z-index: 5;
   background-color: white;
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 0px 0 10px 0;
+  border-top: 0;
   display: none;
+  border-radius: 0.25rem;
 }
 
-.result ul li {
+ul.listPessoas {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.result ul.listPessoas li {
   cursor: pointer;
 }
 
@@ -523,6 +535,7 @@ select {
 .table_admin tbody tr:nth-child(odd) {
   background-color: var(--c-white);
 }
+
 .table_admin tbody tr:nth-child(even) {
   background-color: var(--c-fundo_depoimento_verde_claro);
 }
@@ -536,9 +549,11 @@ select {
 .block {
   display: block;
 }
+
 .w-100 {
   width: 100%;
 }
+
 .text-center {
   text-align: center;
 }
@@ -550,29 +565,36 @@ select {
   align-items: center;
   gap: 10px;
 }
+
 .box_item {
   width: 100%;
 }
+
 .item_form_check {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 2px;
 }
+
 .item_form_check input {
   text-align: left;
   max-width: 25px;
 }
+
 .timeFormat {
   text-align: center;
   font-weight: 600;
 }
+
 .timeFormat[readonly] {
   background-color: var(--c-white);
 }
+
 .item_time label {
   font-weight: 600;
 }
+
 .box_time {
   text-align: center;
   display: flex;
@@ -581,27 +603,32 @@ select {
   gap: 1em;
   margin: 10px auto;
 }
+
 .box_all_item_time {
   border: 1px dashed #000;
   padding: 10px;
   border-radius: 2px;
 }
+
 .item_time {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
+
 .content_inputs_time {
   display: flex;
   flex-direction: row;
   align-items: center;
   max-width: 200px;
 }
+
 .content_times {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
+
 @media (max-width: 991.98px) {
   .fc-today-button {
     font-size: 10pt !important;

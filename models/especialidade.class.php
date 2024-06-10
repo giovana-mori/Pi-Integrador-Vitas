@@ -2,7 +2,10 @@
 
 class Especialidade
 {
-    public function __construct(private int $id_especialidade = 0, private string $descricao = "", private string $tipo = "")
+    private int $id_especialidade;
+    private string $descricao;
+    private string $tipo;
+    public function __construct(int $id_especialidade = 0, string $descricao = "", string $tipo = "")
     {
         $this->descricao = $descricao;
         $this->tipo = $tipo;
