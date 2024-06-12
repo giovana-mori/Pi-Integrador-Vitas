@@ -1,4 +1,5 @@
 <?php
+
 class Rotas
 {
     private array $rotas = [];
@@ -37,10 +38,11 @@ class Rotas
                 return $classe->$metodo(...array_values($parametros)); // Passa os parâmetros como argumentos
             }
         }
-        exit("Rota Invalida");
+        $notFoundController = new NotFoundController();
+        $notFoundController->render();
+         exit();
     }
 } //fim da classe
-
 $router = new Rotas();
 //rota inicio
 $router->get("/", [indexController::class, "index"]);
