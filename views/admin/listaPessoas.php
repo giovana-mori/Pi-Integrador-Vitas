@@ -11,6 +11,9 @@
         </div>
         <br>
 
+        <?php
+        if (!isset($pessoas)) :
+        ?>
         <table class="table_admin">
             <thead>
                 <tr>
@@ -38,5 +41,10 @@
                 ?>
             </tbody>
         </table>
+        <?php
+        else :
+            echo '<p class="text-center">Nenhuma Pessoa cadastrada</p>';
+        endif;
+        ?>
     </div>
 </div>
