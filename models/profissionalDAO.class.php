@@ -9,16 +9,35 @@ class ProfissionalDAO extends Conexao
 
     public function inserir(Profissional $profissional)
     {
-        $sql = "INSERT INTO profissional (registroProfissional) VALUES (?)";
+        //insert this values `REGISTROCLASSEPROFISSIONAL`, `PESSOA_ID`, `TIPO_PROFISSIONAL_ID`
+        $sql = "INSERT INTO PROFISSIONAIS (registroclasseprofissional, pessoa_id, tipo_profissional_id) VALUES (?,?,?)";
         try {
             $stmt = $this->db->prepare($sql);
             $stmt->bindValue(1, $profissional->getRegistroProfissional());
+            $stmt->bindValue(2, $profissional->getId_pessoa());
+            $stmt->bindValue(3, $profissional->getTipo_profissional());
             $stmt->execute();
             $id_profissional = $this->db->lastInsertId();
-            $this->db = null;
+            // $this->db = null;
             return $id_profissional;
         } catch (PDOException $e) {
             return 0;
+        }
+    }
+
+    public function inserirEspecialidade($profissional)
+    {
+        $sql = "INSERT INTO PROFISSIONAL_ESPECIALISTA (PROFISSIONAL_ID, ESPECIALIDADE_ID) VALUES (?, ?)";
+        try {
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, $profissional->getId_profissional());
+            $stmt->bindValue(2, $profissional->getEspecialidade());
+            $stmt->execute();
+            $id_especialidade_profissional = $this->db->lastInsertId();
+            // $this->db = null;
+            return $id_especialidade_profissional;
+        } catch (PDOException $e) {
+            return $e;
         }
     }
 

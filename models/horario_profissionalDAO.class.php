@@ -9,14 +9,15 @@ class Horario_profissionalDAO extends Conexao
 
     public function inserir($horario_profissional)
     {
-        $sql = "INSERT INTO HORARIOS_PROFISSIONAIS (DIA_SEMANA, HORA_INICIO, HORA_FIM, DURACAO, PROFISSIONAL_ID) VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO HORARIOS_PROFISSIONAIS (DIA_SEMANA, PERIODO, HORA_INICIO, HORA_FIM, DURACAO, PROFISSIONAL_ID) VALUES (?, ?, ?, ?, ?, ?)";
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $horario_profissional->getDia_semana());
-            $stm->bindValue(2, $horario_profissional->getHorario_inicio());
-            $stm->bindValue(3, $horario_profissional->getHorario_fim());
-            $stm->bindValue(4, $horario_profissional->getDuracao());
-            $stm->bindValue(5, $horario_profissional->getProfissional_id());
+            $stm->bindValue(2, $horario_profissional->getPeriodo());
+            $stm->bindValue(3, $horario_profissional->getHorario_inicio());
+            $stm->bindValue(4, $horario_profissional->getHorario_fim());
+            $stm->bindValue(5, $horario_profissional->getDuracao());
+            $stm->bindValue(6, $horario_profissional->getProfissional_id());
             $stm->execute();
             $id_profissional = $this->db->lastInsertId();
             $this->db = null;
@@ -46,11 +47,16 @@ class Horario_profissionalDAO extends Conexao
         }
     }
 
-    public function listar()
+    public function buscarID($id_profissional)
     {
-        $sql = "SELECT * FROM HORARIOS_PROFISSIONAIS";
+        $sql = "SELECT * 
+                FROM HORARIOS_PROFISSIONAIS
+                WHERE PROFISSIONAL_ID = ?
+                GROUP BY DIA_SEMANA, PERIODO
+                LIMIT 28";
         try {
             $stm = $this->db->prepare($sql);
+            $stm->bindValue(1, $id_profissional);
             $stm->execute();
             return $stm->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {

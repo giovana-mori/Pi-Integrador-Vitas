@@ -39,46 +39,48 @@ class ProfissionaisController extends layoutAdminController
         //post data from PessoaDAO
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             //check if data form is valid
-            // $profissional = new Profissional();
-            // $profissional->setRegistroProfissional($_POST['registro_profissional']);
-            // $profissional->setId_pessoa($_POST['id_pessoa']);
-            // $profissional->setTipo_profissional($_POST['tipo_profissional']);
-            // $profissional->setEspecialidade($_POST['especialidade']);
+            $profissional = new Profissional();
+            $profissional->setRegistroProfissional($_POST['registro_profissional']);
+            $profissional->setId_pessoa($_POST['id_pessoa']);
+            $profissional->setTipo_profissional($_POST['tipo_profissional']);
+            $profissional->setEspecialidade($_POST['especialidade']);
 
-            // $profissionalDAO = new ProfissionalDAO();
-            // $id_profissional = $profissionalDAO->inserir($profissional);
 
-            $id_profissional = 1;
+            $profissionalDAO = new ProfissionalDAO();
+            $id_profissional = $profissionalDAO->inserir($profissional);
 
             if ($id_profissional > 0) {
-                $horarios = new Horario_profissional();
-                //create for each day of week
-                foreach ($_POST as $key => $value) {
-                    if (is_array($value)) {
-                        if ($value['manha_inicio'] || $value['manha_termino'] || $value['tarde_inicio'] || $value['tarde_termino']) {
+                $profissional->setId_profissional($id_profissional);
+                $especialidade_profissional_id = $profissionalDAO->inserirEspecialidade($profissional);
+
+                if ($especialidade_profissional_id) {
+                    $horarios = new Horario_profissional();
+                    //create for each day of week
+                    foreach ($_POST as $key => $value) {
+                        if (is_array($value)) {
+                            $horarioDAO = new Horario_profissionalDAO();
                             $horarios->setDia_semana($key);
                             $horarios->setProfissional_id($id_profissional);
                             $horarios->setPeriodo('manha');
-                            $horarios->setHorario_inicio($value['manha_inicio']);
-                            $horarios->setHorario_fim($value['manha_termino']);
+                            $horarios->setHorario_inicio(empty($value['manha_inicio']) ? null : $value['manha_inicio']);
+                            $horarios->setHorario_fim(empty($value['manha_termino']) ? null : $value['manha_termino']);
                             $horarios->setDuracao(60);
-                            print_r($horarios);
+                            $horarioDAO->inserir($horarios);
+                            //insert
+                            $horarioDAO = new Horario_profissionalDAO();
                             $horarios->setDia_semana($key);
                             $horarios->setProfissional_id($id_profissional);
                             $horarios->setPeriodo('tarde');
-                            $horarios->setHorario_inicio($value['tarde_inicio']);
-                            $horarios->setHorario_fim($value['tarde_termino']);
+                            $horarios->setHorario_inicio(empty($value['tarde_inicio']) ? null : $value['tarde_inicio']);
+                            $horarios->setHorario_fim(empty($value['tarde_termino']) ? null : $value['tarde_termino']);
                             $horarios->setDuracao(60);
-                            // $horarioDAO = new Horario_profissionalDAO();
-                            // $horarioDAO->inserir($horarios);
+                            $horarioDAO->inserir($horarios);
+                            //insert
                         }
                     }
                 }
-            }
-            exit;
-            if ($id_profissional > 0) {
-                $horarios =  new Horario_profissionalDAO();
-                header('Location: ' . $_SERVER['REQUEST_URI']);
+
+                header('Location: ' . Utils::base_url('profissionais'));
             } else
                 echo 'Erro ao atualizar dados!';
         }
@@ -92,6 +94,7 @@ class ProfissionaisController extends layoutAdminController
         $data['title'] = 'Editar Profissional';
         $profissional = new ProfissionalDAO();
         $data['profissional'] = $profissional->buscarID((int)$id);
+
         if (!$data['profissional']) {
             header('Location: ' . Utils::base_url('profissionais'));
         }
@@ -112,7 +115,29 @@ class ProfissionaisController extends layoutAdminController
         $data['especialidades'] = $especialidades->listar();
 
         $horarios = new Horario_profissionalDAO();
+        $horarios_get = $horarios->buscarID($id);
 
+        $result = [];
+
+        foreach ($horarios_get as $item) {
+            $diaSemana = $item['DIA_SEMANA'];
+            $periodo = $item['PERIODO'];
+
+            if (!isset($result[$diaSemana])) {
+                $result[$diaSemana] = [];
+            }
+
+            if (!isset($result[$diaSemana][$periodo])) {
+                $result[$diaSemana][$periodo] = [];
+            }
+
+            $result[$diaSemana][$periodo] = [
+                'HORA_INICIO' => $item['HORA_INICIO'],
+                'HORA_FIM' => $item['HORA_FIM']
+            ];
+        }
+
+        $data["horarios"] = $result;
 
         $this->render('views/admin/cadastrarProfissional', $data);
     }
@@ -126,9 +151,6 @@ class ProfissionaisController extends layoutAdminController
             $profissional->setId_pessoa($_POST['id_pessoa']);
             $profissional->setTipo_profissional($_POST['tipo_profissional']);
             $profissional->setEspecialidade($_POST['especialidade']);
-
-            print_r($profissional);
-            exit;
 
             $profissionalDAO = new ProfissionalDAO();
             if ($profissionalDAO->inserir($profissional))
