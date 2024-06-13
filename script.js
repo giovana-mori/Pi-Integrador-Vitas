@@ -59,12 +59,12 @@ async function popularEstados() {
 }
 
 async function popularCidades(estadoSelecionado) {
-  debugger;
-  const url = `http://localhost/Pi-Integrador-Vitas/api/cidades/${estadoSelecionado}`;
+  const url = `http://localhost/vitas/api/cidades/${estadoSelecionado}`;
 
   try {
     const response = await fetch(url);
-    const cidades = await response.json();
+    const data = await response.json();
+    const cidades = data.cidades;
     const selectCidades = document.getElementById("cidade");
 
     // Limpa as opções existentes
@@ -73,8 +73,8 @@ async function popularCidades(estadoSelecionado) {
     // Adiciona as cidades como opções no select
     cidades.forEach((cidade) => {
       const option = document.createElement("option");
-      option.value = cidade.id;
-      option.text = cidade.nome;
+      option.value = cidade;
+      option.text = cidade;
       selectCidades.appendChild(option);
     });
   } catch (error) {
