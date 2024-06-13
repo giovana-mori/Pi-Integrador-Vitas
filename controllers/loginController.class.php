@@ -19,7 +19,7 @@ class LoginController extends LayoutLoginController
             }
         }
 
-        $this->render('views/login');
+        $this->render('views/login', $data);
     }
 
     public function logout()

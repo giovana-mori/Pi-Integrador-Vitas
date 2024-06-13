@@ -6,7 +6,7 @@ class RegisterController extends LayoutLoginController
     public function index()
     {
         $data['title'] = 'Registrar';
-        $this->render('views/registro');
+        $this->render('views/registro', $data);
     }
 
     public function registrar()
