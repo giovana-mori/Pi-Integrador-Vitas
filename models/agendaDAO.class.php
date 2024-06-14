@@ -10,20 +10,22 @@ class AgendaDAO extends Conexao
 
     public function inserir(Agenda $agenda)
     {
-        $sql = "INSERT INTO agenda (id_pessoa, id_profissional, data, hora, observacoes, status) VALUES (?,?,?,?,?,?)";
+        $sql = "INSERT INTO AGENDA (DATA, HORA, DURACAO, STATUS, OBSERVACOES, FACULTATIVO, PESSOA_ID, PROFISSIONAL_ID) VALUES (?,?,?,?,?,?,?,?)";
         try {
             $stm = $this->db->prepare($sql);
-            $stm->bindValue(1, $agenda->getIdPessoa());
-            $stm->bindValue(2, $agenda->getIdProfissional());
-            $stm->bindValue(3, $agenda->getData());
-            $stm->bindValue(4, $agenda->getHora());
+            $stm->bindValue(1, $agenda->getData());
+            $stm->bindValue(2, $agenda->getHora());
+            $stm->bindValue(3, $agenda->getDuracao());
+            $stm->bindValue(4, $agenda->getStatus());
             $stm->bindValue(5, $agenda->getObservacoes());
-            $stm->bindValue(6, $agenda->getStatus());
+            $stm->bindValue(6, $agenda->getFacultativo());
+            $stm->bindValue(7, $agenda->getIdPessoa());
+            $stm->bindValue(8, $agenda->getIdProfissional());
             $stm->execute();
             $id_agenda = $this->db->lastInsertId();
             $this->db = null;
             return $id_agenda;
-        } catch (\Throwable $th) {
+        } catch (PDOException $th) {
             return 0;
         }
     }
@@ -42,7 +44,7 @@ class AgendaDAO extends Conexao
             $stm->execute();
             $this->db = null;
             return true;
-        } catch (\Throwable $th) {
+        } catch (PDOException $th) {
             return false;
         }
     }
@@ -56,7 +58,7 @@ class AgendaDAO extends Conexao
             $stm->execute();
             $this->db = null;
             return $stm->fetch(PDO::FETCH_OBJ);
-        } catch (\Throwable $th) {
+        } catch (PDOException $th) {
             return 0;
         }
     }
@@ -70,7 +72,7 @@ class AgendaDAO extends Conexao
             $stm->execute();
             $this->db = null;
             return 1;
-        } catch (\Throwable $th) {
+        } catch (PDOException $th) {
             return 0;
         }
     }
@@ -83,7 +85,7 @@ class AgendaDAO extends Conexao
             $stm->execute();
             $this->db = null;
             return $stm->fetchAll(PDO::FETCH_OBJ);
-        } catch (\Throwable $th) {
+        } catch (PDOException $th) {
             return [];
         }
     }

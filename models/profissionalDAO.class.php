@@ -25,6 +25,22 @@ class ProfissionalDAO extends Conexao
         }
     }
 
+    public function alterar(Profissional $profissional)
+    {
+        $sql = "UPDATE PROFISSIONAIS SET registroclasseprofissional = ?, tipo_profissional_id = ? WHERE id_profissional = ?";
+        try {
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, $profissional->getRegistroProfissional());
+            $stmt->bindValue(2, $profissional->getTipo_profissional());
+            $stmt->bindValue(3, $profissional->getId_profissional());
+            $stmt->execute();
+            // $this->db = null;
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
     public function inserirEspecialidade($profissional)
     {
         $sql = "INSERT INTO PROFISSIONAL_ESPECIALISTA (PROFISSIONAL_ID, ESPECIALIDADE_ID) VALUES (?, ?)";
@@ -38,6 +54,21 @@ class ProfissionalDAO extends Conexao
             return $id_especialidade_profissional;
         } catch (PDOException $e) {
             return $e;
+        }
+    }
+
+    public function alterarEspecialidade($profissional)
+    {
+        $sql = "UPDATE PROFISSIONAL_ESPECIALISTA SET ESPECIALIDADE_ID = ? WHERE PROFISSIONAL_ID = ?";
+        try {
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, $profissional->getEspecialidade());
+            $stmt->bindValue(2, $profissional->getId_profissional());
+            $stmt->execute();
+            $this->db = null;
+            return true;
+        } catch (PDOException $e) {
+            return false;
         }
     }
 
@@ -64,7 +95,7 @@ class ProfissionalDAO extends Conexao
 
     public function listarProfissionais()
     {
-        $sql = "SELECT PROF.id_profissional, PE.nome, PROF.registroclasseprofissional, TPROF.nome AS tipo, ESP.descritivo
+        $sql = "SELECT PROF.id_profissional, PE.nome, PROF.registroclasseprofissional, TPROF.nome AS tipo, ESP.descritivo, ESP.TIPO AS tipo_profissional
                 FROM PESSOAS PE
                 LEFT JOIN PROFISSIONAIS PROF ON PROF.PESSOA_ID = PE.ID_PESSOA
                 LEFT JOIN TIPO_PROFISSIONAL TPROF ON TPROF.ID_TIPO_PROFISSIONAL = PROF.TIPO_PROFISSIONAL_ID

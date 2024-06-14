@@ -32,11 +32,10 @@ class PessoasController extends layoutAdminController
             $pessoa->setEstado($_POST['estado']);
             $pessoa->setCidade($_POST['cidade']);
             $pessoa->setEmail($_POST['email']);
-
             $pessoaDAO = new PessoaDAO();
             if ($pessoaDAO->inserir($pessoa))
                 // header location for current path
-                header('Location: ' . $_SERVER['REQUEST_URI']);
+                header('Location: ' . Utils::base_url('clientes'));
             else
                 echo 'Erro ao atualizar dados!';
         }

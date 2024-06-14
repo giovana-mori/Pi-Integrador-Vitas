@@ -1,47 +1,50 @@
 document.addEventListener("DOMContentLoaded", function () {
-  document
-    .querySelector("#contato_form")
-    ?.addEventListener("submit", function (e) {
-      e.preventDefault();
-      validarFormulario(e);
-    });
+  document.querySelector("#contato_form")?.addEventListener("submit", function (e) {
+    e.preventDefault();
+    validarFormulario(e);
+  });
 
-  document
-    .getElementById("profileImage")
-    ?.addEventListener("change", function (event) {
-      debugger;
-      //send image with uploadAvatar and after call reader.onload
-      uploadAvatar(this, document.querySelector("#id_pessoa").value);
-      //show image preview
+  document.getElementById("profileImage")?.addEventListener("change", function (event) {
+    debugger;
+    //send image with uploadAvatar and after call reader.onload
+    uploadAvatar(this, document.querySelector("#id_pessoa").value);
+    //show image preview
+    var output = document.querySelector(".imagePreview");
+    output.style.display = "block";
+    //read image with FileReader
+    var reader = new FileReader();
+    reader.onload = function () {
       var output = document.querySelector(".imagePreview");
+      output.src = reader.result;
       output.style.display = "block";
-      //read image with FileReader
-      var reader = new FileReader();
-      reader.onload = function () {
-        var output = document.querySelector(".imagePreview");
-        output.src = reader.result;
-        output.style.display = "block";
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    });
-  document
-    .getElementById("profileLogo")
-    ?.addEventListener("change", function (event) {
-      debugger;
-      //send image with uploadAvatar and after call reader.onload
-      uploadLogo(this, document.querySelector("#id_clinica").value);
-      //show image preview
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  });
+
+  document.getElementById("profileLogo")?.addEventListener("change", function (event) {
+    debugger;
+    //send image with uploadAvatar and after call reader.onload
+    uploadLogo(this, document.querySelector("#id_clinica").value);
+    //show image preview
+    var output = document.querySelector(".imagePreview");
+    output.style.display = "block";
+    //read image with FileReader
+    var reader = new FileReader();
+    reader.onload = function () {
       var output = document.querySelector(".imagePreview");
+      output.src = reader.result;
       output.style.display = "block";
-      //read image with FileReader
-      var reader = new FileReader();
-      reader.onload = function () {
-        var output = document.querySelector(".imagePreview");
-        output.src = reader.result;
-        output.style.display = "block";
-      };
-      reader.readAsDataURL(event.target.files[0]);
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  });
+
+  document.querySelectorAll('[data-profissional]').forEach(function (element) {
+    element.addEventListener('click', function (e) {
+      e.preventDefault();
+      const id_profissional = this.dataset.profissional;
+      profissionalPicker(id_profissional);
     });
+  });
 });
 
 async function popularCidades(estadoSelecionado) {
@@ -244,54 +247,39 @@ function validarFormulario(e) {
   e.currentTarget.reset();
 }
 
-// datePicker(".start-date");
-// datePicker(".end-date");
-// datePicker(".start-date-time", "datetime-local");
-// datePicker(".end-date-time", "datetime-local");
-// datePicker(".start-time", "time");
-// datePicker(".end-time", "time");
-
 $(document).ready(function () {
   var calendar = $("#calendar").fullCalendar({
     header: {
       left: "prev,next today",
       center: "title",
-      right: "basicWeek,basicDay",
+      right: "month,basicWeek,basicDay",
     },
     initialView: "timeGridWeek", // Visualização semanal com intervalo de horas
     slotDuration: "00:30:00", // Intervalos de 30 minutos
     slotLabelInterval: "01:00", // Rótulos de hora a cada 1 hora
     aspectRatio: 1.35, // Ajuste este valor conforme necessário
-    events: [
-      {
-        title: "Evento 1",
-        start: "2024-05-28T10:00:00",
-        end: "2024-05-28T12:00:00",
-      },
-      {
-        title: "Evento 2",
-        start: "2024-05-29T14:00:00",
-        end: "2024-05-29T16:00:00",
-      },
-      // Adicione mais eventos conforme necessário
-    ],
-
     windowResize: function (view) {
       // Ajustar o FullCalendar quando a janela é redimensionada
       // Você pode adicionar lógica personalizada aqui, se necessário
       $("#calendar").fullCalendar("option", "height", getCalHeight());
     },
     locale: "pt-br",
-    events: generateEventsFromLocalStorage(), // Adicione os eventos da localStorage
-
+    events: [], // Adicione os eventos da localStorage
     eventClick: function (calEvent, jsEvent, view) {
+      debugger;
+      document.querySelector('#data').value = moment(calEvent.start).format('YYYY-MM-DD');
+      document.querySelector('#hora').value = moment(calEvent.start).format('HH:mm');
+      document.querySelector('#duracao').value = calEvent.end.diff(calEvent.start, 'minutes');
+      document.querySelector('#id_profissional').value = calEvent.profissional_id;
+      document.querySelector('#profissional_name').value = calEvent.profissional_nome;
+      abrirModal();
       // Lidar com o clique em um evento (você pode personalizar essa parte conforme necessário)
-      alert(
-        "Clique no evento:\n\nTítulo: " +
-          calEvent.title +
-          "\nData: " +
-          calEvent.start.format("YYYY-MM-DD")
-      );
+      // alert(
+      //   "Clique no evento:\n\nTítulo: " +
+      //   calEvent.title +
+      //   "\nData: " +
+      //   calEvent.start.format("YYYY-MM-DD")
+      // );
     },
   });
   // Fechar o modal ao pressionar a tecla "Esc"
@@ -301,3 +289,68 @@ $(document).ready(function () {
     }
   });
 });
+
+function profissionalPicker(idProfissional) {
+  const diaSemanaParaData = {
+    'domingo': 0,
+    'segunda': 1,
+    'terca': 2,
+    'quarta': 3,
+    'quinta': 4,
+    'sexta': 5,
+    'sabado': 6
+  };
+  if (!idProfissional) {
+    alert("Por favor, selecione um profissional.");
+    return;
+  }
+  fetch(`${base_url}/api/horarios/${idProfissional}`) // URL do seu endpoint REST
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erro ao carregar eventos: ' + response.statusText);
+      }
+      return response.json();
+    })
+    .then(data => {
+      const events = [];
+      const today = moment().startOf('day'); // Hoje, no início do dia
+      const endOfMonth = moment().endOf('month').startOf('day'); // Fim do mês, no início do dia
+
+      // Itera sobre cada evento retornado pela API
+      data.forEach(event => {
+        event.DIAS_SEMANA_DISPONIVEIS.forEach(disponivel => {
+          const dataDisponivel = moment(disponivel.data).startOf('day'); // Data disponível, no início do dia
+
+          // Verifica se a data disponível está dentro do mês atual
+          if (dataDisponivel.isSameOrAfter(today) && dataDisponivel.isSameOrBefore(endOfMonth)) {
+            // Verifica se é o dia da semana correto
+            if (event.DIA_SEMANA.toLowerCase() === disponivel.diaSemana.toLowerCase()) {
+              event.DISPONIVEIS.forEach(horario => {
+                debugger;
+                const startDateTime = moment(disponivel.data + 'T' + horario);
+                const endDateTime = moment(startDateTime).add(event.DURACAO, 'minutes');
+
+                events.push({
+                  title: `${startDateTime.format('HH:mm')} - ${endDateTime.format('HH:mm')}`,
+                  start: startDateTime.format('YYYY-MM-DDTHH:mm:ss'),
+                  end: endDateTime.format('YYYY-MM-DDTHH:mm:ss'),
+                  allDay: false,
+                  eventId: event.ID_HORARIO, // Adiciona o ID do evento como propriedade
+                  profissional_id: event.ID_PROFISSIONAL, // Adiciona o ID do profissional como propriedade
+                  profissional_nome: event.NOME // Adiciona o nome do profissional como propriedade
+                });
+              });
+            }
+          }
+        });
+      });
+
+      // Adicionando eventos ao calendário
+      $('#calendar').fullCalendar('addEventSource', events);
+    })
+    .catch(error => {
+      console.error('Erro ao carregar eventos:', error);
+    });
+}
+
+//crie uma função para validar CNPJ

@@ -5,17 +5,27 @@
         </h3>
     </div>
     <form id="profissional_form" method="post" action="">
-        <input type="hidden" name="id_pessoa" id="id_pessoa" readonly required value="<?= $profissional['PESSOA_ID'] ?? '' ?>">
-        <div class="item_form">
-            <label for="id_pessoa">Pessoa Referente</label>
-            <div class="relative">
-                <input type="text" name="nome_pessoa" readonly id="nome_pessoa" required value="<?= $profissional['NOME'] ?? '' ?>">
-                <div class="result">
-                    <input type="text" name="search_people" id="search_people" value="">
-                    <ul class="listPessoas"></ul>
+        <?php
+        if (isset($profissional)) :
+            echo "<input type='hidden' name='id_profissional' id='id_profissional' value='{$profissional['id_profissional']}'>";
+            echo "<input type='hidden' name='id_pessoa' id='id_pessoa' value='{$profissional['PESSOA_ID']}'>";
+            echo "<input type='text' name='search_people' readonly id='search_people' value='{$profissional['NOME']}'>";
+        else:
+        ?>
+            <input type="hidden" name="id_pessoa" id="id_pessoa" readonly required value="<?= $profissional['PESSOA_ID'] ?? '' ?>">
+            <div class="item_form">
+                <label for="id_pessoa">Pessoa Referente</label>
+                <div class="relative">
+                    <input type="text" name="nome_pessoa" readonly id="nome_pessoa" required value="<?= $profissional['NOME'] ?? '' ?>">
+                    <div class="result">
+                        <input type="text" name="search_people" id="search_people" value="">
+                        <ul class="listPessoas"></ul>
+                    </div>
                 </div>
             </div>
-        </div>
+        <?php
+        endif;
+        ?>
         <div class="item_form">
             <label for="registro_profissional">Registro Profissional</label>
             <input type="text" name="registro_profissional" id="registro_profissional" value="<?= $profissional['registroclasseprofissional'] ?? '' ?>" required>
@@ -252,7 +262,7 @@
             </div>
         </div>
 
-        <button class="btn center" type="submit">Cadastrar Profissional</button>
+        <button class="btn center" type="submit"><?= isset($horarios) ? "Editar" : "Cadastrar" ?> Profissional</button>
     </form>
 </div>
 

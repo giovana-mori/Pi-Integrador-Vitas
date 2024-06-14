@@ -12,7 +12,7 @@
         <br>
 
         <?php
-        if (!isset($pessoas)) :
+        if (isset($pessoas) && count($pessoas) > 0) :
         ?>
         <table class="table_admin">
             <thead>

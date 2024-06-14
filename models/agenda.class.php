@@ -2,7 +2,16 @@
 
 class Agenda
 {
-    public function __construct(private int $id_agenda, private string $data = "", private string $hora,  private string $duracao = "", private int $id_pessoa = 0, private int $id_profissional = 0, private string $observacoes = "", private string $status)
+    private int $id_agenda;
+    private string $data;
+    private string $hora;
+    private string $duracao;
+    private int $id_pessoa;
+    private int $id_profissional;
+    private string $observacoes;
+    private bool $facultativo;
+    private string $status;
+    public function __construct(int $id_agenda = 0, string $data = "", string $hora = '',  string $duracao = "", int $id_pessoa = 0, int $id_profissional = 0, string $observacoes = "", bool $facultativo = false, string $status = 'NÃO')
     {
         $this->id_agenda = $id_agenda;
         $this->data = $data;
@@ -41,6 +50,10 @@ class Agenda
     {
         return $this->observacoes;
     }
+    public function getFacultativo()
+    {
+        return $this->facultativo;
+    }
     public function getStatus()
     {
         return $this->status;
@@ -72,6 +85,10 @@ class Agenda
     public function setObservacoes($observacoes)
     {
         $this->observacoes = $observacoes;
+    }
+    public function setFacultativo($facultativo)
+    {
+        $this->facultativo = $facultativo;
     }
     public function setStatus($status)
     {

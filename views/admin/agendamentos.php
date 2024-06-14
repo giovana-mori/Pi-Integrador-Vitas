@@ -1,6 +1,26 @@
 <div class="content_">
-  <div>
+  <!--<div>
     <button class="btn_agendar" onclick="abrirModal()">Agendar+</button>
+  </div>-->
+  <div class="box_profissionais">
+    <span>SELECIONA UM PROFISSIONAL:</span>
+    <div class="profissionais">
+      <div class="optimization-content-style">
+        <?php
+        foreach ($profissionais as $key => $value) :
+        ?>
+          <div class="optimization-content-desc" data-profissional="<?= $value['id_profissional'] ?>">
+            <div class="simbolo">
+              <img src="https://static.vecteezy.com/system/resources/previews/013/042/571/original/default-avatar-profile-icon-social-media-user-photo-in-flat-style-vector.jpg">
+            </div>
+            <h2><?= $value['nome'] ?></h2>
+            <small><?= $value['tipo_profissional'] ?> - <?= $value['descritivo'] ?></small>
+          </div>
+        <?php
+        endforeach;
+        ?>
+      </div>
+    </div>
   </div>
   <div id="calendar"></div>
 </div>
@@ -18,23 +38,29 @@
       <form id="consultaForm">
         <div class="item_form">
           <label for="nome">Nome:</label>
+          <input type="hidden" id="id_pessoa" name="id_pessoa" value="<?= $_SESSION['user_id'] ?>">
           <input type="text" id="nome" readonly value="<?= $_SESSION['user_name'] ?>" placeholder="Digite o nome de quem sera atendido.." required>
         </div>
 
         <div class="item_form">
           <label for="dataHora">Data e Hora:</label>
-          <input type="datetime-local" id="dataHora" required>
+          <input type="date" id="data" readonly name="data" required>
         </div>
 
         <div class="item_form">
-          <label for="medico">Médico:</label>
-          <select id="medico" required>
-            <?php
-            foreach ($profissionais as $key => $value) {
-              echo "<option value='$value->id_profissional'>$value->nome - $value->descritivo</option>";
-            };
-            ?>
-          </select>
+          <label for="dataHora">Data e Hora:</label>
+          <input type="time" id="hora" readonly name="hora" required>
+        </div>
+
+        <div class="item_form">
+          <label for="dataHora">Duração: (minutos)</label>
+          <input type="number" id="duracao" readonly name="duracao" required>
+        </div>
+
+        <div class="item_form">
+          <label for="medico">Profissional:</label>
+          <input type="hidden" id="id_profissional" name="id_profissional" value="">
+          <input type="text" id="profissional_name" readonly value="" required >
         </div>
 
         <button type="button" class="btn" onclick="agendarConsulta()">Agendar</button>

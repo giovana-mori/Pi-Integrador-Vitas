@@ -10,6 +10,7 @@ class APIController
         header('Access-Control-Allow-Headers: Content-Type');
         header('Content-Type: application/json');
     }
+
     public function pessoas($nome = null)
     {
         try {
@@ -21,6 +22,58 @@ class APIController
                 exit;
             }
             echo json_encode($pessoas->listar());
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function profissionais($id = null)
+    {
+        try {
+            $profissional = new ProfissionalDAO();
+            if ($id) {
+                $prof = new Profissional();
+                $prof->setId_profissional($id);
+                echo json_encode($profissional->buscarID($prof));
+                exit;
+            }
+            echo json_encode($profissional->listarProfissionais());
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function profissionalHorarios($profissionalID = null)
+    {
+        try {
+            $horarios = new Horario_profissionalDAO();
+            if ($profissionalID) {
+                $data = $horarios->buscarID($profissionalID);
+                $ano = date('Y');
+                $mes = date('m');
+                // Coletar os dias da semana disponíveis a partir dos dados
+                $diasSemanaDisponiveis = array_unique(array_column($data, 'DIA_SEMANA'));
+                foreach ($data as $key => $value) {
+                    $horaInicio = $value['HORA_INICIO'];
+                    $horaFim = $value['HORA_FIM'];
+                    $duracao = $value['DURACAO'];
+                    //criar um item em data com os horarios disponiveis
+                    $data[$key]['DISPONIVEIS'] = Utils::generateHorariosDisponiveis_($horaInicio, $horaFim, $duracao);
+                    $data[$key]['DIAS_SEMANA_DISPONIVEIS'] = Utils::getDiasSemanaDisponiveis($ano, $mes, $diasSemanaDisponiveis);
+                }
+
+                echo json_encode($data);
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function todosHorarios()
+    {
+        try {
+            $horarios = new Horario_profissionalDAO();
+            echo json_encode($horarios->listar());
         } catch (Exception $e) {
             echo $e->getMessage();
         }
@@ -183,5 +236,25 @@ class APIController
         }
 
         echo json_encode(Utils::loadCidades($uf));
+    }
+
+    public function agendar()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $agenda = new Agenda();
+            $agenda->setData($_POST['data']);
+            $agenda->setHora($_POST['hora']);
+            $agenda->setDuracao($_POST['duracao']);
+            $agenda->setIdProfissional($_POST['id_profissional']);
+            $agenda->setIdPessoa($_POST['id_pessoa']);
+            $agenda->setObservacoes($_POST['observacao']);
+            $agenda->setFacultativo($_POST['facultativo']);
+            $agenda->setStatus($_POST['status']);
+
+            // $agendamento = new AgendaDAO();
+            // $agendamento->inserir($agenda);
+            echo print_r($agenda);
+            exit;
+        }
     }
 }

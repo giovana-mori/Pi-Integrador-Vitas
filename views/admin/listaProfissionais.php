@@ -12,7 +12,7 @@
         <br>
 
         <?php
-        if (!isset($profissionais)) :
+        if (isset($profissionais) && count($profissionais) > 0) :
         ?>
             <table class="table_admin">
                 <thead>

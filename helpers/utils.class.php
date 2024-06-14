@@ -82,4 +82,60 @@ class Utils
 
         return getenv('BASE_PATH');
     }
+
+    public static function generateHorariosDisponiveis($horaInicio, $horaFim, $duracao)
+    {
+        $horarios = [];
+
+        $start = new DateTime($horaInicio);
+        $end = new DateTime($horaFim);
+
+        while ($start < $end) {
+            $horarioInicio = $start->format('H:i:s');
+            $start->add(new DateInterval('PT' . $duracao . 'M'));
+            if ($start > $end) {
+                break;
+            }
+            $horarioFim = $start->format('H:i:s');
+            $horarios[] = ['inicio' => $horarioInicio, 'fim' => $horarioFim];
+        }
+
+        return $horarios;
+    }
+
+    public static function generateHorariosDisponiveis_($horaInicio, $horaFim, $duracao)
+    {
+        $horarios = [];
+        $inicio = strtotime($horaInicio);
+        $fim = strtotime($horaFim);
+
+        while ($inicio < $fim) {
+            $horarios[] = date('H:i', $inicio);
+            $inicio = strtotime("+$duracao minutes", $inicio);
+        }
+
+        return $horarios;
+    }
+
+    public static function getDiasSemanaDisponiveis($ano, $mes, $diasSemanaDisponiveis) {
+        $diasDisponiveis = [];
+        $diasSemana = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+        
+        $quantidadeDias = cal_days_in_month(CAL_GREGORIAN, $mes, $ano);
+
+        for ($dia = 1; $dia <= $quantidadeDias; $dia++) {
+            $timestamp = mktime(0, 0, 0, $mes, $dia, $ano);
+            $diaSemana = date('w', $timestamp); // 0 (para domingo) até 6 (para sábado)
+            $nomeDiaSemana = $diasSemana[$diaSemana];
+
+            if (in_array($nomeDiaSemana, $diasSemanaDisponiveis)) {
+                $diasDisponiveis[] = [
+                    'data' => date('Y-m-d', $timestamp),
+                    'diaSemana' => $nomeDiaSemana
+                ];
+            }
+        }
+
+        return $diasDisponiveis;
+    }
 }

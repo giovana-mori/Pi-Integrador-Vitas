@@ -59,8 +59,10 @@ $router->post("/clinica", [ClinicaController::class, "update"]);
 
 $router->get("/agendamentos", [AgendamentosController::class, "index"]);
 $router->get("/contato", [ContatoController::class, "index"]);
+
 $router->get("/perfil", [PerfilController::class, "index"]);
 $router->post("/perfil", [PerfilController::class, "update"]);
+
 $router->get("/clientes", [PessoasController::class, "index"]);
 $router->get("/novocadastro", [PessoasController::class, "cadastro"]);
 $router->post("/novocadastro", [PessoasController::class, "inserir"]);
@@ -71,11 +73,17 @@ $router->get("/profissionais", [ProfissionaisController::class, "index"]);
 $router->get("/novoprofissional", [ProfissionaisController::class, "cadastro"]);
 $router->post("/novoprofissional", [ProfissionaisController::class, "inserir"]);
 $router->get("/editarprofissional/{id}", [ProfissionaisController::class, "editar"]);
+$router->post("/editarprofissional/{id}", [ProfissionaisController::class, "update"]);
 
 //API Rotas
 $router->get("/api/pessoas", [APIController::class, "Pessoas"]);
 $router->get("/api/pessoas/{nome}", [APIController::class, "Pessoas"]);
 $router->get("/api/cidades/{uf}", [APIController::class, "cidades"]);
+$router->get("/api/profissionais", [APIController::class, "profissionais"]);
+$router->get("/api/horarios/{profissionalId}", [APIController::class, "profissionalHorarios"]);
+
+
 $router->post("/api/alterarpessoa", [APIController::class, "alterarPessoa"]);
 $router->post("/api/upload", [APIController::class, "uploadAvatar"]);
 $router->post("/api/uploadlogo", [APIController::class, "uploadLogo"]);
+$router->post("/api/agendar", [APIController::class, "agendar"]);
