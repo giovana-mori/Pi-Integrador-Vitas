@@ -21,6 +21,29 @@ class EspecialidadeDAO extends Conexao
         }catch (Exception $e){
             return 0;
         }
+    }   
+
+    public function listarTipos()
+    {
+        try {
+            $sql = "SELECT ID_ESPECIALIDADE, TIPO, DESCRITIVO FROM ESPECIALIDADES GROUP BY TIPO";
+            $stm = $this->db->prepare($sql);
+            $stm->execute();
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return [];
+        }
+    }
+
+    public function listarEspecilidades(){
+        try {
+            $sql = "SELECT ID_ESPECIALIDADE, TIPO, DESCRITIVO FROM ESPECIALIDADES";
+            $stm = $this->db->prepare($sql);
+            $stm->execute();
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            return [];
+        }
     }
 
     public function listar()

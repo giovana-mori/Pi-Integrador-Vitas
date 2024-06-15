@@ -74,7 +74,7 @@ class ProfissionalDAO extends Conexao
 
     public function buscarID($id = null)
     {
-        $sql = "SELECT PROF.id_profissional,PROF.PESSOA_ID, PE.NOME, PROF.registroclasseprofissional, TPROF.NOME AS tipo, ESP.descritivo
+        $sql = "SELECT PROF.id_profissional,PROF.PESSOA_ID, PE.NOME, PROF.registroclasseprofissional, TPROF.NOME AS tipo, ESP.descritivo, ESP.TIPO AS tipo_profissao
                 FROM PESSOAS PE
                 LEFT JOIN PROFISSIONAIS PROF ON PROF.PESSOA_ID = PE.ID_PESSOA
                 LEFT JOIN TIPO_PROFISSIONAL TPROF ON TPROF.ID_TIPO_PROFISSIONAL = PROF.TIPO_PROFISSIONAL_ID

@@ -79,33 +79,6 @@ class APIController
         }
     }
 
-    public function alterarPessoa()
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $pessoa = new Pessoa();
-            $pessoa->setId_pessoa($_POST['id_pessoa']);
-            $pessoa->setNome($_POST['name']);
-            $pessoa->setEmail($_POST['email']);
-            $pessoa->setCpf($_POST['cpf']);
-            $pessoa->setLogradouro($_POST['logradouro']);
-            $pessoa->setBairro($_POST['bairro']);
-            $pessoa->setCidade($_POST['cidade']);
-            $pessoa->setEstado($_POST['estado']);
-            $pessoa->setCep($_POST['cep']);
-            $pessoa->setGenero($_POST['genero']);
-            $pessoa->setDataNasc($_POST['datanasc']);
-
-            echo json_encode($pessoa);
-            return 0;
-            exit;
-
-
-            $pessoa = new PessoaDAO();
-            $pessoa->alterar($_POST);
-            echo json_encode(["success" => "Pessoa alterada com sucesso"]);
-        }
-    }
-
     public function uploadAvatar()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -222,6 +195,47 @@ class APIController
         }
     }
 
+    public function uploadDoc()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $targetDir = "uploads/documentos/";
+            $targetFile = $targetDir . basename($_FILES["upload"]["name"]);
+            $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+            // Verifica se o arquivo já existe
+            if (file_exists($targetFile)) {
+                echo json_encode(["error" => "Arquivo já existe"]);
+                exit;
+            }
+
+            // Verifica o tamanho do arquivo
+            if ($_FILES["upload"]["size"] > 500000) {
+                echo json_encode(["error" => "Arquivo muito grande"]);
+            }
+
+            // Permite determinados formatos de arquivo .pdf,.doc,.docx,.txt,.jpg,.jpeg,.png
+            if (
+                $imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif" && $imageFileType != "pdf" && $imageFileType != "doc"
+                && $imageFileType != "docx" && $imageFileType != "txt"
+            ) {
+                echo json_encode(["error" => "Desculpe, apenas arquivos PDF, DOC, DOCX, TXT, JPG, JPEG, PNG e GIF são permitidos."]);
+                exit;
+            }
+
+            if (move_uploaded_file($_FILES["upload"]["tmp_name"], $targetFile)) {
+                $agenda = new AgendaDAO();
+                //concatenar no Files o caminho completo da url até a pasta uploads
+                $agenda->insertUpload($_FILES["upload"]["name"], $_POST['id_agenda']);
+                echo json_encode(["success" => "Arquivo "  . htmlspecialchars(basename($_FILES["upload"]["name"])) . " enviado com sucesso"]);
+                exit;
+            } else {
+                echo json_encode(["error" => "Desculpe, houve um erro ao enviar seu arquivo."]);
+                exit;
+            }
+        }
+    }
+
     public function cidades($uf = null)
     {
         if ($uf == null) {
@@ -254,10 +268,48 @@ class APIController
             $agendamento = new AgendaDAO();
             $retorno = $agendamento->inserir($agenda);
             if ($retorno > 0) {
-                echo json_encode(["success" => "Agendamento realizado com sucesso"]);
+                echo json_encode(["success" => "Agendamento realizado com sucesso", "id_agenda" => $retorno]);
             } else {
                 echo json_encode(["error" => "Erro ao agendar"]);
             }
+        }
+    }
+
+    public function agendamentos($id = null)
+    {
+        try {
+            $agendamento = new AgendaDAO();
+            if ($id) {
+                $data = $agendamento->buscarID($id);
+                //insert into $data['uploads'] = $uploads;
+                $uploads = $agendamento->getUploads($id);
+                $data['UPLOADS'] = $uploads;
+                echo json_encode($data);
+                exit;
+            }
+            echo json_encode($agendamento->listar());
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function meusatendimentos($id = null, $date = null)
+    {
+        try {
+            $agendamento = new AgendaDAO();
+            if ($id) {
+                $agendamentos = $agendamento->buscarMeusAtendimentos($id, $date);
+                //foreach nos agendamentos e buscar os uploads
+                foreach ($agendamentos as $key => $value) {
+                    //insere no array do agendamento a chave upload e seu respectivo valo
+                    $agendamentos[$key]["UPLOADS"] = $agendamento->getUploads($value["ID_AGENDA"]);
+                }
+                echo json_encode($agendamentos);
+                exit;
+            }
+            echo json_encode($agendamento->listar());
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
     }
 }

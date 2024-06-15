@@ -202,9 +202,7 @@ ul.listPessoas {
   z-index: 1;
   border-radius: 100%;
   overflow: hidden;
-  box-shadow:
-    1px 1px 0px 2px rgb(59 205 113),
-    -1px -1px 0px 2px rgb(59 205 113);
+  box-shadow: 1px 1px 0px 2px rgb(59 205 113), -1px -1px 0px 2px rgb(59 205 113);
 }
 
 #imagePreview {
@@ -245,9 +243,9 @@ label.imagem {
   position: relative;
 }
 
-[data-profissional]{
+[data-profissional] {
   border-radius: 3px;
-  transition: all .3s;
+  transition: all 0.3s;
   cursor: pointer;
 }
 
@@ -336,9 +334,7 @@ select {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
-  transition:
-    border-color 0.15s ease-in-out,
-    box-shadow 0.15s ease-in-out;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
 .btn {
@@ -643,6 +639,105 @@ select {
   gap: 10px;
 }
 
+.download_btn {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.content_download {
+  display: flex;
+  gap: 3px;
+}
+.data_filtro {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+  max-width: 300px;
+  flex: auto;
+}
+.data_filtro label {
+  font-weight: 600;
+}
+.download_btn:after {
+  content: "";
+  background-image: url(data:image/svg+xml;base64,PCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KDTwhLS0gVXBsb2FkZWQgdG86IFNWRyBSZXBvLCB3d3cuc3ZncmVwby5jb20sIFRyYW5zZm9ybWVkIGJ5OiBTVkcgUmVwbyBNaXhlciBUb29scyAtLT4KPHN2ZyB3aWR0aD0iNjRweCIgaGVpZ2h0PSI2NHB4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+Cg08ZyBpZD0iU1ZHUmVwb19iZ0NhcnJpZXIiIHN0cm9rZS13aWR0aD0iMCIvPgoNPGcgaWQ9IlNWR1JlcG9fdHJhY2VyQ2FycmllciIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+Cg08ZyBpZD0iU1ZHUmVwb19pY29uQ2FycmllciI+IDxwYXRoIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIiBkPSJNOCAxMEM4IDcuNzkwODYgOS43OTA4NiA2IDEyIDZDMTQuMjA5MSA2IDE2IDcuNzkwODYgMTYgMTBWMTFIMTdDMTguOTMzIDExIDIwLjUgMTIuNTY3IDIwLjUgMTQuNUMyMC41IDE2LjQzMyAxOC45MzMgMTggMTcgMThIMTYuOUMxNi4zNDc3IDE4IDE1LjkgMTguNDQ3NyAxNS45IDE5QzE1LjkgMTkuNTUyMyAxNi4zNDc3IDIwIDE2LjkgMjBIMTdDMjAuMDM3NiAyMCAyMi41IDE3LjUzNzYgMjIuNSAxNC41QzIyLjUgMTEuNzc5MyAyMC41MjQ1IDkuNTE5OTcgMTcuOTI5NiA5LjA3ODI0QzE3LjQ4NjIgNi4yMDIxMyAxNS4wMDAzIDQgMTIgNEM4Ljk5OTc0IDQgNi41MTM4MSA2LjIwMjEzIDYuMDcwMzYgOS4wNzgyNEMzLjQ3NTUxIDkuNTE5OTcgMS41IDExLjc3OTMgMS41IDE0LjVDMS41IDE3LjUzNzYgMy45NjI0MyAyMCA3IDIwSDcuMUM3LjY1MjI4IDIwIDguMSAxOS41NTIzIDguMSAxOUM4LjEgMTguNDQ3NyA3LjY1MjI4IDE4IDcuMSAxOEg3QzUuMDY3IDE4IDMuNSAxNi40MzMgMy41IDE0LjVDMy41IDEyLjU2NyA1LjA2NyAxMSA3IDExSDhWMTBaTTEzIDExQzEzIDEwLjQ0NzcgMTIuNTUyMyAxMCAxMiAxMEMxMS40NDc3IDEwIDExIDEwLjQ0NzcgMTEgMTFWMTYuNTg1OEw5LjcwNzExIDE1LjI5MjlDOS4zMTY1OCAxNC45MDI0IDguNjgzNDIgMTQuOTAyNCA4LjI5Mjg5IDE1LjI5MjlDNy45MDIzNyAxNS42ODM0IDcuOTAyMzcgMTYuMzE2NiA4LjI5Mjg5IDE2LjcwNzFMMTEuMjkyOSAxOS43MDcxQzExLjY4MzQgMjAuMDk3NiAxMi4zMTY2IDIwLjA5NzYgMTIuNzA3MSAxOS43MDcxTDE1LjcwNzEgMTYuNzA3MUMxNi4wOTc2IDE2LjMxNjYgMTYuMDk3NiAxNS42ODM0IDE1LjcwNzEgMTUuMjkyOUMxNS4zMTY2IDE0LjkwMjQgMTQuNjgzNCAxNC45MDI0IDE0LjI5MjkgMTUuMjkyOUwxMyAxNi41ODU4VjExWiIgZmlsbD0iIzAwMDAwMCIvPiA8L2c+Cg08L3N2Zz4=);
+  width: 24px;
+  height: 24px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.box_meus_agendamentos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
+  justify-content: flex-start;
+}
+
+.box_meus_agendamentos p {
+  width: 100%;
+  text-align: center;
+  padding: 15px;
+}
+
+.item_agendamento_header {
+  border-bottom: 3px solid var(--c-verde-forte);
+  padding: 0px 0 5px 0;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14pt;
+}
+
+.item_agendamento_body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+li.item_obs {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+input.button_ver_mais {
+  border-radius: 4px;
+  border: 1px solid var(--c-verde-forte);
+  transition: all 0.3s;
+  font-size: 12pt;
+  line-height: normal;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+textarea {
+  max-width: 100%;
+  resize: none;
+}
+
+.item_agendamento {
+  padding: 10px;
+  box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 3px;
+  background-color: var(--c-fundo_depoimento_verde_claro);
+  max-width: 300px;
+  width: 100%;
+}
+
+input#upload {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  padding: 0;
+}
 @media (max-width: 991.98px) {
   .fc-today-button {
     font-size: 10pt !important;

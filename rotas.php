@@ -62,6 +62,7 @@ $router->get("/contato", [ContatoController::class, "index"]);
 
 $router->get("/perfil", [PerfilController::class, "index"]);
 $router->post("/perfil", [PerfilController::class, "update"]);
+$router->get("/meusagendamentos", [PerfilController::class, "meuagendamento"]);
 
 $router->get("/clientes", [PessoasController::class, "index"]);
 $router->get("/novocadastro", [PessoasController::class, "cadastro"]);
@@ -74,6 +75,7 @@ $router->get("/novoprofissional", [ProfissionaisController::class, "cadastro"]);
 $router->post("/novoprofissional", [ProfissionaisController::class, "inserir"]);
 $router->get("/editarprofissional/{id}", [ProfissionaisController::class, "editar"]);
 $router->post("/editarprofissional/{id}", [ProfissionaisController::class, "update"]);
+$router->get("/meusatendimentos", [ProfissionaisController::class, "meusatendimentos"]);
 
 //API Rotas
 $router->get("/api/pessoas", [APIController::class, "Pessoas"]);
@@ -82,7 +84,13 @@ $router->get("/api/cidades/{uf}", [APIController::class, "cidades"]);
 $router->get("/api/profissionais", [APIController::class, "profissionais"]);
 $router->get("/api/horarios/{profissionalId}", [APIController::class, "profissionalHorarios"]);
 
-$router->post("/api/alterarpessoa", [APIController::class, "alterarPessoa"]);
 $router->post("/api/upload", [APIController::class, "uploadAvatar"]);
 $router->post("/api/uploadlogo", [APIController::class, "uploadLogo"]);
+$router->post("/api/uploadDoc", [APIController::class, "uploadDoc"]);
 $router->post("/api/agendar", [APIController::class, "agendar"]);
+//pega todos os agendamentos
+$router->get("/api/agendamento", [APIController::class, "agendamentos"]);
+//pega um agendamento especifico por ID
+$router->get("/api/agendamento/{id}", [APIController::class, "agendamentos"]);
+//pega varios agendamentos de um profissional especifico por PROFISSIONAL_ID
+$router->get("/api/meusatendimentos/{id}/{date}", [APIController::class, "meusatendimentos"]);

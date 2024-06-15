@@ -51,6 +51,7 @@ $currentpage = $uri[sizeof($uri) - 1];
                             <li><a href="<?= Utils::base_url('clientes') ?>" class="<?php echo $currentpage == 'clientes' ? 'checked_link' : ''; ?>">Clientes</a></li>
                             <li><a href="<?= Utils::base_url('profissionais') ?>" class="<?php echo $currentpage == 'profissionais' ? 'checked_link' : ''; ?>">Profissionais</a></li>
                             <li><a href="<?= Utils::base_url('clinica') ?>" class="<?php echo $currentpage == 'clinica' ? 'checked_link' : ''; ?>">Configurações</a></li>
+                            <li><a href="<?= Utils::base_url('meusagendamentos') ?>" class="<?php echo $currentpage == 'meusagendamentos' ? 'checked_link' : ''; ?>">Meus Agendamentos</a></li>
                         </ul>
                     </div>
                 </div>

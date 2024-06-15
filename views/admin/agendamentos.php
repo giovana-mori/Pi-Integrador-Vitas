@@ -63,6 +63,16 @@
           <input type="text" class="profissional_name" readonly value="" required >
         </div>
 
+        <div class="item_form">
+          <label for="observacao">Observação (Opcional):</label>
+          <textarea id="observacao" name="observacao" l placeholder="Observações da consulta.."></textarea>
+        </div>
+
+        <div class="item_form">
+          <label for="upload">Anexos:</label>
+          <input type="file" id="upload" name="upload" accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png">
+        </div>
+
         <button type="submit" class="btn">Agendar</button>
       </form>
     </div>

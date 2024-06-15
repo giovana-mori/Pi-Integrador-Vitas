@@ -38,4 +38,18 @@ class PerfilController extends layoutAdminController
                 echo 'Erro ao atualizar dados!';
         }
     }
+
+    public function meuagendamento()
+    {
+        $data['title'] = 'Meu Agendamento';
+        $agendamento = new AgendaDAO();
+        $agendamentos = $agendamento->buscarMeusAgendamentos($_SESSION['user_id']);
+        //foreach nos agendamentos e buscar os uploads
+        foreach ($agendamentos as $key => $value) {
+            //insere no array do agendamento a chave upload e seu respectivo valo
+            $agendamentos[$key]["UPLOADS"] = $agendamento->getUploads($_SESSION['user_id']);
+        }
+        $data['agendamentos'] = $agendamentos;
+        $this->render('views/admin/meusAgendamentos', $data);
+    }
 }

@@ -15,7 +15,9 @@ class ProfissionaisController extends layoutAdminController
         $tipoprofissional = new Tipo_profissionalDAO();
         $data['tipo_profissional'] = $tipoprofissional->listar();
         $especialidades = new EspecialidadeDAO();
-        $data['especialidades'] = $especialidades->listar();
+        // $data['especialidades'] = $especialidades->listar();
+        $data['tipos'] = $especialidades->listarTipos();
+        $data['especialidades'] = $especialidades->listarEspecilidades();
         $clinica = new ClinicaDAO();
         $data['clinica'] = $clinica->buscarID(1);
         $data['clinica']['SEGUNDA'] = Utils::splitHourClinica($data['clinica']['SEGUNDA']);
@@ -111,7 +113,8 @@ class ProfissionaisController extends layoutAdminController
         $data['tipos_profissional'] = $tipo->listar();
 
         $especialidades = new EspecialidadeDAO();
-        $data['especialidades'] = $especialidades->listar();
+        $data['tipos'] = $especialidades->listarTipos();
+        $data['especialidades'] = $especialidades->listarEspecilidades();
 
         $horarios = new Horario_profissionalDAO();
         $horarios_get = $horarios->buscarID($id);
@@ -186,5 +189,20 @@ class ProfissionaisController extends layoutAdminController
             } else
                 echo 'Erro ao atualizar dados!';
         }
+    }
+
+    public function meusatendimentos()
+    {
+        $data['title'] = 'Meus Atendimentos';
+        $agendamento = new AgendaDAO();
+        // $agendamentos = $agendamento->buscarMeusAtendimentos($_SESSION['user_id']);
+        $agendamentos = $agendamento->buscarMeusAtendimentos(2);
+        //foreach nos agendamentos e buscar os uploads
+        foreach ($agendamentos as $key => $value) {
+            //insere no array do agendamento a chave upload e seu respectivo valo
+            $agendamentos[$key]["UPLOADS"] = $agendamento->getUploads($value["ID_AGENDA"]);
+        }
+        $data['agendamentos'] = $agendamentos;
+        $this->render('views/admin/meusAgendamentos', $data);
     }
 }

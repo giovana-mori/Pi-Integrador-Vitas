@@ -101,7 +101,7 @@ class PessoaDAO extends Conexao
 
     public function listar()
     {
-        $sql = "SELECT * FROM pessoas";
+        $sql = "SELECT * FROM pessoas limit 15";
 
         try {
             $stm = $this->db->prepare($sql);

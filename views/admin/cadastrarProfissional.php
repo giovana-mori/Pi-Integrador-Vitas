@@ -10,13 +10,13 @@
             echo "<input type='hidden' name='id_profissional' id='id_profissional' value='{$profissional['id_profissional']}'>";
             echo "<input type='hidden' name='id_pessoa' id='id_pessoa' value='{$profissional['PESSOA_ID']}'>";
             echo "<input type='text' name='search_people' readonly id='search_people' value='{$profissional['NOME']}'>";
-        else:
+        else :
         ?>
             <input type="hidden" name="id_pessoa" id="id_pessoa" readonly required value="<?= $profissional['PESSOA_ID'] ?? '' ?>">
             <div class="item_form">
                 <label for="id_pessoa">Pessoa Referente</label>
                 <div class="relative">
-                    <input type="text" name="nome_pessoa" readonly id="nome_pessoa" required value="<?= $profissional['NOME'] ?? '' ?>">
+                    <input type="text" name="nome_pessoa" autocomplete="off" id="nome_pessoa" required onkeypress="return false;" value="<?= $profissional['NOME'] ?? '' ?>">
                     <div class="result">
                         <input type="text" name="search_people" id="search_people" value="">
                         <ul class="listPessoas"></ul>
@@ -31,11 +31,34 @@
             <input type="text" name="registro_profissional" id="registro_profissional" value="<?= $profissional['registroclasseprofissional'] ?? '' ?>" required>
         </div>
         <div class="item_form">
-            <label for="tipo_profissional">Tipo Profissional</label>
+            <label for="tipo_profissional">Tipo Acesso</label>
             <select name="tipo_profissional" id="tipo_profissional" required>
                 <?php
-                foreach ($tipos_profissional as $tipo) {
-                    echo "<option value='{$tipo['ID_TIPO_PROFISSIONAL']}' " . ($tipo['NOME'] == $profissional['tipo'] ? 'selected' : '') . ">{$tipo['NOME']}</option>";
+                if (isset($profissional['descritivo'])) {
+                    foreach ($tipos_profissional as $tipo) {
+                        echo "<option value='{$tipo['ID_TIPO_PROFISSIONAL']}' " . ($tipo['NOME'] == $profissional['tipo'] ? 'selected' : '') . ">{$tipo['NOME']}</option>";
+                    }
+                } else {
+                    foreach ($tipos_profissional as $tipo) {
+                        echo "<option value='{$tipo['ID_TIPO_PROFISSIONAL']}' " . ">{$tipo['NOME']}</option>";
+                    }
+                }
+                ?>
+            </select>
+        </div>
+        <div class="item_form">
+            <label for="tipo_especialidade">Profissão</label>
+            <select id="tipo_especialidade" required>
+                <option value="">Selecione uma Profissão</option>
+                <?php
+                if (isset($profissional['tipo_profissao'])) {
+                    foreach ($tipos as $especialidade) {
+                        echo "<option value='{$especialidade['TIPO']}' " . ($especialidade['TIPO'] == $profissional['tipo_profissao'] ? 'selected' : '') . ">{$especialidade['TIPO']}</option>";
+                    }
+                } else {
+                    foreach ($tipos as $especialidade) {
+                        echo "<option value='{$especialidade['TIPO']}' " . ">{$especialidade['TIPO']}</option>";
+                    }
                 }
                 ?>
             </select>
@@ -43,9 +66,16 @@
         <div class="item_form">
             <label for="especialidade">Especialidades</label>
             <select name="especialidade" id="especialidade" required>
+                <option value="">Selecione uma especialidade</option>
                 <?php
-                foreach ($especialidades as $especialidade) {
-                    echo "<option value='{$especialidade['ID_ESPECIALIDADE']}' " . ($especialidade['DESCRITIVO'] == $profissional['descritivo'] ? 'selected' : '') . ">{$especialidade['DESCRITIVO']} - {$especialidade['TIPO']}</option>";
+                if (isset($profissional['descritivo'])) {
+                    foreach ($especialidades as $especialidade) {
+                        echo "<option style='display:none' data-tipo='{$especialidade['TIPO']}' value='{$especialidade['ID_ESPECIALIDADE']}' " . ($especialidade['DESCRITIVO'] == $profissional['descritivo'] ? 'selected' : '') . ">{$especialidade['DESCRITIVO']}</option>";
+                    }
+                } else {
+                    foreach ($especialidades as $especialidade) {
+                        echo "<option style='display:none' data-tipo='{$especialidade['TIPO']}' value='{$especialidade['ID_ESPECIALIDADE']}' " . ">{$especialidade['DESCRITIVO']}</option>";
+                    }
                 }
                 ?>
             </select>
@@ -268,7 +298,7 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        document.querySelector('#nome_pessoa').addEventListener('click', (e) => {
+        document.querySelector('#nome_pessoa')?.addEventListener('click', (e) => {
             e.preventDefault;
             //inicializar o ponteiro de digitacao no #search_people
             document.querySelector('#search_people').value = '';
@@ -286,29 +316,46 @@
             }
         });
 
-        document.querySelector('#search_people').addEventListener('keyup', function(e) {
-            e.preventDefault();
-            let nome = e.target.value;
-            const requestOptions = {
-                method: "GET",
-                redirect: "follow"
-            };
+        document.querySelector("#tipo_especialidade").addEventListener('change', selectTipo);
 
-            fetch(`${base_url}/api/pessoas${nome && '/' + nome}`, requestOptions)
-                .then((response) => response.text())
-                .then((result) => {
-                    result = JSON.parse(result);
-                    console.log(result);
-                    document.querySelector('.listPessoas').innerHTML = result.length > 0 ? '' : 'Nenhum resultado encontrado';
-                    result.forEach(element => {
-                        document.querySelector('.listPessoas').innerHTML += `<li data-id='${element.ID_PESSOA}' onclick='selectPessoa(event)'>${element.NOME}</li>`;
-                    })
-                })
-                .catch((error) => console.error(error));
-        })
+        //keyup and focus
+        document.querySelector('#search_people').addEventListener('keyup', eventSearchPessoa)
+        document.querySelector('#search_people').addEventListener('focus', eventSearchPessoa)
     });
 
+    const eventSearchPessoa = (e) => {
+        e.preventDefault();
+        let nome = e.target.value;
+        const requestOptions = {
+            method: "GET",
+            redirect: "follow"
+        };
+
+        fetch(`${base_url}/api/pessoas${nome && '/' + nome}`, requestOptions)
+            .then((response) => response.text())
+            .then((result) => {
+                result = JSON.parse(result);
+                console.log(result);
+                document.querySelector('.listPessoas').innerHTML = result.length > 0 ? '' : 'Nenhum resultado encontrado';
+                result.forEach(element => {
+                    document.querySelector('.listPessoas').innerHTML += `<li data-id='${element.ID_PESSOA}' onclick='selectPessoa(event)'>${element.NOME}</li>`;
+                })
+            })
+            .catch((error) => console.error(error));
+    }
+
+    const selectTipo = (e) => {
+        e.preventDefault();
+        const tipo = e.target.value;
+        //reset selected value in "#especialidade
+        document.querySelector('#especialidade').value = '';
+        document.querySelectorAll("#especialidade option").forEach(element => {
+            element.style.display = tipo == element.dataset.tipo ? 'block' : 'none';
+        })
+    }
+
     const selectPessoa = (e) => {
+        e.preventDefault();
         const id = e.target.getAttribute('data-id');
         const nome = e.target.innerText;
         document.querySelector('#id_pessoa').value = id;

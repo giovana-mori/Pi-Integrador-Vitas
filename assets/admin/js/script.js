@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   document
     .querySelector("#consultaForm")
-    .addEventListener("submit", function (e) {
+    ?.addEventListener("submit", function (e) {
       e.preventDefault();
       debugger;
       //criar fetch post para a url `${base_url}/api/agendar/`, enviar os dados de agendament
@@ -73,9 +73,20 @@ document.addEventListener("DOMContentLoaded", function () {
         .then((result) => {
           console.log(result);
           //if result has success, return message
-          if (result.success) alert("Consulta agendada com sucesso!");
-          else alert("Erro ao agendar consulta!");
-          
+          if (result.success) {
+            debugger;
+            let fileInput = document.querySelector(
+              "#consultaForm [name='upload']"
+            );
+            if (fileInput.files.length > 0) {
+              uploadFile(fileInput, result.id_agenda);
+            }
+            //limpar apenas o input file
+            alert("Consulta agendada com sucesso!");
+          } else {
+            alert("Erro ao agendar consulta!");
+          }
+
           fecharModal();
         })
         .catch((error) => console.log("error", error));
@@ -161,50 +172,26 @@ function uploadLogo(inputFile, id_clinica) {
     .catch((error) => console.error(error));
 }
 
-function agendarConsulta() {
-  console.log();
-  return;
-  // Obter os valores do formulário
-  var nome = document.getElementById("nome").value;
-  var dataHora = document.getElementById("dataHora").value;
-  var medico = document.getElementById("medico").value;
-
-  if (nome == "" || dataHora == "" || medico == "") {
-    alert("Por favor, preencha todos os campos.");
+function uploadFile(inputFile, id_agenda) {
+  if (!inputFile.files[0]) {
+    alert("Por favor, selecione um arquivo para fazer o upload.");
     return;
   }
 
-  // Criar um objeto com os dados da consulta
-  var consulta = {
-    nome: nome,
-    dataHora: dataHora,
-    medico: medico,
+  const formdata = new FormData();
+  formdata.append("upload", inputFile.files[0]);
+  formdata.append("id_agenda", id_agenda);
+
+  const requestOptions = {
+    method: "POST",
+    body: formdata,
+    redirect: "follow",
   };
 
-  // Verificar se já existe um array de consultas no localStorage
-  var consultas = JSON.parse(localStorage.getItem("consultas")) || [];
-
-  // Adicionar a nova consulta ao array
-  consultas.push(consulta);
-
-  // Salvar o array atualizado de consultas no localStorage
-  localStorage.setItem("consultas", JSON.stringify(consultas));
-
-  // Remover todos os eventos do calendário
-  $("#calendar").fullCalendar("removeEvents");
-
-  // Adicionar os novos eventos
-  $("#calendar").fullCalendar(
-    "addEventSource",
-    generateEventsFromLocalStorage()
-  );
-
-  // Limpar o formulário
-  document.getElementById("consultaForm").reset();
-
-  alert("Consulta agendada com sucesso!");
-
-  fecharModal();
+  fetch(`${base_url}/api/uploadDoc`, requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.error(error));
 }
 
 // Função para abrir o modal
@@ -217,24 +204,6 @@ function abrirModal() {
 function fecharModal() {
   document.querySelector(".modal_agendar").style.display = "none";
   document.querySelector(".overlay").style.display = "none";
-}
-
-// Função para gerar eventos aleatórios e adicionar eventos da localStorage
-function generateEventsFromLocalStorage() {
-  var events = [];
-
-  // Adicionar eventos da localStorage
-  var consultas = JSON.parse(localStorage.getItem("consultas")) || [];
-  consultas.forEach(function (consulta) {
-    events.push({
-      title: consulta.nome,
-      start: consulta.dataHora,
-      end: moment(consulta.dataHora).add(1, "hours"), // Duração de 1 hora
-      allDay: false,
-    });
-  });
-
-  return events;
 }
 
 // Função para obter uma data aleatória dentro de um intervalo
@@ -319,6 +288,47 @@ $(document).ready(function () {
   });
 });
 
+function openAgendamentoInfos(id_agendamento = undefined) {
+  if (!id_agendamento || id_agendamento == undefined) {
+    return;
+  }
+
+  fetch(`${base_url}/api/agendamento/${id_agendamento}`)
+    .then((response) => response.json())
+    .then((data) => {
+      let html = `<ul>
+                      <li>
+                          <b>Inicio:</b> ${data.HORA}
+                      </li>
+                      <li>
+                          <b>Data:</b> ${data.DATA.split("-")
+                            .reverse()
+                            .join("/")}
+                      </li>
+                      <li>
+                          <b>Obs:</b> ${
+                            data.OBSERVACOES ? data.OBSERVACOES : "Nenhuma"
+                          }
+                      </li>
+                      <li class='content_download'>
+                          <b>Anexo: </b> ${
+                            data.UPLOADS.length > 0
+                              ? '<a href="' +
+                                base_url +
+                                "/uploads/documentos/" +
+                                data.UPLOADS[0].URL +
+                                '" target="_blank" class="download_btn">Baixar Arquivo</a>'
+                              : "Nenhum Arquivo"
+                          }
+                      </li>
+                  </ul>`;
+      document.querySelector(".ler_infos").innerHTML = html;
+      // Exibe o modal
+      abrirModal();
+    })
+    .catch((error) => console.error(error));
+}
+
 function profissionalPicker(idProfissional) {
   const diaSemanaParaData = {
     domingo: 0,
@@ -385,6 +395,7 @@ function profissionalPicker(idProfissional) {
         });
       });
 
+      $("#calendar").fullCalendar("removeEvents");
       // Adicionando eventos ao calendário
       $("#calendar").fullCalendar("addEventSource", events);
     })
@@ -393,4 +404,43 @@ function profissionalPicker(idProfissional) {
     });
 }
 
-//crie uma função para validar CNPJ
+function filterMeusAtendimentos(date) {
+  const formattedDate = moment(date).format("YYYY-MM-DD");
+  fetch(`${base_url}/api/meusatendimentos/2/${formattedDate}`)
+    .then((response) => response.json())
+    .then((data) => {
+      let html = "";
+      if (data.length > 0) {
+        data.forEach((item) => {
+          html += `<div class="item_agendamento">
+                        <div class="item_agendamento_header">
+                            <div class="item_agendamento_header_title">
+                                ${item.DATA}
+                            </div>
+                        </div>
+                        <div class="item_agendamento_body">
+                            <ul>
+                                <li>
+                                    <b>Inicio</b> :  ${item.HORA}
+                                </li>
+                                <li>
+                                    <b>Duração</b> : ${item.DURACAO}
+                                </li>
+                                <li>
+                                    <b>Profissional</b> : ${item.NOME_PROFISSIONAL}
+                                </li>
+                                <li class="item_obs">
+                                    <b>Obs</b> : ${item.OBSERVACOES ? item.OBSERVACOES : "Nenhuma"}
+                                </li>
+                            </ul>
+                            <input type="button" value="ver mais" onclick="openAgendamentoInfos(${item.ID_AGENDA})" class="button_ver_mais">
+                        </div>
+                    </div>`;
+        });
+      } else {
+        html = '<p>Nenhum agendamento encontrado.</p>';
+      }
+      document.querySelector(".box_meus_agendamentos").innerHTML = html;
+    })
+    .catch((error) => console.error(error));
+}
