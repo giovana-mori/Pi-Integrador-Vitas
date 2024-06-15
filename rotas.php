@@ -82,7 +82,6 @@ $router->get("/api/cidades/{uf}", [APIController::class, "cidades"]);
 $router->get("/api/profissionais", [APIController::class, "profissionais"]);
 $router->get("/api/horarios/{profissionalId}", [APIController::class, "profissionalHorarios"]);
 
-
 $router->post("/api/alterarpessoa", [APIController::class, "alterarPessoa"]);
 $router->post("/api/upload", [APIController::class, "uploadAvatar"]);
 $router->post("/api/uploadlogo", [APIController::class, "uploadLogo"]);

@@ -10,7 +10,7 @@ class AgendaDAO extends Conexao
 
     public function inserir(Agenda $agenda)
     {
-        $sql = "INSERT INTO AGENDA (DATA, HORA, DURACAO, STATUS, OBSERVACOES, FACULTATIVO, PESSOA_ID, PROFISSIONAL_ID) VALUES (?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO AGENDAS (DATA, HORA, DURACAO, STATUS, OBSERVACOES, FACULTATIVO, PESSOA_ID, PROFISSIONAL_ID) VALUES (?,?,?,?,?,?,?,?)";
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $agenda->getData());
@@ -31,7 +31,7 @@ class AgendaDAO extends Conexao
     }
     public function alterar(Agenda $agenda)
     {
-        $sql = "UPDATE agenda SET id_pessoa = ?, id_profissional = ?, data = ?, hora = ?, observacoes = ?, status = ? WHERE id_agenda = ?";
+        $sql = "UPDATE AGENDAS SET id_pessoa = ?, id_profissional = ?, data = ?, hora = ?, observacoes = ?, status = ? WHERE id_agenda = ?";
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $agenda->getIdPessoa());
@@ -51,7 +51,7 @@ class AgendaDAO extends Conexao
 
     public function buscar($id)
     {
-        $sql = "SELECT * FROM agenda WHERE id_agenda = ?";
+        $sql = "SELECT * FROM AGENDAS WHERE id_agenda = ?";
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $id);

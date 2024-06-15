@@ -247,14 +247,17 @@ class APIController
             $agenda->setDuracao($_POST['duracao']);
             $agenda->setIdProfissional($_POST['id_profissional']);
             $agenda->setIdPessoa($_POST['id_pessoa']);
-            $agenda->setObservacoes($_POST['observacao']);
-            $agenda->setFacultativo($_POST['facultativo']);
-            $agenda->setStatus($_POST['status']);
+            $agenda->setObservacoes($_POST['observacao'] ?? '');
+            $agenda->setFacultativo($_POST['facultativo'] ?? false);
+            $agenda->setStatus($_POST['status'] ?? 'NÃO');
 
-            // $agendamento = new AgendaDAO();
-            // $agendamento->inserir($agenda);
-            echo print_r($agenda);
-            exit;
+            $agendamento = new AgendaDAO();
+            $retorno = $agendamento->inserir($agenda);
+            if ($retorno > 0) {
+                echo json_encode(["success" => "Agendamento realizado com sucesso"]);
+            } else {
+                echo json_encode(["error" => "Erro ao agendar"]);
+            }
         }
     }
 }

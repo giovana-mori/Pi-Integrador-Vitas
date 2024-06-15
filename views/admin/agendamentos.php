@@ -60,10 +60,10 @@
         <div class="item_form">
           <label for="medico">Profissional:</label>
           <input type="hidden" id="id_profissional" name="id_profissional" value="">
-          <input type="text" id="profissional_name" readonly value="" required >
+          <input type="text" class="profissional_name" readonly value="" required >
         </div>
 
-        <button type="button" class="btn" onclick="agendarConsulta()">Agendar</button>
+        <button type="submit" class="btn">Agendar</button>
       </form>
     </div>
   </div>

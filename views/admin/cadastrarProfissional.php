@@ -63,9 +63,9 @@
                     <div class="item_time">
                         <label for="cidade">Manha</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['segunda']['manha']['HORA_INICIO'] ?>" <?= isset($clinica['SEGUNDA'][0][0]) ? $clinica['SEGUNDA'][0][0] : 'readonly'  ?> name="segunda[manha_inicio]" id="segunda" class="timeFormat">
+                            <input type="time" value="<?= $horarios['segunda']['manha']['HORA_INICIO'] ?? null ?>" <?= isset($clinica['SEGUNDA'][0][0]) ? $clinica['SEGUNDA'][0][0] : 'readonly'  ?> name="segunda[manha_inicio]" id="segunda" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['segunda']['manha']['HORA_FIM'] ?>" <?= isset($clinica['SEGUNDA'][0][1]) ? $clinica['SEGUNDA'][0][1] : 'readonly'  ?> name="segunda[manha_termino]" id="segunda" class="timeFormat">
+                            <input type="time" value="<?= $horarios['segunda']['manha']['HORA_FIM'] ?? null ?>" <?= isset($clinica['SEGUNDA'][0][1]) ? $clinica['SEGUNDA'][0][1] : 'readonly'  ?> name="segunda[manha_termino]" id="segunda" class="timeFormat">
                         </div>
                     </div>
                     <div class="item_time">
@@ -79,9 +79,9 @@
                     <div class="item_time">
                         <label for="cidade">Tarde</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['segunda']['tarde']['HORA_FIM'] ?>" <?= isset($clinica['SEGUNDA'][2][0]) ? $clinica['SEGUNDA'][2][0] : 'readonly'  ?> name="segunda[tarde_inicio]" id="segunda" class="timeFormat">
+                            <input type="time" value="<?= $horarios['segunda']['tarde']['HORA_FIM'] ?? null ?>" <?= isset($clinica['SEGUNDA'][2][0]) ? $clinica['SEGUNDA'][2][0] : 'readonly'  ?> name="segunda[tarde_inicio]" id="segunda" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['segunda']['tarde']['HORA_FIM'] ?>" <?= isset($clinica['SEGUNDA'][2][1]) ? $clinica['SEGUNDA'][2][1] : 'readonly'  ?> name="segunda[tarde_termino]" id="segunda" class="timeFormat">
+                            <input type="time" value="<?= $horarios['segunda']['tarde']['HORA_FIM'] ?? null ?>" <?= isset($clinica['SEGUNDA'][2][1]) ? $clinica['SEGUNDA'][2][1] : 'readonly'  ?> name="segunda[tarde_termino]" id="segunda" class="timeFormat">
                         </div>
                     </div>
                 </div>
@@ -92,9 +92,9 @@
                     <div class="item_time">
                         <label for="cidade">Manhã</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['terca']['manha']['HORA_INICIO'] ?>" <?= isset($clinica['TERCA'][0][0]) ? $clinica['TERCA'][0][0] : 'readonly'  ?> name="terca[manha_inicio]" id="terca" class="timeFormat">
+                            <input type="time" value="<?= $horarios['terca']['manha']['HORA_INICIO'] ?? null ?>" <?= isset($clinica['TERCA'][0][0]) ? $clinica['TERCA'][0][0] : 'readonly'  ?> name="terca[manha_inicio]" id="terca" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['terca']['manha']['HORA_FIM'] ?>" <?= isset($clinica['TERCA'][0][1]) ? $clinica['TERCA'][0][1] : 'readonly'  ?> name="terca[manha_termino]" id="terca" class="timeFormat">
+                            <input type="time" value="<?= $horarios['terca']['manha']['HORA_FIM'] ?? null ?>" <?= isset($clinica['TERCA'][0][1]) ? $clinica['TERCA'][0][1] : 'readonly'  ?> name="terca[manha_termino]" id="terca" class="timeFormat">
                         </div>
                     </div>
                     <div class="item_time">
@@ -108,9 +108,9 @@
                     <div class="item_time">
                         <label for="cidade">Tarde</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['terca']['tarde']['HORA_INICIO'] ?>" <?= isset($clinica['TERCA'][2][0]) ? $clinica['TERCA'][2][0] : 'readonly'  ?> name="terca[tarde_inicio]" id="terca" class="timeFormat">
+                            <input type="time" value="<?= $horarios['terca']['tarde']['HORA_INICIO'] ?? null ?>" <?= isset($clinica['TERCA'][2][0]) ? $clinica['TERCA'][2][0] : 'readonly'  ?> name="terca[tarde_inicio]" id="terca" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['terca']['tarde']['HORA_FIM'] ?>" <?= isset($clinica['TERCA'][2][1]) ? $clinica['TERCA'][2][1] : 'readonly'  ?> name="terca[tarde_termino]" id="terca" class="timeFormat">
+                            <input type="time" value="<?= $horarios['terca']['tarde']['HORA_FIM'] ?? null ?>" <?= isset($clinica['TERCA'][2][1]) ? $clinica['TERCA'][2][1] : 'readonly'  ?> name="terca[tarde_termino]" id="terca" class="timeFormat">
                         </div>
                     </div>
                 </div>
@@ -121,9 +121,9 @@
                     <div class="item_time">
                         <label for="cidade">Manhã</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['quarta']['manha']['HORA_INICIO'] ?>" <?= isset($clinica['QUARTA'][0][0]) ? $clinica['QUARTA'][0][0] : 'readonly'  ?> name="quarta[manha_inicio]" id="quarta" class="timeFormat">
+                            <input type="time" value="<?= $horarios['quarta']['manha']['HORA_INICIO'] ?? null ?>" <?= isset($clinica['QUARTA'][0][0]) ? $clinica['QUARTA'][0][0] : 'readonly'  ?> name="quarta[manha_inicio]" id="quarta" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['quarta']['manha']['HORA_FIM'] ?>" <?= isset($clinica['QUARTA'][0][1]) ? $clinica['QUARTA'][0][1] : 'readonly'  ?> name="quarta[manha_termino]" id="quarta" class="timeFormat">
+                            <input type="time" value="<?= $horarios['quarta']['manha']['HORA_FIM'] ?? null ?>" <?= isset($clinica['QUARTA'][0][1]) ? $clinica['QUARTA'][0][1] : 'readonly'  ?> name="quarta[manha_termino]" id="quarta" class="timeFormat">
                         </div>
                     </div>
                     <div class="item_time">
@@ -137,9 +137,9 @@
                     <div class="item_time">
                         <label for="cidade">Tarde</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['quarta']['tarde']['HORA_INICIO'] ?>" <?= isset($clinica['QUARTA'][2][0]) ? $clinica['QUARTA'][2][0] : 'readonly'  ?> name="quarta[tarde_inicio]" id="quarta" class="timeFormat">
+                            <input type="time" value="<?= $horarios['quarta']['tarde']['HORA_INICIO'] ?? null ?>" <?= isset($clinica['QUARTA'][2][0]) ? $clinica['QUARTA'][2][0] : 'readonly'  ?> name="quarta[tarde_inicio]" id="quarta" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['quarta']['tarde']['HORA_FIM'] ?>" <?= isset($clinica['QUARTA'][2][1]) ? $clinica['QUARTA'][2][1] : 'readonly'  ?> name="quarta[tarde_termino]" id="quarta" class="timeFormat">
+                            <input type="time" value="<?= $horarios['quarta']['tarde']['HORA_FIM'] ?? null ?>" <?= isset($clinica['QUARTA'][2][1]) ? $clinica['QUARTA'][2][1] : 'readonly'  ?> name="quarta[tarde_termino]" id="quarta" class="timeFormat">
                         </div>
                     </div>
                 </div>
@@ -150,9 +150,9 @@
                     <div class="item_time">
                         <label for="cidade">Manhã</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['quinta']['manha']['HORA_INICIO'] ?>" <?= isset($clinica['QUINTA'][0][0]) ? $clinica['QUINTA'][0][0] : 'readonly'  ?> name="quinta[manha_inicio]" id="quinta" class="timeFormat">
+                            <input type="time" value="<?= $horarios['quinta']['manha']['HORA_INICIO'] ?? null ?>" <?= isset($clinica['QUINTA'][0][0]) ? $clinica['QUINTA'][0][0] : 'readonly'  ?> name="quinta[manha_inicio]" id="quinta" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['quinta']['manha']['HORA_FIM'] ?>" <?= isset($clinica['QUINTA'][0][1]) ? $clinica['QUINTA'][0][1] : 'readonly'  ?> name="quinta[manha_termino]" id="quinta" class="timeFormat">
+                            <input type="time" value="<?= $horarios['quinta']['manha']['HORA_FIM'] ?? null ?>" <?= isset($clinica['QUINTA'][0][1]) ? $clinica['QUINTA'][0][1] : 'readonly'  ?> name="quinta[manha_termino]" id="quinta" class="timeFormat">
                         </div>
                     </div>
                     <div class="item_time">
@@ -166,9 +166,9 @@
                     <div class="item_time">
                         <label for="cidade">Tarde</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['quinta']['tarde']['HORA_INICIO'] ?>" <?= isset($clinica['QUINTA'][2][0]) ? $clinica['QUINTA'][2][0] : 'readonly'  ?> name="quinta[tarde_inicio]" id="quinta" class="timeFormat">
+                            <input type="time" value="<?= $horarios['quinta']['tarde']['HORA_INICIO'] ?? null ?>" <?= isset($clinica['QUINTA'][2][0]) ? $clinica['QUINTA'][2][0] : 'readonly'  ?> name="quinta[tarde_inicio]" id="quinta" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['quinta']['tarde']['HORA_FIM'] ?>" <?= isset($clinica['QUINTA'][2][1]) ? $clinica['QUINTA'][2][1] : 'readonly'  ?> name="quinta[tarde_termino]" id="quinta" class="timeFormat">
+                            <input type="time" value="<?= $horarios['quinta']['tarde']['HORA_FIM'] ?? null ?>" <?= isset($clinica['QUINTA'][2][1]) ? $clinica['QUINTA'][2][1] : 'readonly'  ?> name="quinta[tarde_termino]" id="quinta" class="timeFormat">
                         </div>
                     </div>
                 </div>
@@ -179,9 +179,9 @@
                     <div class="item_time">
                         <label for="cidade">Manhã</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['sexta']['manha']['HORA_INICIO'] ?>" <?= isset($clinica['SEXTA'][0][0]) ? $clinica['SEXTA'][0][0] : 'readonly'  ?> name="sexta[manha_inicio]" id="sexta" class="timeFormat">
+                            <input type="time" value="<?= $horarios['sexta']['manha']['HORA_INICIO'] ?? null ?>" <?= isset($clinica['SEXTA'][0][0]) ? $clinica['SEXTA'][0][0] : 'readonly'  ?> name="sexta[manha_inicio]" id="sexta" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['sexta']['manha']['HORA_FIM'] ?>" <?= isset($clinica['SEXTA'][0][1]) ? $clinica['SEXTA'][0][1] : 'readonly'  ?> name="sexta[manha_termino]" id="sexta" class="timeFormat">
+                            <input type="time" value="<?= $horarios['sexta']['manha']['HORA_FIM'] ?? null ?>" <?= isset($clinica['SEXTA'][0][1]) ? $clinica['SEXTA'][0][1] : 'readonly'  ?> name="sexta[manha_termino]" id="sexta" class="timeFormat">
                         </div>
                     </div>
                     <div class="item_time">
@@ -195,9 +195,9 @@
                     <div class="item_time">
                         <label for="cidade">Tarde</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['sexta']['tarde']['HORA_INICIO'] ?>" <?= isset($clinica['SEXTA'][2][0]) ? $clinica['SEXTA'][2][0] : 'readonly'  ?> name="sexta[tarde_inicio]" id="sexta" class="timeFormat">
+                            <input type="time" value="<?= $horarios['sexta']['tarde']['HORA_INICIO'] ?? null ?>" <?= isset($clinica['SEXTA'][2][0]) ? $clinica['SEXTA'][2][0] : 'readonly'  ?> name="sexta[tarde_inicio]" id="sexta" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['sexta']['tarde']['HORA_FIM'] ?>" <?= isset($clinica['SEXTA'][2][1]) ? $clinica['SEXTA'][2][1] : 'readonly'  ?> name="sexta[tarde_termino]" id="sexta" class="timeFormat">
+                            <input type="time" value="<?= $horarios['sexta']['tarde']['HORA_FIM'] ?? null ?>" <?= isset($clinica['SEXTA'][2][1]) ? $clinica['SEXTA'][2][1] : 'readonly'  ?> name="sexta[tarde_termino]" id="sexta" class="timeFormat">
                         </div>
                     </div>
                 </div>
@@ -208,9 +208,9 @@
                     <div class="item_time">
                         <label for="cidade">Manhã</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['sabado']['manha']['HORA_INICIO'] ?>" <?= isset($clinica['SABADO'][0][0]) ? $clinica['SABADO'][0][0] : 'readonly'  ?> name="sabado[manha_inicio]" id="sabado" class="timeFormat">
+                            <input type="time" value="<?= $horarios['sabado']['manha']['HORA_INICIO'] ?? null ?>" <?= isset($clinica['SABADO'][0][0]) ? $clinica['SABADO'][0][0] : 'readonly'  ?> name="sabado[manha_inicio]" id="sabado" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['sabado']['manha']['HORA_FIM'] ?>" <?= isset($clinica['SABADO'][0][1]) ? $clinica['SABADO'][0][1] : 'readonly'  ?> name="sabado[manha_termino]" id="sabado" class="timeFormat">
+                            <input type="time" value="<?= $horarios['sabado']['manha']['HORA_FIM'] ?? null ?>" <?= isset($clinica['SABADO'][0][1]) ? $clinica['SABADO'][0][1] : 'readonly'  ?> name="sabado[manha_termino]" id="sabado" class="timeFormat">
                         </div>
                     </div>
                     <div class="item_time">
@@ -224,9 +224,9 @@
                     <div class="item_time">
                         <label for="cidade">Tarde</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['sabado']['tarde']['HORA_INICIO'] ?>" <?= isset($clinica['SABADO'][2][0]) ? $clinica['SABADO'][2][0] : 'readonly'  ?> name="sabado[tarde_inicio]" id="sabado" class="timeFormat">
+                            <input type="time" value="<?= $horarios['sabado']['tarde']['HORA_INICIO'] ?? null ?>" <?= isset($clinica['SABADO'][2][0]) ? $clinica['SABADO'][2][0] : 'readonly'  ?> name="sabado[tarde_inicio]" id="sabado" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['sabado']['tarde']['HORA_FIM'] ?>" <?= isset($clinica['SABADO'][2][1]) ? $clinica['SABADO'][2][1] : 'readonly'  ?> name="sabado[tarde_termino]" id="sabado" class="timeFormat">
+                            <input type="time" value="<?= $horarios['sabado']['tarde']['HORA_FIM'] ?? null ?>" <?= isset($clinica['SABADO'][2][1]) ? $clinica['SABADO'][2][1] : 'readonly'  ?> name="sabado[tarde_termino]" id="sabado" class="timeFormat">
                         </div>
                     </div>
                 </div>
@@ -237,9 +237,9 @@
                     <div class="item_time">
                         <label for="cidade">Manhã</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['domingo']['manha']['HORA_INICIO'] ?>" <?= isset($clinica['DOMINGO'][0][0]) ? $clinica['DOMINGO'][0][0] : 'readonly'  ?> name="domingo[manha_inicio]" id="domingo" class="timeFormat">
+                            <input type="time" value="<?= $horarios['domingo']['manha']['HORA_INICIO'] ?? null ?>" <?= isset($clinica['DOMINGO'][0][0]) ? $clinica['DOMINGO'][0][0] : 'readonly'  ?> name="domingo[manha_inicio]" id="domingo" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['domingo']['manha']['HORA_FIM'] ?>" <?= isset($clinica['DOMINGO'][0][1]) ? $clinica['DOMINGO'][0][1] : 'readonly'  ?> name="domingo[manha_termino]" id="domingo" class="timeFormat">
+                            <input type="time" value="<?= $horarios['domingo']['manha']['HORA_FIM'] ?? null ?>" <?= isset($clinica['DOMINGO'][0][1]) ? $clinica['DOMINGO'][0][1] : 'readonly'  ?> name="domingo[manha_termino]" id="domingo" class="timeFormat">
                         </div>
                     </div>
                     <div class="item_time">
@@ -253,9 +253,9 @@
                     <div class="item_time">
                         <label for="cidade">Tarde</label>
                         <div class="content_inputs_time">
-                            <input type="time" value="<?= $horarios['domingo']['tarde']['HORA_INICIO'] ?>" <?= isset($clinica['DOMINGO'][2][0]) ? $clinica['DOMINGO'][2][0] : 'readonly'  ?> name="domingo[tarde_inicio]" id="domingo" class="timeFormat">
+                            <input type="time" value="<?= $horarios['domingo']['tarde']['HORA_INICIO'] ?? null ?>" <?= isset($clinica['DOMINGO'][2][0]) ? $clinica['DOMINGO'][2][0] : 'readonly'  ?> name="domingo[tarde_inicio]" id="domingo" class="timeFormat">
                             -
-                            <input type="time" value="<?= $horarios['domingo']['tarde']['HORA_FIM'] ?>" <?= isset($clinica['DOMINGO'][2][1]) ? $clinica['DOMINGO'][2][1] : 'readonly'  ?> name="domingo[tarde_termino]" id="domingo" class="timeFormat">
+                            <input type="time" value="<?= $horarios['domingo']['tarde']['HORA_FIM'] ?? null ?>" <?= isset($clinica['DOMINGO'][2][1]) ? $clinica['DOMINGO'][2][1] : 'readonly'  ?> name="domingo[tarde_termino]" id="domingo" class="timeFormat">
                         </div>
                     </div>
                 </div>
