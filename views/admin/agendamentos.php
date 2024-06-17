@@ -1,28 +1,37 @@
 <div class="content_">
-  <!--<div>
-    <button class="btn_agendar" onclick="abrirModal()">Agendar+</button>
-  </div>-->
-  <div class="box_profissionais">
-    <span>SELECIONA UM PROFISSIONAL:</span>
-    <div class="profissionais">
-      <div class="optimization-content-style">
-        <?php
-        foreach ($profissionais as $key => $value) :
-        ?>
-          <div class="optimization-content-desc" data-profissional="<?= $value['id_profissional'] ?>">
-            <div class="simbolo">
-              <img src="https://static.vecteezy.com/system/resources/previews/013/042/571/original/default-avatar-profile-icon-social-media-user-photo-in-flat-style-vector.jpg">
+  <div class="bloco_titulo">
+    <h3 class="title_admin">
+      <?= $title ?>
+    </h3>
+  </div>
+
+  <?php if (count($profissionais) > 0) : ?>
+    <div class="box_profissionais">
+      <span>SELECIONE UM PROFISSIONAL:</span>
+      <div class="profissionais">
+        <div class="optimization-content-style">
+          <?php
+          foreach ($profissionais as $key => $value) :
+          ?>
+            <div class="optimization-content-desc" data-profissional="<?= $value['id_profissional'] ?>">
+              <div class="simbolo">
+                <img src="https://static.vecteezy.com/system/resources/previews/013/042/571/original/default-avatar-profile-icon-social-media-user-photo-in-flat-style-vector.jpg">
+              </div>
+              <h2><?= $value['nome'] ?></h2>
+              <small><?= $value['tipo_profissional'] ?> - <?= $value['descritivo'] ?></small>
             </div>
-            <h2><?= $value['nome'] ?></h2>
-            <small><?= $value['tipo_profissional'] ?> - <?= $value['descritivo'] ?></small>
-          </div>
-        <?php
-        endforeach;
-        ?>
+          <?php
+          endforeach;
+          ?>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="calendar"></div>
+    <div class="content_calendar">
+    </div>
+
+  <?php else : ?>
+    <p class="text-center">Nenhum Profissional encontrado para agendar</p>
+  <?php endif; ?>
 </div>
 
 <div class="overlay" id="overlay" onclick="fecharModal()"></div>
@@ -43,12 +52,12 @@
         </div>
 
         <div class="item_form">
-          <label for="dataHora">Data e Hora:</label>
+          <label for="dataHora">Data:</label>
           <input type="date" id="data" readonly name="data" required>
         </div>
 
         <div class="item_form">
-          <label for="dataHora">Data e Hora:</label>
+          <label for="dataHora">Hora:</label>
           <input type="time" id="hora" readonly name="hora" required>
         </div>
 
@@ -60,7 +69,7 @@
         <div class="item_form">
           <label for="medico">Profissional:</label>
           <input type="hidden" id="id_profissional" name="id_profissional" value="">
-          <input type="text" class="profissional_name" readonly value="" required >
+          <input type="text" class="profissional_name" readonly value="" required>
         </div>
 
         <div class="item_form">

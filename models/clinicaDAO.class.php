@@ -8,7 +8,7 @@ class ClinicaDAO extends Conexao
     }
     public function alterar($clinica)
     {
-        $sql = "UPDATE clinica SET nome = ?, cnpj = ?, inscricao_estadual = ?, logo = ?, cep = ?, logradouro = ?, bairro = ?, estado = ?, cidade = ?, segunda = ?, terca = ?, quarta = ?, quinta = ?, sexta = ?, sabado = ?, domingo = ?, feriados = ?, email = ? WHERE id_clinica = ?";
+        $sql = "UPDATE clinica SET nome = ?, cnpj = ?, inscricao_estadual = ?, logo = ?, cep = ?, logradouro = ?, bairro = ?, estado = ?, cidade = ?, segunda = ?, terca = ?, quarta = ?, quinta = ?, sexta = ?, sabado = ?, domingo = ?, feriados = ?, email = ?, telefone = ?, whatsapp = ? WHERE id_clinica = ?";
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $clinica->getNome());
@@ -29,7 +29,9 @@ class ClinicaDAO extends Conexao
             $stm->bindValue(16, $clinica->getDomingo());
             $stm->bindValue(17, $clinica->getFeriados());
             $stm->bindValue(18, $clinica->getEmail());
-            $stm->bindValue(19, $clinica->getIdClinica());
+            $stm->bindValue(19, $clinica->getTelefone());
+            $stm->bindValue(20, $clinica->getWhatsapp());
+            $stm->bindValue(21, $clinica->getIdClinica());
             $stm->execute();
             $this->db = null;
             return true;

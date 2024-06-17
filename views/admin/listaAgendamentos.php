@@ -7,11 +7,7 @@
     <div class="filtros">
         <div class="data_filtro">
             <label for="">Data</label>
-            <?php if ($_SESSION['user_tipo'] == 'PACIENTE') {
-                echo "<input type='date' onchange='filterMeusAgendamentos({$_SESSION['user_id']}, this.value)' id='data_filtro'>";
-            } else { 
-                echo "<input type='date' onchange='filterMeusAtendimentos({$_SESSION['user_id_profissional']}, this.value)' id='data_filtro'>";
-            } ?>
+            <input type='date' onchange='filterAtendimentos(this.value)' id='data_filtro'>
         </div>
     </div>
     <div class="box_meus_agendamentos">
@@ -30,13 +26,17 @@
                 <div class="item_agendamento">
                     <div class="item_agendamento_header">
                         <div class="item_agendamento_header_title">
-                            <?php echo $data; ?>
+                            <?php echo $data; ?>                            
+                            <a href="<?= Utils::base_url('editaragendamento/') . $id ?>">editar</a>
                         </div>
                     </div>
                     <div class="item_agendamento_body">
                         <ul>
                             <li>
                                 <b>Nome</b> : <?php echo $nomePessoa; ?>
+                            </li>
+                            <li>
+                                <b>Inicio</b> : <?php echo $hora; ?>
                             </li>
                             <li>
                                 <b>Inicio</b> : <?php echo $hora; ?>

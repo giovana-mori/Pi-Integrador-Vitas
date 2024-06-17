@@ -115,7 +115,7 @@ class PessoaDAO extends Conexao
 
     public function login($email, $senha)
     {
-        $query = "  SELECT PE.ID_PESSOA,PE.NOME,PE.EMAIL,PE.SENHA,TPROF.NOME AS 'TIPO'
+        $query = "  SELECT PE.ID_PESSOA,PE.NOME,PE.EMAIL,PE.SENHA,TPROF.NOME AS 'TIPO', PROF.ID_PROFISSIONAL
                     FROM PESSOAS PE
                     LEFT JOIN PROFISSIONAIS PROF ON PROF.PESSOA_ID = PE.ID_PESSOA
                     LEFT JOIN TIPO_PROFISSIONAL TPROF ON TPROF.ID_TIPO_PROFISSIONAL = PROF.TIPO_PROFISSIONAL_ID
@@ -135,6 +135,8 @@ class PessoaDAO extends Conexao
                 $_SESSION['user_id'] = $row['ID_PESSOA'];
                 $_SESSION['user_name'] = $row['NOME'];
                 $_SESSION['user_email'] = $row['EMAIL'];
+                $_SESSION['user_tipo'] = $row['TIPO'] ?? 'PACIENTE';
+                $_SESSION['user_id_profissional'] = $row['ID_PROFISSIONAL'] ?? null;
 
                 return array(
                     "status" => "success",

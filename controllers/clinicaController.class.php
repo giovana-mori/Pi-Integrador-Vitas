@@ -28,6 +28,8 @@ class ClinicaController extends layoutAdminController
             $clinica->setCnpj($_POST['cnpj']);
             $clinica->setInscricaoEstadual($_POST['inscricao_estadual']);
             $clinica->setEmail($_POST['email']);
+            $clinica->setTelefone($_POST['telefone']);
+            $clinica->setWhatsapp($_POST['whatsapp']);
             $clinica->setCep($_POST['cep']);
             $clinica->setLogradouro($_POST['logradouro']);
             $clinica->setBairro($_POST['bairro']);

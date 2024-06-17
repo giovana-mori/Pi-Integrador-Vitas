@@ -93,6 +93,27 @@ class ProfissionalDAO extends Conexao
         }
     }
 
+    public function buscar($nome)
+    {
+        $sql = "SELECT PROF.id_profissional, PE.nome, PROF.registroclasseprofissional, TPROF.nome AS tipo, ESP.descritivo, ESP.TIPO AS tipo_profissional
+                FROM PESSOAS PE
+                LEFT JOIN PROFISSIONAIS PROF ON PROF.PESSOA_ID = PE.ID_PESSOA
+                LEFT JOIN TIPO_PROFISSIONAL TPROF ON TPROF.ID_TIPO_PROFISSIONAL = PROF.TIPO_PROFISSIONAL_ID
+                LEFT JOIN PROFISSIONAL_ESPECIALISTA PROFE ON PROFE.PROFISSIONAL_ID = PROF.ID_PROFISSIONAL
+                LEFT JOIN ESPECIALIDADES ESP ON ESP.ID_ESPECIALIDADE = PROFE.ESPECIALIDADE_ID
+                WHERE PROF.TIPO_PROFISSIONAL_ID = 2 AND PE.NOME LIKE ?";
+        try {
+            $stmt = $this->db->prepare($sql);
+            $stmt->bindValue(1, "%{$nome}%");
+            $stmt->execute();
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $this->db = null;
+            return $result;
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+
     public function listarProfissionais()
     {
         $sql = "SELECT PROF.id_profissional, PE.nome, PROF.registroclasseprofissional, TPROF.nome AS tipo, ESP.descritivo, ESP.TIPO AS tipo_profissional

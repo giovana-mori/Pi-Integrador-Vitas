@@ -31,7 +31,7 @@ class AgendaDAO extends Conexao
     }
     public function alterar(Agenda $agenda)
     {
-        $sql = "UPDATE AGENDAS SET id_pessoa = ?, id_profissional = ?, data = ?, hora = ?, observacoes = ?, status = ? WHERE id_agenda = ?";
+        $sql = "UPDATE AGENDAS SET pessoa_id = ?, profissional_id = ?, data = ?, hora = ?, observacoes = ?, status = ? WHERE id_agenda = ?";
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $agenda->getIdPessoa());
@@ -45,15 +45,16 @@ class AgendaDAO extends Conexao
             $this->db = null;
             return true;
         } catch (PDOException $th) {
-            return false;
+            return $th;
         }
     }
     public function buscarID($id)
     {
-        $sql = "SELECT ID_AGENDA, DATA, HORA, DURACAO, STATUS, OBSERVACOES, FACULTATIVO, PROFISSIONAIS.PESSOA_ID, PROFISSIONAL_ID, ID_PROFISSIONAL, REGISTROCLASSEPROFISSIONAL, TIPO_PROFISSIONAL_ID, NOME AS NOME_PROFISSIONAL 
+        $sql = "SELECT ID_AGENDA, DATA, HORA, DURACAO, STATUS, OBSERVACOES, FACULTATIVO, PROFISSIONAIS.PESSOA_ID, PROFISSIONAL_ID, ID_PROFISSIONAL, REGISTROCLASSEPROFISSIONAL, TIPO_PROFISSIONAL_ID, PESSOAS.NOME AS NOME_PROFISSIONAL, CLI.NOME AS NOME_PESSOA
                 FROM AGENDAS 
                 LEFT JOIN PROFISSIONAIS ON PROFISSIONAIS.ID_PROFISSIONAL = AGENDAS.PROFISSIONAL_ID
                 LEFT JOIN PESSOAS ON PESSOAS.ID_PESSOA = PROFISSIONAIS.PESSOA_ID
+                LEFT JOIN PESSOAS CLI ON CLI.ID_PESSOA = AGENDAS.PESSOA_ID
                 WHERE id_agenda = ?";
         try {
             $stm = $this->db->prepare($sql);
@@ -65,16 +66,36 @@ class AgendaDAO extends Conexao
         }
     }
 
-    public function buscarMeusAgendamentos($id)
+    public function buscarMeusAgendamentos($id, $date = null)
     {
-        $sql = "SELECT ID_AGENDA, DATA, HORA, DURACAO, STATUS, OBSERVACOES, FACULTATIVO, PROFISSIONAIS.PESSOA_ID, PROFISSIONAL_ID, ID_PROFISSIONAL, REGISTROCLASSEPROFISSIONAL, TIPO_PROFISSIONAL_ID, NOME AS NOME_PROFISSIONAL
-                FROM AGENDAS
-                LEFT JOIN PROFISSIONAIS ON PROFISSIONAIS.ID_PROFISSIONAL = AGENDAS.PROFISSIONAL_ID
-                LEFT JOIN PESSOAS ON PESSOAS.ID_PESSOA = PROFISSIONAIS.PESSOA_ID
-                WHERE AGENDAS.PESSOA_ID = ?";
+        if ($date == null) {
+            $date = date("Y-m-d");
+        }
+        $sql = "SELECT 
+                AG.ID_AGENDA, 
+                AG.DATA, 
+                AG.HORA, 
+                AG.DURACAO, 
+                AG.STATUS, 
+                AG.OBSERVACOES, 
+                AG.FACULTATIVO, 
+                PR.PESSOA_ID AS PROFISSIONAL_PESSOA_ID, 
+                AG.PROFISSIONAL_ID, 
+                PR.ID_PROFISSIONAL, 
+                PR.REGISTROCLASSEPROFISSIONAL, 
+                PR.TIPO_PROFISSIONAL_ID, 
+                P1.NOME AS NOME_PROFISSIONAL, 
+                CLI.NOME AS NOME_PESSOA,
+                AG.PESSOA_ID
+                FROM AGENDAS AG
+                LEFT JOIN PESSOAS CLI ON CLI.ID_PESSOA = AG.PESSOA_ID
+                LEFT JOIN PROFISSIONAIS PR ON PR.ID_PROFISSIONAL = AG.PROFISSIONAL_ID
+                LEFT JOIN PESSOAS P1 ON P1.ID_PESSOA = PR.PESSOA_ID
+                WHERE AG.PESSOA_ID = ? AND AG.DATA = ?";
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $id);
+            $stm->bindValue(2, $date);
             $stm->execute();
             return $stm->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $th) {
@@ -82,13 +103,32 @@ class AgendaDAO extends Conexao
         }
     }
     //get date now in parameter $date
-    public function buscarMeusAtendimentos($id, $date = "1980-01-01")
+    public function buscarMeusAtendimentos($id, $date = null)
     {
-        $sql = "SELECT ID_AGENDA, DATA, HORA, DURACAO, STATUS, OBSERVACOES, FACULTATIVO, PROFISSIONAIS.PESSOA_ID, PROFISSIONAL_ID, ID_PROFISSIONAL, REGISTROCLASSEPROFISSIONAL, TIPO_PROFISSIONAL_ID, NOME AS NOME_PROFISSIONAL
-                FROM AGENDAS
-                LEFT JOIN PROFISSIONAIS ON PROFISSIONAIS.ID_PROFISSIONAL = AGENDAS.PROFISSIONAL_ID
-                LEFT JOIN PESSOAS ON PESSOAS.ID_PESSOA = PROFISSIONAIS.PESSOA_ID
-                WHERE AGENDAS.PROFISSIONAL_ID = ? AND DATA = ?
+        if ($date == null) {
+            $date = date("Y-m-d");
+        }
+        $sql = "SELECT 
+                    AG.ID_AGENDA, 
+                    AG.DATA, 
+                    AG.HORA, 
+                    AG.DURACAO, 
+                    AG.STATUS, 
+                    AG.OBSERVACOES, 
+                    AG.FACULTATIVO, 
+                    PR.PESSOA_ID AS PROFISSIONAL_PESSOA_ID, 
+                    AG.PROFISSIONAL_ID, 
+                    PR.ID_PROFISSIONAL, 
+                    PR.REGISTROCLASSEPROFISSIONAL, 
+                    PR.TIPO_PROFISSIONAL_ID, 
+                    P1.NOME AS NOME_PROFISSIONAL, 
+                    CLI.NOME AS NOME_PESSOA,
+                    AG.PESSOA_ID
+                FROM AGENDAS AG
+                LEFT JOIN PESSOAS CLI ON CLI.ID_PESSOA = AG.PESSOA_ID
+                LEFT JOIN PROFISSIONAIS PR ON PR.ID_PROFISSIONAL = AG.PROFISSIONAL_ID
+                LEFT JOIN PESSOAS P1 ON P1.ID_PESSOA = PR.PESSOA_ID
+                WHERE AG.PROFISSIONAL_ID = ? AND AG.DATA = ?
                 ORDER BY DATA, HORA";
         try {
             $stm = $this->db->prepare($sql);
@@ -115,17 +155,71 @@ class AgendaDAO extends Conexao
         }
     }
 
+    public function buscar($date)
+    {
+        if ($date == null) {
+            $date = date("Y-m-d");
+        }
+        $sql = "SELECT 
+                    AG.ID_AGENDA, 
+                    AG.DATA, 
+                    AG.HORA, 
+                    AG.DURACAO, 
+                    AG.STATUS, 
+                    AG.OBSERVACOES, 
+                    AG.FACULTATIVO, 
+                    PR.PESSOA_ID AS PROFISSIONAL_PESSOA_ID, 
+                    AG.PROFISSIONAL_ID, 
+                    PR.ID_PROFISSIONAL, 
+                    PR.REGISTROCLASSEPROFISSIONAL, 
+                    PR.TIPO_PROFISSIONAL_ID, 
+                    P1.NOME AS NOME_PROFISSIONAL, 
+                    CLI.NOME AS NOME_PESSOA,
+                    AG.PESSOA_ID
+                FROM AGENDAS AG
+                LEFT JOIN PESSOAS CLI ON CLI.ID_PESSOA = AG.PESSOA_ID
+                LEFT JOIN PROFISSIONAIS PR ON PR.ID_PROFISSIONAL = AG.PROFISSIONAL_ID
+                LEFT JOIN PESSOAS P1 ON P1.ID_PESSOA = PR.PESSOA_ID 
+                WHERE AG.DATA = ?
+                ORDER BY data
+                LIMIT 15";
+        try {
+            $stm = $this->db->prepare($sql);
+            $stm->bindValue(1, $date);
+            $stm->execute();
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $th) {
+            return [];
+        }
+    }
+
     public function listar()
     {
-        $sql = "SELECT ID_AGENDA, DATA, HORA, DURACAO, STATUS, OBSERVACOES, FACULTATIVO, PROFISSIONAIS.PESSOA_ID, PROFISSIONAL_ID, ID_PROFISSIONAL, REGISTROCLASSEPROFISSIONAL, TIPO_PROFISSIONAL_ID, NOME AS NOME_PROFISSIONAL
-                FROM AGENDAS 
-                LEFT JOIN PROFISSIONAIS ON PROFISSIONAIS.ID_PROFISSIONAL = AGENDAS.PROFISSIONAL_ID
-                LEFT JOIN PESSOAS ON PESSOAS.ID_PESSOA = PROFISSIONAIS.PESSOA_ID 
-                ORDER BY data";
+        $sql = "SELECT 
+                    AG.ID_AGENDA, 
+                    AG.DATA, 
+                    AG.HORA, 
+                    AG.DURACAO, 
+                    AG.STATUS, 
+                    AG.OBSERVACOES, 
+                    AG.FACULTATIVO, 
+                    PR.PESSOA_ID AS PROFISSIONAL_PESSOA_ID, 
+                    AG.PROFISSIONAL_ID, 
+                    PR.ID_PROFISSIONAL, 
+                    PR.REGISTROCLASSEPROFISSIONAL, 
+                    PR.TIPO_PROFISSIONAL_ID, 
+                    P1.NOME AS NOME_PROFISSIONAL, 
+                    CLI.NOME AS NOME_PESSOA,
+                    AG.PESSOA_ID
+                FROM AGENDAS AG
+                LEFT JOIN PESSOAS CLI ON CLI.ID_PESSOA = AG.PESSOA_ID
+                LEFT JOIN PROFISSIONAIS PR ON PR.ID_PROFISSIONAL = AG.PROFISSIONAL_ID
+                LEFT JOIN PESSOAS P1 ON P1.ID_PESSOA = PR.PESSOA_ID
+                ORDER BY data
+                LIMIT 15";
         try {
             $stm = $this->db->prepare($sql);
             $stm->execute();
-            $this->db = null;
             return $stm->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $th) {
             return [];

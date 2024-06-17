@@ -45,6 +45,14 @@
             <input type="text" name="cep" id="cep" value="<?= $clinica['CEP'] ?>" required>
         </div>
         <div class="item_form">
+            <label for="telefone">Telefone</label>
+            <input type="tel" name="telefone" id="telefone" value="<?= $clinica['TELEFONE'] ?>" required>
+        </div>
+        <div class="item_form">
+            <label for="whatsapp">WhatsApp</label>
+            <input type="tel" name="whatsapp" id="whatsapp" value="<?= $clinica['WHATSAPP'] ?>" required>
+        </div>
+        <div class="item_form">
             <label for="logradouro">Endereço/Numero</label>
             <input type="text" name="logradouro" id="logradouro" value="<?= $clinica['LOGRADOURO'] ?>" required>
         </div>

@@ -10,23 +10,7 @@
                 <div class="dividir"></div>
                 <div class="content_form">
                     <h3 class="header_form">
-                        Área do Paciente
-                    </h3>
-                    <form id="login_form" method="GET">
-                        <div class="item_form">
-                            <label for="email">E-mail</label>
-                            <input type="email" name="email" id="email" required>
-                        </div>
-                        <div class="item_form">
-                            <label for="email">Senha</label>
-                            <input type="password" name="password" id="password" required>
-                        </div>
-                        <button class="btn" type="submit">Login</button>
-                    </form>
-                </div>
-                <div class="content_form">
-                    <h3 class="header_form">
-                        Área do Profissional
+                        Login
                     </h3>
                     <form id="login_form" method="GET">
                         <div class="item_form">

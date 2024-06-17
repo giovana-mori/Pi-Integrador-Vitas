@@ -117,25 +117,84 @@ class Utils
         return $horarios;
     }
 
-    public static function getDiasSemanaDisponiveis($ano, $mes, $diasSemanaDisponiveis) {
+    public static function getDiasSemanaDisponiveis($ano, $mes, $diasSemanaDisponiveis)
+    {
         $diasDisponiveis = [];
         $diasSemana = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
-        
-        $quantidadeDias = cal_days_in_month(CAL_GREGORIAN, $mes, $ano);
 
-        for ($dia = 1; $dia <= $quantidadeDias; $dia++) {
-            $timestamp = mktime(0, 0, 0, $mes, $dia, $ano);
-            $diaSemana = date('w', $timestamp); // 0 (para domingo) até 6 (para sábado)
-            $nomeDiaSemana = $diasSemana[$diaSemana];
+        // Iterar sobre os meses do ano a partir do mês atual
+        for ($m = $mes; $m <= 12; $m++) {
+            $quantidadeDias = cal_days_in_month(CAL_GREGORIAN, $m, $ano);
 
-            if (in_array($nomeDiaSemana, $diasSemanaDisponiveis)) {
-                $diasDisponiveis[] = [
-                    'data' => date('Y-m-d', $timestamp),
-                    'diaSemana' => $nomeDiaSemana
-                ];
+            for ($dia = 1; $dia <= $quantidadeDias; $dia++) {
+                $timestamp = mktime(0, 0, 0, $m, $dia, $ano);
+                $diaSemana = date('w', $timestamp); // 0 (para domingo) até 6 (para sábado)
+                $nomeDiaSemana = $diasSemana[$diaSemana];
+
+                if (in_array($nomeDiaSemana, $diasSemanaDisponiveis)) {
+                    $diasDisponiveis[] = [
+                        'data' => date('Y-m-d', $timestamp),
+                        'diaSemana' => $nomeDiaSemana
+                    ];
+                }
             }
         }
 
         return $diasDisponiveis;
+    }
+
+    public static function enviarEmailSMTP($para, $assunto, $mensagem)
+    {
+        $de = 'andrericardosilva26@gmail.com';
+        $senha = '@7A1b2c3d4';
+        // Mensagem a ser enviada
+        $msg = "From: $de\r\n";
+        $msg .= "To: $para\r\n";
+        $msg .= "Subject: $assunto\r\n";
+        $msg .= "MIME-Version: 1.0\r\n";
+        $msg .= "Content-Type: text/html; charset=UTF-8\r\n";
+        $msg .= "\r\n";
+        $msg .= $mensagem;
+
+        // Conectar ao servidor SMTP
+        $smtp = fsockopen('ssl://smtp.gmail.com', 465, $errno, $errstr, 10);
+
+        if (!$smtp) {
+            echo "Erro de conexão: $errstr ($errno)\n";
+            return false;
+        }
+
+        fgets($smtp, 512);
+        fputs($smtp, "EHLO " . gethostname() . "\r\n");
+        fgets($smtp, 512);
+
+        fputs($smtp, "AUTH LOGIN\r\n");
+        fgets($smtp, 512);
+
+        fputs($smtp, base64_encode($de) . "\r\n");
+        fgets($smtp, 512);
+
+        fputs($smtp, base64_encode($senha) . "\r\n");
+        fgets($smtp, 512);
+
+        fputs($smtp, "MAIL FROM: <$de>\r\n");
+        fgets($smtp, 512);
+
+        fputs($smtp, "RCPT TO: <$para>\r\n");
+        fgets($smtp, 512);
+
+        fputs($smtp, "DATA\r\n");
+        fgets($smtp, 512);
+
+        fputs($smtp, $msg . "\r\n.\r\n");
+        fgets($smtp, 512);
+
+        fputs($smtp, "QUIT\r\n");
+        fgets($smtp, 512);
+
+        fclose($smtp);
+
+        echo "Email enviado com sucesso";
+        return true;
     }
 }

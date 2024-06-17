@@ -39,19 +39,20 @@ $currentpage = $uri[sizeof($uri) - 1];
             </div>
         </div>
     </header>
+    <div id="loading-indicator" style="display:none">
+        <div>Carregando...</div>
+    </div>
     <div class="panel">
         <div class="container">
             <div class="conteudo_admin">
                 <div class="menu_content">
                     <div class="menu">
                         <ul>
-                            <li><a href="<?= Utils::base_url('agendamentos') ?>" class="<?php echo $currentpage == 'agendamentos' ? 'checked_link' : ''; ?>">Agendamentos</a></li>
-                            <li><a href="<?= Utils::base_url('contato') ?>" class=" <?php echo $currentpage == 'contato' ? 'checked_link' : ''; ?>">Contato</a></li>
-                            <li><a href="<?= Utils::base_url('perfil') ?>" class="<?php echo $currentpage == 'perfil' ? 'checked_link' : ''; ?>">Perfil</a></li>
-                            <li><a href="<?= Utils::base_url('clientes') ?>" class="<?php echo $currentpage == 'clientes' ? 'checked_link' : ''; ?>">Clientes</a></li>
-                            <li><a href="<?= Utils::base_url('profissionais') ?>" class="<?php echo $currentpage == 'profissionais' ? 'checked_link' : ''; ?>">Profissionais</a></li>
-                            <li><a href="<?= Utils::base_url('clinica') ?>" class="<?php echo $currentpage == 'clinica' ? 'checked_link' : ''; ?>">Configurações</a></li>
-                            <li><a href="<?= Utils::base_url('meusagendamentos') ?>" class="<?php echo $currentpage == 'meusagendamentos' ? 'checked_link' : ''; ?>">Meus Agendamentos</a></li>
+                            <?php foreach ($this->menu as $item) : ?>
+                                <?php if (in_array($_SESSION['user_tipo'], $item[2])) : ?>
+                                    <li><a href="<?= Utils::base_url($item[1]) ?>" class="<?php echo $currentpage == $item[1] ? 'checked_link' : ''; ?>"><?= $item[0] ?></a></li>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>

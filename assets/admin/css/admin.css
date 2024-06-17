@@ -554,6 +554,10 @@ select {
 .table_admin tr th {
   padding: 10px 2px;
   text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 165px;
 }
 
 .block {
@@ -668,7 +672,35 @@ select {
   background-repeat: no-repeat;
   background-size: contain;
 }
-
+.box_profissionais {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+#loading-indicator {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.profissionais .optimization-content-style {
+  justify-content: flex-start;
+}
+.fc-time {
+  display: none;
+}
 .box_meus_agendamentos {
   display: flex;
   flex-wrap: wrap;
@@ -681,7 +713,10 @@ select {
   text-align: center;
   padding: 15px;
 }
-
+.item_agendamento_header_title {
+  display: flex;
+  justify-content: space-between;
+}
 .item_agendamento_header {
   border-bottom: 3px solid var(--c-verde-forte);
   padding: 0px 0 5px 0;

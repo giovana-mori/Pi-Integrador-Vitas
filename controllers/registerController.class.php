@@ -16,14 +16,6 @@ class RegisterController extends LayoutLoginController
             //check if data form is valid
             $pessoa = new Pessoa();
             $pessoa->setNome($_POST['name']);
-            $pessoa->setCpf($_POST['cpf']);
-            $pessoa->setDataNasc($_POST['datanasc']);
-            $pessoa->setGenero($_POST['genero']);
-            $pessoa->setCep($_POST['cep']);
-            $pessoa->setLogradouro($_POST['logradouro']);
-            $pessoa->setBairro($_POST['bairro']);
-            $pessoa->setEstado($_POST['estado']);
-            $pessoa->setCidade($_POST['cidade']);
             $pessoa->setEmail($_POST['email']);
             $pessoa->setSenha(password_hash($_POST['senha'], PASSWORD_BCRYPT));
 

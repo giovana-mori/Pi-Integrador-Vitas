@@ -11,7 +11,14 @@ document.addEventListener("DOMContentLoaded", function () {
     ?.addEventListener("change", function (event) {
       debugger;
       //send image with uploadAvatar and after call reader.onload
-      uploadAvatar(this, document.querySelector("#id_pessoa").value);
+      uploadAvatar(this, document.querySelector("#id_pessoa").value)
+        .then((response) => response.json())
+        .then((result) => {
+          console.log(result);
+          //if result has success, return message
+          alert(result.success);
+        })
+        .catch((error) => console.log("error", error));
       //show image preview
       var output = document.querySelector(".imagePreview");
       output.style.display = "block";
@@ -118,7 +125,7 @@ async function popularCidades(estadoSelecionado) {
   }
 }
 
-function uploadAvatar(inputFile, id_pessoa) {
+async function uploadAvatar(inputFile, id_pessoa) {
   if (!inputFile.files[0]) {
     alert("Por favor, selecione uma imagem para fazer o upload.");
     return;
@@ -237,6 +244,17 @@ function validarFormulario(e) {
 }
 
 $(document).ready(function () {
+  // Fechar o modal ao pressionar a tecla "Esc"
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      fecharModal();
+    }
+  });
+});
+
+function initializeCalendar() {
+  document.querySelector(".content_calendar").innerHTML =
+  '<div id="calendar"></div>';
   var calendar = $("#calendar").fullCalendar({
     header: {
       left: "prev,next today",
@@ -271,22 +289,9 @@ $(document).ready(function () {
       document.querySelector(".profissional_name").value =
         calEvent.profissional_nome;
       abrirModal();
-      // Lidar com o clique em um evento (você pode personalizar essa parte conforme necessário)
-      // alert(
-      //   "Clique no evento:\n\nTítulo: " +
-      //   calEvent.title +
-      //   "\nData: " +
-      //   calEvent.start.format("YYYY-MM-DD")
-      // );
     },
   });
-  // Fechar o modal ao pressionar a tecla "Esc"
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-      fecharModal();
-    }
-  });
-});
+}
 
 function openAgendamentoInfos(id_agendamento = undefined) {
   if (!id_agendamento || id_agendamento == undefined) {
@@ -352,18 +357,18 @@ function profissionalPicker(idProfissional) {
     })
     .then((data) => {
       const events = [];
-      const today = moment().startOf("day"); // Hoje, no início do dia
-      const endOfMonth = moment().endOf("month").startOf("day"); // Fim do mês, no início do dia
+      const tomorrow = moment().add(1, "days").startOf("day"); // Amanhã, no início do dia
+      const endOfYear = moment().endOf("year").startOf("day"); // Fim do ano, no início do dia
 
       // Itera sobre cada evento retornado pela API
       data.forEach((event) => {
         event.DIAS_SEMANA_DISPONIVEIS.forEach((disponivel) => {
           const dataDisponivel = moment(disponivel.data).startOf("day"); // Data disponível, no início do dia
 
-          // Verifica se a data disponível está dentro do mês atual
+          // Verifica se a data disponível está dentro do ano atual, a partir de amanhã
           if (
-            dataDisponivel.isSameOrAfter(today) &&
-            dataDisponivel.isSameOrBefore(endOfMonth)
+            dataDisponivel.isSameOrAfter(tomorrow) &&
+            dataDisponivel.isSameOrBefore(endOfYear)
           ) {
             // Verifica se é o dia da semana correto
             if (
@@ -371,7 +376,6 @@ function profissionalPicker(idProfissional) {
               disponivel.diaSemana.toLowerCase()
             ) {
               event.DISPONIVEIS.forEach((horario) => {
-                debugger;
                 const startDateTime = moment(disponivel.data + "T" + horario);
                 const endDateTime = moment(startDateTime).add(
                   event.DURACAO,
@@ -395,18 +399,135 @@ function profissionalPicker(idProfissional) {
         });
       });
 
+      initializeCalendar();
+
       $("#calendar").fullCalendar("removeEvents");
       // Adicionando eventos ao calendário
       $("#calendar").fullCalendar("addEventSource", events);
+
+      //scrolling to #calendar
+      $("html, body").animate(
+        {
+          scrollTop: $("#calendar").offset().top,
+        },
+        300
+      );
     })
     .catch((error) => {
       console.error("Erro ao carregar eventos:", error);
     });
 }
 
-function filterMeusAtendimentos(date) {
+function filterAtendimentos(date) {
   const formattedDate = moment(date).format("YYYY-MM-DD");
-  fetch(`${base_url}/api/meusatendimentos/2/${formattedDate}`)
+  fetch(`${base_url}/api/buscaratendimento/${formattedDate}`)
+    .then((response) => response.json())
+    .then((data) => {
+      let html = "";
+      if (data.length > 0) {
+        data.forEach((item) => {
+          html += `<div class="item_agendamento">
+                        <div class="item_agendamento_header">
+                            <div class="item_agendamento_header_title">
+                                ${item.DATA.split('-').reverse().join('/')}
+                                <a href="${base_url + '/editaragendamento/' + item.ID_AGENDA}">editar</a>
+                            </div>
+                        </div>
+                        <div class="item_agendamento_body">
+                            <ul>
+                                <li>
+                                    <b>Nome</b> :  :  ${item.NOME_PESSOA}
+                                </li>
+                                <li>
+                                    <b>Inicio</b> :  ${item.HORA}
+                                </li>
+                                <li>
+                                    <b>Duração</b> : ${item.DURACAO}
+                                </li>
+                                <li>
+                                    <b>Profissional</b> : ${
+                                      item.NOME_PROFISSIONAL
+                                    }
+                                </li>
+                                <li class="item_obs">
+                                    <b>Obs</b> : ${
+                                      item.OBSERVACOES
+                                        ? item.OBSERVACOES
+                                        : "Nenhuma"
+                                    }
+                                </li>
+                            </ul>
+                            <input type="button" value="ver mais" onclick="openAgendamentoInfos(${
+                              item.ID_AGENDA
+                            })" class="button_ver_mais">
+                        </div>
+                    </div>`;
+        });
+        //
+      } else {
+        html = "<p>Nenhum agendamento encontrado.</p>";
+      }
+      document.querySelector(".box_meus_agendamentos").innerHTML = html;
+    })
+    .catch((error) => console.error(error));
+}
+
+function filterMeusAtendimentos(id, date) {
+  const formattedDate = moment(date).format("YYYY-MM-DD");
+  fetch(`${base_url}/api/meusatendimentos/${id}/${formattedDate}`)
+    .then((response) => response.json())
+    .then((data) => {
+      let html = "";
+      if (data.length > 0) {
+        data.forEach((item) => {
+          html += `<div class="item_agendamento">
+                        <div class="item_agendamento_header">
+                            <div class="item_agendamento_header_title">
+                                ${item.DATA}
+                            </div>
+                        </div>
+                        <div class="item_agendamento_body">
+                            <ul>
+                              <li>
+                                  <b>Nome</b> :  :  ${item.NOME_PESSOA}
+                              </li>
+                                <li>
+                                    <b>Inicio</b> :  ${item.HORA}
+                                </li>
+                                <li>
+                                    <b>Duração</b> : ${item.DURACAO}
+                                </li>
+                                <li>
+                                    <b>Profissional</b> : ${
+                                      item.NOME_PROFISSIONAL
+                                    }
+                                </li>
+                                <li class="item_obs">
+                                    <b>Obs</b> : ${
+                                      item.OBSERVACOES
+                                        ? item.OBSERVACOES
+                                        : "Nenhuma"
+                                    }
+                                </li>
+                            </ul>
+                            <input type="button" value="ver mais" onclick="openAgendamentoInfos(${
+                              item.ID_AGENDA
+                            })" class="button_ver_mais">
+                        </div>
+                    </div>`;
+        });
+        //
+      } else {
+        html = "<p>Nenhum agendamento encontrado.</p>";
+      }
+      document.querySelector(".box_meus_agendamentos").innerHTML = html;
+    })
+    .catch((error) => console.error(error));
+}
+
+function filterMeusAgendamentos(id, date) {
+  const formattedDate = moment(date).format("YYYY-MM-DD");
+  fetch(`${base_url}/api/meusagendamentos/${id}/${formattedDate}`)
     .then((response) => response.json())
     .then((data) => {
       let html = "";
@@ -421,24 +542,36 @@ function filterMeusAtendimentos(date) {
                         <div class="item_agendamento_body">
                             <ul>
                                 <li>
+                                    <b>Nome</b> :  :  ${item.NOME_PESSOA}
+                                </li>
+                                <li>
                                     <b>Inicio</b> :  ${item.HORA}
                                 </li>
                                 <li>
                                     <b>Duração</b> : ${item.DURACAO}
                                 </li>
                                 <li>
-                                    <b>Profissional</b> : ${item.NOME_PROFISSIONAL}
+                                    <b>Profissional</b> : ${
+                                      item.NOME_PROFISSIONAL
+                                    }
                                 </li>
                                 <li class="item_obs">
-                                    <b>Obs</b> : ${item.OBSERVACOES ? item.OBSERVACOES : "Nenhuma"}
+                                    <b>Obs</b> : ${
+                                      item.OBSERVACOES
+                                        ? item.OBSERVACOES
+                                        : "Nenhuma"
+                                    }
                                 </li>
                             </ul>
-                            <input type="button" value="ver mais" onclick="openAgendamentoInfos(${item.ID_AGENDA})" class="button_ver_mais">
+                            <input type="button" value="ver mais" onclick="openAgendamentoInfos(${
+                              item.ID_AGENDA
+                            })" class="button_ver_mais">
                         </div>
                     </div>`;
         });
+        //
       } else {
-        html = '<p>Nenhum agendamento encontrado.</p>';
+        html = "<p>Nenhum agendamento encontrado.</p>";
       }
       document.querySelector(".box_meus_agendamentos").innerHTML = html;
     })

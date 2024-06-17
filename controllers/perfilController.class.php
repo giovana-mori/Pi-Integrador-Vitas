@@ -9,6 +9,9 @@ class PerfilController extends layoutAdminController
         $pessoa = new PessoaDAO();
         $data['pessoa'] = $pessoa->buscarID($_SESSION['user_id']);
         $data['estados'] = Utils::loadEstados();
+        if (isset($data['pessoa']["ESTADO"]))
+            $data['cidades'] = Utils::loadCidades($data['pessoa']["ESTADO"]);
+
         $this->render('views/admin/perfil', $data);
     }
 

@@ -15,7 +15,7 @@ class LoginController extends LayoutLoginController
             $data['retorno'] = $pessoa->login($email, $password);
 
             if ($data['retorno']['status'] == 'success') {
-                header("Location: agendamentos");
+                header("Location: perfil");
             }
         }
 

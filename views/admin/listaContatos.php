@@ -6,10 +6,6 @@
     </div>
     <!--table listar pessoas-->
     <div class="bloco_table">
-        <div>
-            <a href="<?php echo Utils::base_url('novoprofissional'); ?>" class="btn">Novo Cadastro +</a>
-        </div>
-        <br>
         <div class="filtros">
             <div class="data_filtro">
                 <label for="">Nome</label>
@@ -19,30 +15,30 @@
         <br>
 
         <?php
-        if (isset($profissionais) && count($profissionais) > 0) :
+        if (isset($contatos) && count($contatos) > 0) :
         ?>
             <table class="table_admin">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Nome</th>
-                        <th>Registro (nº)</th>
-                        <th>Descritivo</th>
-                        <th>Tipo</th>
+                        <th>Assunto</th>
+                        <th>Descrição</th>
+                        <th>Data</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                     //$pessoas é a variavel que recebeu as pessoas do banco, e $p é a variavel auxiliar do foreach que contem a pessoa
-                    foreach ($profissionais as $p) {
+                    foreach ($contatos as $p) {
                         echo '<tr>';
-                        echo '<td>' . $p['id_profissional'] . '</td>';
-                        echo '<td>' . $p['nome'] . '</td>';
-                        echo '<td>' . $p['registroclasseprofissional'] . '</td>';
-                        echo '<td>' . $p['descritivo'] . '</td>';
-                        echo '<td>' . $p['tipo'] . '</td>';
-                        echo '<td><a href="' . Utils::base_url('editarprofissional/' . $p['id_profissional']) . '" class="btn btn_editar">Editar</a></td>';
+                        echo '<td>' . $p['ID_CONTATO'] . '</td>';
+                        echo '<td>' . $p['NOME'] . '</td>';
+                        echo '<td>' . $p['ASSUNTO'] . '</td>';
+                        echo '<td>' . $p['DESCRICAO'] . '</td>';
+                        echo '<td>' . $p['DATA'] . '</td>';
+                        echo '<td><a href="' . Utils::base_url('vermensagem/' . $p['ID_CONTATO']) . '" class="btn btn_editar">Editar</a></td>';
                         echo '</tr>';
                     }
                     ?>

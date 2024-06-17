@@ -62,19 +62,25 @@
         </div>
         <div class="item_form">
             <label for="cidade">Estado</label>
-            <input type="text" value="<?= $pessoa['ESTADO'] ?>" readonly name="estado" id="estado">
-            <!--<select name="estado" id="estado" required>
+            <select name="estado" id="estado" required>
                 <option hidden="true" value="">Selecione um Estado</option>
                 <?php
-                // foreach ($estados as $estado) {
-                //     echo "<option value='{$estado['sigla']}' " . ($pessoa['ESTADO'] == $estado['sigla'] ? 'selected' : '') . ">{$estado['nome']}</option>";
-                // }
+                foreach ($estados as $estado) {
+                    echo "<option value='{$estado['sigla']}' " . ($pessoa['ESTADO'] == $estado['sigla'] ? 'selected' : '') . ">{$estado['nome']}</option>";
+                }
                 ?>
-            </select>-->
+            </select>
         </div>
         <div class="item_form">
             <label for="cidade">Cidade</label>
-            <input type="text" value="<?= $pessoa['CIDADE'] ?>" readonly name="cidade" id="cidade">
+            <select name="cidade" id="cidade">
+                <option hidden="true" value="">Selecione uma Cidade</option>
+                <?php
+                foreach ($cidades['cidades'] as $cidade) {
+                    echo "<option value='{$cidade}' " . ($pessoa['CIDADE'] == $cidade ? 'selected' : '') . ">{$cidade}</option>";
+                }
+                ?>
+            </select>
         </div>
         <button class="btn center" type="submit">Editar Perfil</button>
     </form>

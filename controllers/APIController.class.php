@@ -32,9 +32,7 @@ class APIController
         try {
             $profissional = new ProfissionalDAO();
             if ($id) {
-                $prof = new Profissional();
-                $prof->setId_profissional($id);
-                echo json_encode($profissional->buscarID($prof));
+                echo json_encode($profissional->buscar($id));
                 exit;
             }
             echo json_encode($profissional->listarProfissionais());
@@ -105,8 +103,9 @@ class APIController
             }
 
             // Verifica o tamanho do arquivo
-            if ($_FILES["profileImage"]["size"] > 500000) {
+            if ($_FILES["profileImage"]["size"] > 5000000) {
                 echo json_encode(["error" => "Arquivo muito grande"]);
+                exit;
             }
 
             // Permite determinados formatos de arquivo
@@ -163,8 +162,9 @@ class APIController
             }
 
             // Verifica o tamanho do arquivo
-            if ($_FILES["profileLogo"]["size"] > 500000) {
+            if ($_FILES["profileLogo"]["size"] > 5000000) {
                 echo json_encode(["error" => "Arquivo muito grande"]);
+                exit;
             }
 
             // Permite determinados formatos de arquivo
@@ -209,8 +209,9 @@ class APIController
             }
 
             // Verifica o tamanho do arquivo
-            if ($_FILES["upload"]["size"] > 500000) {
+            if ($_FILES["upload"]["size"] > 5000000) {
                 echo json_encode(["error" => "Arquivo muito grande"]);
+                exit;
             }
 
             // Permite determinados formatos de arquivo .pdf,.doc,.docx,.txt,.jpg,.jpeg,.png
@@ -275,13 +276,12 @@ class APIController
         }
     }
 
-    public function agendamentos($id = null)
+    public function agendamentos($id = null,)
     {
         try {
             $agendamento = new AgendaDAO();
             if ($id) {
                 $data = $agendamento->buscarID($id);
-                //insert into $data['uploads'] = $uploads;
                 $uploads = $agendamento->getUploads($id);
                 $data['UPLOADS'] = $uploads;
                 echo json_encode($data);
@@ -292,7 +292,25 @@ class APIController
             echo $e->getMessage();
         }
     }
-
+    public function meusagendamentos($id = null, $date = null)
+    {
+        try {
+            $agendamento = new AgendaDAO();
+            if ($id) {
+                $agendamentos = $agendamento->buscarMeusAgendamentos($id, $date);
+                //foreach nos agendamentos e buscar os uploads
+                foreach ($agendamentos as $key => $value) {
+                    //insere no array do agendamento a chave upload e seu respectivo valo
+                    $agendamentos[$key]["UPLOADS"] = $agendamento->getUploads($value["ID_AGENDA"]);
+                }
+                echo json_encode($agendamentos);
+                exit;
+            }
+            echo json_encode($agendamento->listar());
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
     public function meusatendimentos($id = null, $date = null)
     {
         try {
@@ -310,6 +328,58 @@ class APIController
             echo json_encode($agendamento->listar());
         } catch (Exception $e) {
             echo $e->getMessage();
+        }
+    }
+
+    public function buscaragendamentos($date = null)
+    {
+        try {
+            $agendamento = new AgendaDAO();
+            if ($date) {
+                $agendamentos = $agendamento->buscar($date);
+                //foreach nos agendamentos e buscar os uploads
+                foreach ($agendamentos as $key => $value) {
+                    //insere no array do agendamento a chave upload e seu respectivo valo
+                    $agendamentos[$key]["UPLOADS"] = $agendamento->getUploads($value["ID_AGENDA"]);
+                }
+                echo json_encode($agendamentos);
+                exit;
+            }
+            echo json_encode($agendamento->listar());
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function sendEmail()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $para = $_POST['para'];
+            $assunto = $_POST['assunto'];
+            $mensagem = $_POST['mensagem'];
+            if (Utils::enviarEmailSMTP($para, $assunto, $mensagem)) {
+                echo json_encode(["success" => "Email enviado com sucesso"]);
+            } else {
+                echo json_encode(["error" => "Erro ao enviar"]);
+            }
+        }
+    }
+
+    public function sendContato()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $contato = new Contato();
+            $contato->setAssunto($_POST['assunto']);
+            $contato->setDescricao($_POST['descricao']);
+            $contato->setIdPessoa($_POST['id_pessoa']);
+            
+            $contatoDAO = new ContatoDAO();
+            $retorno = $contatoDAO->inserir($contato);
+            if ($retorno > 0) {
+                echo json_encode(["success" => "Agendamento realizado com sucesso", "id_contato" => $retorno]);
+            } else {
+                echo json_encode(["error" => "Erro ao enviar"]);
+            }
         }
     }
 }

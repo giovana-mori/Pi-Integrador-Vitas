@@ -2,12 +2,14 @@
 
 class Clinica
 {
-    public function __construct(private int $id_clinica = 0, private string $nome = "", private string $cnpj = "", private string $inscricao_estadual = "", private string $email = "", private string $logo = "", private string $cep = "", private string $logradouro = "", private string $bairro = "", private string $estado = "", private string $cidade = "", private string $segunda = "", private string $terca = "", private string $quarta = "", private string $quinta = "", private string $sexta = "", private string $sabado = "", private string $domingo = "", private bool $feriados = false)
+    public function __construct(private int $id_clinica = 0, private string $nome = "", private string $cnpj = "", private string $inscricao_estadual = "", private string $email = "", private string $telefone = "", private string $whatsapp = "", private string $logo = "", private string $cep = "", private string $logradouro = "", private string $bairro = "", private string $estado = "", private string $cidade = "", private string $segunda = "", private string $terca = "", private string $quarta = "", private string $quinta = "", private string $sexta = "", private string $sabado = "", private string $domingo = "", private bool $feriados = false)
     {
         $this->nome = $nome;
         $this->cnpj = $cnpj;
         $this->inscricao_estadual = $inscricao_estadual;
         $this->email = $email;
+        $this->telefone = $telefone;
+        $this->whatsapp = $whatsapp;
         $this->logo = $logo;
         $this->cep = $cep;
         $this->logradouro = $logradouro;
@@ -42,6 +44,12 @@ class Clinica
     public function getEmail()
     {
         return $this->email;
+    }
+    public function getTelefone(){
+        return $this->telefone;
+    }
+    public function getWhatsapp(){
+        return $this->whatsapp;
     }
     public function getLogo()
     {
@@ -118,6 +126,14 @@ class Clinica
     public function setEmail($email)
     {
         $this->email = $email;
+    }
+    public function setTelefone($telefone)
+    {
+        $this->telefone = $telefone;
+    }
+    public function setWhatsapp($whatsapp)
+    {
+        $this->whatsapp = $whatsapp;
     }
     public function setLogo($logo)
     {

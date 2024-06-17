@@ -40,7 +40,7 @@ class Rotas
         }
         $notFoundController = new NotFoundController();
         $notFoundController->render();
-         exit();
+        exit();
     }
 } //fim da classe
 $router = new Rotas();
@@ -57,12 +57,18 @@ $router->post("/registro", [RegisterController::class, "registrar"]);
 $router->get("/clinica", [ClinicaController::class, "index"]);
 $router->post("/clinica", [ClinicaController::class, "update"]);
 
-$router->get("/agendamentos", [AgendamentosController::class, "index"]);
+$router->get("/agendar", [AgendamentosController::class, "index"]);
+$router->get("/agendarpresencial", [AgendamentosController::class, "agendarPresencial"]);
 $router->get("/contato", [ContatoController::class, "index"]);
+$router->get("/contatos", [ContatoController::class, "listar"]);
+$router->post("/contato", [ContatoController::class, "inserir"]);
 
 $router->get("/perfil", [PerfilController::class, "index"]);
 $router->post("/perfil", [PerfilController::class, "update"]);
 $router->get("/meusagendamentos", [PerfilController::class, "meuagendamento"]);
+$router->get("/agendamentos", [ProfissionaisController::class, "listarAgendamentos"]);
+$router->get("/editaragendamento/{id}", [AgendamentosController::class, "editarAgendamento"]);
+$router->post("/editaragendamento/{id}", [AgendamentosController::class, "updateAgendamento"]);
 
 $router->get("/clientes", [PessoasController::class, "index"]);
 $router->get("/novocadastro", [PessoasController::class, "cadastro"]);
@@ -82,6 +88,7 @@ $router->get("/api/pessoas", [APIController::class, "Pessoas"]);
 $router->get("/api/pessoas/{nome}", [APIController::class, "Pessoas"]);
 $router->get("/api/cidades/{uf}", [APIController::class, "cidades"]);
 $router->get("/api/profissionais", [APIController::class, "profissionais"]);
+$router->get("/api/profissionais/{nome}", [APIController::class, "profissionais"]);
 $router->get("/api/horarios/{profissionalId}", [APIController::class, "profissionalHorarios"]);
 
 $router->post("/api/upload", [APIController::class, "uploadAvatar"]);
@@ -92,5 +99,9 @@ $router->post("/api/agendar", [APIController::class, "agendar"]);
 $router->get("/api/agendamento", [APIController::class, "agendamentos"]);
 //pega um agendamento especifico por ID
 $router->get("/api/agendamento/{id}", [APIController::class, "agendamentos"]);
+$router->get("/api/meusagendamentos/{id}/{date}", [APIController::class, "meusagendamentos"]);
 //pega varios agendamentos de um profissional especifico por PROFISSIONAL_ID
 $router->get("/api/meusatendimentos/{id}/{date}", [APIController::class, "meusatendimentos"]);
+$router->get("/api/buscaratendimento/{date}", [APIController::class, "buscaragendamentos"]);
+$router->post("/api/sendEmail", [APIController::class, "sendEmail"]);
+$router->post("/api/enviarcontato", [APIController::class, "sendContato"]);

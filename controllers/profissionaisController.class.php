@@ -191,12 +191,27 @@ class ProfissionaisController extends layoutAdminController
         }
     }
 
+    public function listarAgendamentos()
+    {
+        $data['title'] = 'Agendamentos';
+        $agendamento = new AgendaDAO();
+        // $agendamentos = $agendamento->buscarMeusAtendimentos($_SESSION['user_id']);
+        $agendamentos = $agendamento->listar();
+        //foreach nos agendamentos e buscar os uploads
+        foreach ($agendamentos as $key => $value) {
+            //insere no array do agendamento a chave upload e seu respectivo valo
+            $agendamentos[$key]["UPLOADS"] = $agendamento->getUploads($value["ID_AGENDA"]);
+        }
+        $data['agendamentos'] = $agendamentos;
+        $this->render('views/admin/listaAgendamentos', $data);
+    }
+
     public function meusatendimentos()
     {
         $data['title'] = 'Meus Atendimentos';
         $agendamento = new AgendaDAO();
         // $agendamentos = $agendamento->buscarMeusAtendimentos($_SESSION['user_id']);
-        $agendamentos = $agendamento->buscarMeusAtendimentos(2);
+        $agendamentos = $agendamento->buscarMeusAtendimentos($_SESSION['user_id_profissional']);
         //foreach nos agendamentos e buscar os uploads
         foreach ($agendamentos as $key => $value) {
             //insere no array do agendamento a chave upload e seu respectivo valo
