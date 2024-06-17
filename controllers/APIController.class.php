@@ -47,6 +47,8 @@ class APIController
             $horarios = new Horario_profissionalDAO();
             if ($profissionalID) {
                 $data = $horarios->buscarID($profissionalID);
+                $agendaDAO = new AgendaDAO();
+                $diasReservados = $agendaDAO->buscarTodosMeusAtendimentos($profissionalID);
                 $ano = date('Y');
                 $mes = date('m');
                 // Coletar os dias da semana disponíveis a partir dos dados
@@ -57,7 +59,29 @@ class APIController
                     $duracao = $value['DURACAO'];
                     //criar um item em data com os horarios disponiveis
                     $data[$key]['DISPONIVEIS'] = Utils::generateHorariosDisponiveis_($horaInicio, $horaFim, $duracao);
-                    $data[$key]['DIAS_SEMANA_DISPONIVEIS'] = Utils::getDiasSemanaDisponiveis($ano, $mes, $diasSemanaDisponiveis);
+                    $data[$key]['RESERVADOS'] = $diasReservados;
+                    $data[$key]['DIAS_SEMANA_DISPONIVEIS'] = Utils::getDiasSemanaDisponiveis($ano, $mes, $diasSemanaDisponiveis, $data[$key]['DISPONIVEIS']);
+
+                    // Verificar dentro de $data[$key]['DIAS_SEMANA_DISPONIVEIS'] o item data para ver se a data é igual a de $diasReservados['DATA']
+                    // Tambem verificar se $diasReservados['HORA'] é igual ao item de array horarios dentro de $data[$key]['DIAS_SEMANA_DISPONIVEIS']  
+                    // Se for igual, remover oo item $data[$key]['DIAS_SEMANA_DISPONIVEIS'][index]['horarios'][index]]
+
+                    foreach ($diasReservados as $i => $reservado) {
+                        foreach ($data[$key]['DIAS_SEMANA_DISPONIVEIS'] as $j => $diaSemanaDisponivel) {
+                            if ($reservado['DATA'] == $diaSemanaDisponivel['data']) {
+                                foreach ($diaSemanaDisponivel['horarios'] as $k => $horario) {
+                                    //comparar 2 horarios $reservado['HORA'] e $horario
+                                    //se forem iguais, remover o item $data[$key]['DIAS_SEMANA_DISPONIVEIS'][$j]['horarios'][$k]
+                                    if (strtotime($reservado['HORA']) == strtotime($horario)) {
+                                        //se entrar aqui, remover o item do array sem reorganizar
+                                        unset($data[$key]['DIAS_SEMANA_DISPONIVEIS'][$j]['horarios'][$k]);
+                                        //reorganizar o array sem remover o item
+                                        $data[$key]['DIAS_SEMANA_DISPONIVEIS'][$j]['horarios'] = array_values($data[$key]['DIAS_SEMANA_DISPONIVEIS'][$j]['horarios']);
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
 
                 echo json_encode($data);

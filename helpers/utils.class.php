@@ -1,5 +1,10 @@
 <?php
 
+require 'vendor/autoload.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class Utils
 {
     public static function loadEnv($path)
@@ -117,7 +122,7 @@ class Utils
         return $horarios;
     }
 
-    public static function getDiasSemanaDisponiveis($ano, $mes, $diasSemanaDisponiveis)
+    public static function getDiasSemanaDisponiveis($ano, $mes, $diasSemanaDisponiveis, $horariosDisponiveis)
     {
         $diasDisponiveis = [];
         $diasSemana = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
@@ -134,7 +139,8 @@ class Utils
                 if (in_array($nomeDiaSemana, $diasSemanaDisponiveis)) {
                     $diasDisponiveis[] = [
                         'data' => date('Y-m-d', $timestamp),
-                        'diaSemana' => $nomeDiaSemana
+                        'diaSemana' => $nomeDiaSemana,
+                        'horarios' => $horariosDisponiveis
                     ];
                 }
             }
@@ -142,59 +148,38 @@ class Utils
 
         return $diasDisponiveis;
     }
-
-    public static function enviarEmailSMTP($para, $assunto, $mensagem)
-    {
-        $de = 'andrericardosilva26@gmail.com';
-        $senha = '@7A1b2c3d4';
-        // Mensagem a ser enviada
-        $msg = "From: $de\r\n";
-        $msg .= "To: $para\r\n";
-        $msg .= "Subject: $assunto\r\n";
-        $msg .= "MIME-Version: 1.0\r\n";
-        $msg .= "Content-Type: text/html; charset=UTF-8\r\n";
-        $msg .= "\r\n";
-        $msg .= $mensagem;
-
-        // Conectar ao servidor SMTP
-        $smtp = fsockopen('ssl://smtp.gmail.com', 465, $errno, $errstr, 10);
-
-        if (!$smtp) {
-            echo "Erro de conexão: $errstr ($errno)\n";
-            return false;
+    
+    //send email with phpmailer
+    public static function sendEmailPHPMailer(){        
+        $mail = new PHPMailer(true);
+        
+        try {
+            // Configurações do servidor
+            $mail->isSMTP();
+            $mail->SMTPDebug = 2;
+            $mail->Debugoutput = 'html'; // Formato de saída do debug
+            $mail->Host       = 'email-ssl.com.br';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'contato@vitas.servicos.ws';
+            $mail->Password   = '@7A1b2c3d4';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            $mail->Port       = 587;
+        
+            // Destinatários
+            $mail->setFrom('contato@vitas.servicos.ws', 'Contato Vitas');
+            $mail->addAddress('andrericardosilva26@gmail.com', 'TESTE do Destinatário');
+        
+            // Conteúdo
+            $mail->isHTML(true);
+            $mail->Subject = 'Assunto do Email';
+            $mail->Body    = 'Corpo do email em <b>HTML</b>';
+            $mail->AltBody = 'Corpo do email em texto simples';
+        
+            $mail->send();
+            echo 'Email enviado com sucesso';
+        } catch (Exception $e) {
+            echo "Email não pôde ser enviado. Mailer Error: {$mail->ErrorInfo} - {$e}";
         }
-
-        fgets($smtp, 512);
-        fputs($smtp, "EHLO " . gethostname() . "\r\n");
-        fgets($smtp, 512);
-
-        fputs($smtp, "AUTH LOGIN\r\n");
-        fgets($smtp, 512);
-
-        fputs($smtp, base64_encode($de) . "\r\n");
-        fgets($smtp, 512);
-
-        fputs($smtp, base64_encode($senha) . "\r\n");
-        fgets($smtp, 512);
-
-        fputs($smtp, "MAIL FROM: <$de>\r\n");
-        fgets($smtp, 512);
-
-        fputs($smtp, "RCPT TO: <$para>\r\n");
-        fgets($smtp, 512);
-
-        fputs($smtp, "DATA\r\n");
-        fgets($smtp, 512);
-
-        fputs($smtp, $msg . "\r\n.\r\n");
-        fgets($smtp, 512);
-
-        fputs($smtp, "QUIT\r\n");
-        fgets($smtp, 512);
-
-        fclose($smtp);
-
-        echo "Email enviado com sucesso";
-        return true;
+        
     }
 }

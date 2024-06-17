@@ -161,6 +161,20 @@ class PessoaDAO extends Conexao
         }
     }
 
+    public function checkEmail($email)
+    {
+        $sql = "SELECT * FROM pessoas WHERE email = ?";
+        try {
+            $stm = $this->db->prepare($sql);
+            $stm->bindValue(1, $email);
+            $stm->execute();
+            $this->db = null;
+            return $stm->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
     public function logout()
     {
         session_start();

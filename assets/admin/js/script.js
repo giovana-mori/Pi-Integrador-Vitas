@@ -50,6 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
     element.addEventListener("click", function (e) {
       e.preventDefault();
       const id_profissional = this.dataset.profissional;
+      document.querySelectorAll("[data-profissional]").forEach(function (element) {
+        element.classList.remove('selected');
+      });
+      this.classList.add('selected');
       profissionalPicker(id_profissional);
     });
   });
@@ -75,14 +79,13 @@ document.addEventListener("DOMContentLoaded", function () {
         //if result has success, return message
         if (result.success) {
           debugger;
-          let fileInput = document.querySelector(
-            "#consultaForm [name='upload']"
-          );
+          let fileInput = document.querySelector("#consultaForm [name='upload']");
           if (fileInput.files.length > 0) {
             uploadFile(fileInput, result.id_agenda);
           }
           //limpar apenas o input file
           alert("Consulta agendada com sucesso!");
+          profissionalPicker(document.querySelector("[data-profissional].selected").dataset.profissional);
         } else {
           alert("Erro ao agendar consulta!");
         }
@@ -413,16 +416,11 @@ function profissionalPicker(idProfissional) {
           const dataDisponivel = moment(disponivel.data).startOf("day"); // Data disponível, no início do dia
 
           // Verifica se a data disponível está dentro do ano atual, a partir de amanhã
-          if (
-            dataDisponivel.isSameOrAfter(tomorrow) &&
-            dataDisponivel.isSameOrBefore(endOfYear)
-          ) {
+          if (dataDisponivel.isSameOrAfter(tomorrow) && dataDisponivel.isSameOrBefore(endOfYear)) {
             // Verifica se é o dia da semana correto
-            if (
-              event.DIA_SEMANA.toLowerCase() ===
-              disponivel.diaSemana.toLowerCase()
-            ) {
-              event.DISPONIVEIS.forEach((horario) => {
+            debugger;
+            if (event.DIA_SEMANA.toLowerCase() === disponivel.diaSemana.toLowerCase()) {
+              disponivel.horarios.forEach((horario) => {
                 const startDateTime = moment(disponivel.data + "T" + horario);
                 const endDateTime = moment(startDateTime).add(
                   event.DURACAO,
@@ -430,9 +428,7 @@ function profissionalPicker(idProfissional) {
                 );
 
                 events.push({
-                  title: `${startDateTime.format(
-                    "HH:mm"
-                  )} - ${endDateTime.format("HH:mm")}`,
+                  title: `${startDateTime.format("HH:mm")} - ${endDateTime.format("HH:mm")}`,
                   start: startDateTime.format("YYYY-MM-DDTHH:mm:ss"),
                   end: endDateTime.format("YYYY-MM-DDTHH:mm:ss"),
                   allDay: false,
@@ -441,6 +437,23 @@ function profissionalPicker(idProfissional) {
                   profissional_nome: event.NOME, // Adiciona o nome do profissional como propriedade
                 });
               });
+              /*event.DISPONIVEIS.forEach((horario) => {
+                const startDateTime = moment(disponivel.data + "T" + horario);
+                const endDateTime = moment(startDateTime).add(
+                  event.DURACAO,
+                  "minutes"
+                );
+
+                events.push({
+                  title: `${startDateTime.format("HH:mm")} - ${endDateTime.format("HH:mm")}`,
+                  start: startDateTime.format("YYYY-MM-DDTHH:mm:ss"),
+                  end: endDateTime.format("YYYY-MM-DDTHH:mm:ss"),
+                  allDay: false,
+                  eventId: event.ID_HORARIO, // Adiciona o ID do evento como propriedade
+                  profissional_id: event.ID_PROFISSIONAL, // Adiciona o ID do profissional como propriedade
+                  profissional_nome: event.NOME, // Adiciona o nome do profissional como propriedade
+                });
+              });*/
             }
           }
         });

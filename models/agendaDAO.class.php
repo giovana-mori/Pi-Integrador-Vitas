@@ -141,6 +141,40 @@ class AgendaDAO extends Conexao
         }
     }
 
+    public function buscarTodosMeusAtendimentos($id)
+    {
+        $sql = "SELECT 
+                    AG.ID_AGENDA, 
+                    AG.DATA, 
+                    AG.HORA, 
+                    AG.DURACAO, 
+                    AG.STATUS, 
+                    AG.OBSERVACOES, 
+                    AG.FACULTATIVO, 
+                    PR.PESSOA_ID AS PROFISSIONAL_PESSOA_ID, 
+                    AG.PROFISSIONAL_ID, 
+                    PR.ID_PROFISSIONAL, 
+                    PR.REGISTROCLASSEPROFISSIONAL, 
+                    PR.TIPO_PROFISSIONAL_ID, 
+                    P1.NOME AS NOME_PROFISSIONAL, 
+                    CLI.NOME AS NOME_PESSOA,
+                    AG.PESSOA_ID
+                FROM AGENDAS AG
+                LEFT JOIN PESSOAS CLI ON CLI.ID_PESSOA = AG.PESSOA_ID
+                LEFT JOIN PROFISSIONAIS PR ON PR.ID_PROFISSIONAL = AG.PROFISSIONAL_ID
+                LEFT JOIN PESSOAS P1 ON P1.ID_PESSOA = PR.PESSOA_ID
+                WHERE AG.PROFISSIONAL_ID = ?
+                ORDER BY DATA, HORA";
+        try {
+            $stm = $this->db->prepare($sql);
+            $stm->bindValue(1, $id);
+            $stm->execute();
+            return $stm->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $th) {
+            return [];
+        }
+    }
+
     public function excluir($id)
     {
         $sql = "DELETE FROM agenda WHERE id_agenda = ?";

@@ -13,7 +13,7 @@
           <?php
           foreach ($profissionais as $key => $value) :
           ?>
-            <div class="optimization-content-desc" data-profissional="<?= $value['id_profissional'] ?>">
+            <div class="optimization-content-desc" data-profissional="<?= $value['id_profissional'] ?>" class="">
               <div class="simbolo">
                 <img src="https://static.vecteezy.com/system/resources/previews/013/042/571/original/default-avatar-profile-icon-social-media-user-photo-in-flat-style-vector.jpg">
               </div>

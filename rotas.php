@@ -50,6 +50,7 @@ $router->get("/", [indexController::class, "index"]);
 $router->get("/login", [LoginController::class, "index"]);
 $router->post("/auth", [LoginController::class, "auth"]);
 $router->get("/logout", [LoginController::class, "logout"]);
+$router->get("/esquecisenha", [LoginController::class, "forgot"]);
 
 $router->get("/registro", [RegisterController::class, "index"]);
 $router->post("/registro", [RegisterController::class, "registrar"]);

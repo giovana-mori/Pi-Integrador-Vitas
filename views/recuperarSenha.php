@@ -9,21 +9,14 @@
                 <div class="dividir"></div>
                 <div class="content_form">
                     <h3 class="header_form">
-                        Login
+                        <?= $title ?>
                     </h3>
                     <form id="login_form" method="GET">
                         <div class="item_form">
                             <label for="email">E-mail</label>
                             <input type="email" name="email" id="email" required>
                         </div>
-                        <div class="item_form">
-                            <label for="email">Senha</label>
-                            <input type="password" name="password" id="password" required>
-                        </div>
-                        <div class="item_form">
-                            <a href="<?= Utils::base_url('esquecisenha') ?>" class="link">Esqueceu a senha?</a>
-                        </div>
-                        <button class="btn" type="submit">Login</button>
+                        <button class="btn" type="submit">Recuperar</button>
                     </form>
                 </div>
             </div>

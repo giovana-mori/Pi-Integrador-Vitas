@@ -159,7 +159,9 @@ header {
 .header-info span img {
   margin: 0 3px;
 }
-
+.text-center {
+  text-align: center;
+}
 .header-info span small u {
   text-decoration: none;
   font-weight: bolder;
@@ -688,6 +690,15 @@ footer .container .footer_contact {
   height: auto;
 }
 
+.content_check_mail{
+  border-radius: 10px;
+  display: table;
+  margin: auto;
+  font-weight: 600;
+  padding: 15px;
+  background-color: var(--c-azul-ver-claro);
+}
+
 footer li {
   font-family: mulish;
   font-size: 13pt;
@@ -700,6 +711,10 @@ footer li {
   header .container {
     height: auto;
   }
+  
+.header-info > * {
+  flex: 1;
+}
   .all_contacts_footer {
     display: flex;
     flex-direction: column;
