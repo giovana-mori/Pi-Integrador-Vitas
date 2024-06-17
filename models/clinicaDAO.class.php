@@ -82,4 +82,16 @@ class ClinicaDAO extends Conexao
             return false;
         }
     }
+    public function buscar()
+    {
+        $sql = "SELECT * FROM clinica limit 1";
+        try {
+            $stm = $this->db->prepare($sql);
+            $stm->execute();
+            $this->db = null;
+            return $stm->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 }

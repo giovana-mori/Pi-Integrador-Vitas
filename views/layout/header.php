@@ -27,10 +27,13 @@
                         <li><a href="#faq">FAQ</a></li>
                     </menu>
                     <div class="header-info">
-                        <span><img src="static/images/zapp.svg" /><a href="tel:123-456-7890">123-456-7890</a></span>
+                        <span><img src="static/images/zapp.svg" />
+                            <a href="https://api.whatsapp.com/send?phone=55<?= str_replace(['(', ')', '-', ' '], '', $clinica['WHATSAPP']) ?? '1234567890' ?>"><?= $clinica['WHATSAPP'] ?? '123-456-7890' ?></a>
+                        </span>
+
                         <div class="link-nav">
-                        <a href="login"><button class="botao-sfun">ENTRAR</button></a>
-                        <a href="registro"><button class="botao">CADASTRAR</button></a>
+                            <a href="login"><button class="botao-sfun">ENTRAR</button></a>
+                            <a href="registro"><button class="botao">CADASTRAR</button></a>
                         </div>
                     </div>
                 </div>

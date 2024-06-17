@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
   popularEstados();
-  debugger;
   document.getElementById("estado")?.addEventListener("change", function (e) {
     e.preventDefault();
     // Chama a função para popular as cidades quando o estado é selecionado
@@ -35,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     ],
   });
 });
+
 
 function anchorScrolling(e) {
   console.log(e.currentTarget.dataset.target);

@@ -34,11 +34,12 @@ class PerfilController extends layoutAdminController
             $pessoa->setEmail($_POST['email']);
 
             $pessoaDAO = new PessoaDAO();
-            if ($pessoaDAO->alterar($pessoa))
+            if ($pessoaDAO->alterar($pessoa)) {
                 // header location for current path
-                header('Location: ' . $_SERVER['REQUEST_URI']);
-            else
+                header('Location: ' . Utils::base_url('perfil') . '?mensagem_sucesso=Perfil Atualizado com Sucesso!');
+            } else {
                 echo 'Erro ao atualizar dados!';
+            }
         }
     }
 

@@ -22,12 +22,11 @@ class RegisterController extends LayoutLoginController
             $pessoaDAO = new PessoaDAO();
             //se for maior que zero, quer dizer que inseriu no banco e retornou o ID da pessoa
             if ($pessoaDAO->inserir($pessoa) > 0) {
-                header('Location: login');
+                header('Location: ' . Utils::base_url('login') . '?mensagem_sucesso=Cadastrado com Sucesso!');
                 exit;
             }
 
-            header('Location: registro');
-
+            header('Location: ' . Utils::base_url('registro'));
         }
     }
 }

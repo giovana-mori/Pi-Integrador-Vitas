@@ -202,7 +202,9 @@ ul.listPessoas {
   z-index: 1;
   border-radius: 100%;
   overflow: hidden;
-  box-shadow: 1px 1px 0px 2px rgb(59 205 113), -1px -1px 0px 2px rgb(59 205 113);
+  box-shadow:
+    1px 1px 0px 2px rgb(59 205 113),
+    -1px -1px 0px 2px rgb(59 205 113);
 }
 
 #imagePreview {
@@ -237,6 +239,30 @@ ul.listPessoas {
 
 .img_perfil:hover p {
   visibility: visible;
+}
+
+.float_message {
+  position: fixed;
+  right: 15px;
+  top: 150px;
+  border-radius: 15px;
+  background-color: var(--c-verde-forte);  
+  padding: 15px;
+  color: white;
+  gap: 1em;
+  font-weight: 600;
+  min-width: 100px;
+  transition: opacity 0.5s ease-in; /* Especifica apenas a transição da opacidade */
+  opacity: 0; /* Começa invisível */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.float_message.error {
+  background-color: orangered;
 }
 
 label.imagem {
@@ -334,7 +360,9 @@ select {
   background-clip: padding-box;
   border: 1px solid #ced4da;
   border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition:
+    border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
 }
 
 .btn {

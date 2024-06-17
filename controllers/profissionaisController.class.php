@@ -81,7 +81,7 @@ class ProfissionaisController extends layoutAdminController
                     }
                 }
 
-                header('Location: ' . Utils::base_url('profissionais'));
+                header('Location: ' . Utils::base_url('profissionais') . '?mensagem_sucesso=Profissional Inserido com Sucesso!');
             } else
                 echo 'Erro ao atualizar dados!';
         }
@@ -90,7 +90,7 @@ class ProfissionaisController extends layoutAdminController
     public function editar($id = null)
     {
         if (!$id) {
-            header('Location: profissionais');
+            header('Location: ' . Utils::base_url('profissionais'));
         }
         $data['title'] = 'Editar Profissional';
         $profissional = new ProfissionalDAO();
@@ -185,7 +185,8 @@ class ProfissionaisController extends layoutAdminController
                     }
                 }
 
-                header('Location: ' . Utils::base_url('profissionais'));
+                header('Location: ' . Utils::base_url('profissionais') . '?mensagem_sucesso=Dados Atualizados com Sucesso!');
+
             } else
                 echo 'Erro ao atualizar dados!';
         }

@@ -29,7 +29,7 @@ class ContatoController extends layoutAdminController
             $contatoDAO = new ContatoDAO();
             if ($contatoDAO->inserir($contato))
                 // header location for current path
-                header('Location: ' . Utils::base_url('contato'));
+                header('Location: ' . Utils::base_url('contato') . '?mensagem_sucesso=Contato Inserido com Sucesso!');
             else
                 echo 'Erro ao atualizar dados!';
         }

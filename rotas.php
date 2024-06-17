@@ -105,3 +105,6 @@ $router->get("/api/meusatendimentos/{id}/{date}", [APIController::class, "meusat
 $router->get("/api/buscaratendimento/{date}", [APIController::class, "buscaragendamentos"]);
 $router->post("/api/sendEmail", [APIController::class, "sendEmail"]);
 $router->post("/api/enviarcontato", [APIController::class, "sendContato"]);
+$router->get("/api/vermensagem/{id}", [APIController::class, "verContato"]);
+$router->get("/api/buscarcontatos", [APIController::class, "buscarContatos"]);
+$router->get("/api/buscarcontatos/{nome}", [APIController::class, "buscarContatos"]);

@@ -24,6 +24,7 @@ class ContatoDAO extends Conexao
             return 0;
         }
     }
+
     public function listar()
     {
         $sql = "SELECT ID_CONTATO, ASSUNTO, DESCRICAO, CONTATOS.DATA, PESSOAS.NOME, CONTATOS.PESSOA_ID 
@@ -36,7 +37,38 @@ class ContatoDAO extends Conexao
             $this->db = null;
             return $contato;
         } catch (PDOException $e) {
-            return 0;
+            return [];
+        }
+    }
+
+    public function buscarID($id)
+    {
+        $sql = "SELECT * FROM CONTATOS
+                LEFT JOIN PESSOAS ON PESSOAS.ID_PESSOA = CONTATOS.PESSOA_ID
+                WHERE ID_CONTATO = ?";
+        try {
+            $stm = $this->db->prepare($sql);
+            $stm->bindValue(1, $id);
+            $stm->execute();
+            $contato = $stm->fetch(PDO::FETCH_ASSOC);
+            return $contato;
+        } catch (PDOException $e) {
+            return [];
+        }
+    }
+
+    public function buscar($name){
+        $sql = "SELECT * FROM CONTATOS
+                LEFT JOIN PESSOAS ON PESSOAS.ID_PESSOA = CONTATOS.PESSOA_ID
+                WHERE PESSOAS.NOME LIKE ?";
+        try {
+            $stm = $this->db->prepare($sql);
+            $stm->bindValue(1, "%{$name}%");
+            $stm->execute();
+            $contato = $stm->fetchAll(PDO::FETCH_ASSOC);
+            return $contato;
+        } catch (PDOException $e) {
+            return [];
         }
     }
 }

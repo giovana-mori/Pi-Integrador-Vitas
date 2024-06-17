@@ -39,9 +39,6 @@
                                 <b>Inicio</b> : <?php echo $hora; ?>
                             </li>
                             <li>
-                                <b>Inicio</b> : <?php echo $hora; ?>
-                            </li>
-                            <li>
                                 <b>Duração</b> : <?php echo $duracao; ?>
                             </li>
                             <li>

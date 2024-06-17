@@ -19,7 +19,6 @@ $currentpage = $uri[sizeof($uri) - 1];
     <link rel="stylesheet" href="<?= Utils::base_url('assets/admin/css/admin.css') ?>" />
     <link rel="shortcut icon" href="./static/images/logo_menorSvg.svg" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
-
 </head>
 
 <body>
@@ -32,7 +31,7 @@ $currentpage = $uri[sizeof($uri) - 1];
                 <div class="header-info">
                     <span>
                         <img src="<?= Utils::base_url('static/images/zapp.svg') ?>" />
-                        <a href="tel:123-456-7890">123-456-7890</a>
+                        <a href="https://api.whatsapp.com/send?phone=55<?= str_replace(['(', ')', '-', ' '], '', $clinica['WHATSAPP']) ?? '1234567890' ?>"><?= $clinica['WHATSAPP'] ?? '123-456-7890' ?></a>
                     </span>
                     <span class="bem_vindo"><small>Bem vindo! <u><?= $_SESSION['user_name'] ?></u> <a href="logout">(sair)</a></small></span>
                 </div>

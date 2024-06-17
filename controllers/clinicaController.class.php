@@ -55,7 +55,7 @@ class ClinicaController extends layoutAdminController
             $clinicaDAO = new ClinicaDAO();
             if ($clinicaDAO->alterar($clinica))
                 // header location for current path
-                header('Location: ' . $_SERVER['REQUEST_URI']);
+                header('Location: ' . Utils::base_url('clinica') . '?mensagem_sucesso=Dados Atualizado com Sucesso!');
             else
                 echo 'Erro ao atualizar dados!';
         }

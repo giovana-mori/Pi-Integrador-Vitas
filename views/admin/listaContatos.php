@@ -37,8 +37,8 @@
                         echo '<td>' . $p['NOME'] . '</td>';
                         echo '<td>' . $p['ASSUNTO'] . '</td>';
                         echo '<td>' . $p['DESCRICAO'] . '</td>';
-                        echo '<td>' . $p['DATA'] . '</td>';
-                        echo '<td><a href="' . Utils::base_url('vermensagem/' . $p['ID_CONTATO']) . '" class="btn btn_editar">Editar</a></td>';
+                        echo '<td>' . Utils::formatarData($p['DATA']) . '</td>';
+                        echo '<td><a href="javascript:openContato(' . $p['ID_CONTATO'] . ')" class="btn btn_editar">Visualizar</a></td>';
                         echo '</tr>';
                     }
                     ?>
@@ -46,7 +46,7 @@
             </table>
         <?php
         else :
-            echo '<p class="text-center">Nenhum profissional cadastrado</p>';
+            echo '<p class="text-center">Nenhum Contato cadastrado</p>';
         ?>
         <?php
         endif;
@@ -54,7 +54,60 @@
     </div>
 </div>
 
+
+<div class="overlay" id="overlay" onclick="fecharModal()"></div>
+
+<div class="modal_agendar">
+    <div class="modal_header">
+        <h3 class="header_form admin">
+            Mensagem
+        </h3>
+    </div>
+    <div class="modal_content">
+        <div class="content_form">
+            <div class="item_form">
+                <input type="hidden" id="id_contato" name="id_contato" value="">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" readonly value="<?= $_SESSION['user_name'] ?>" placeholder="Digite o nome de quem sera atendido.." required>
+            </div>
+
+            <div class="item_form">
+                <label for="dataHora">Assunto:</label>
+                <input type="text" id="data" readonly name="data" required>
+            </div>
+
+            <div class="item_form">
+                <label for="dataHora">Mensagem:</label>
+                <textarea name="descricao" id="descricao" cols="30" rows="10" readonly required></textarea>
+            </div>
+            <br>
+            <button type="button" onclick="fecharModal()" class="btn">Fechar</button>
+        </div>
+    </div>
+    <div class="modal_footer"></div>
+</div>
+
 <script>
+    function openContato(id) {
+        const requestOptions = {
+            method: "GET",
+            redirect: "follow"
+        };
+
+        fetch(`${base_url}/api/vermensagem/${id}`, requestOptions)
+            .then((response) => response.text())
+            .then((result) => {
+                result = JSON.parse(result);
+                document.querySelector('#id_contato').value = result.ID_CONTATO;
+                document.querySelector('#nome').value = result.NOME;
+                document.querySelector('#data').value = result.ASSUNTO;
+                document.querySelector('#descricao').value = result.DESCRICAO;
+                document.querySelector('.overlay').style.display = 'block';
+                document.querySelector('.modal_agendar').style.display = 'block';
+            })
+            .catch((error) => console.error(error));
+    }
+
     document.querySelector('#data_pessoa_search').addEventListener('keyup', function(e) {
         e.preventDefault();
         let nome = e.target.value;
@@ -63,19 +116,19 @@
             redirect: "follow"
         };
 
-        fetch(`${base_url}/api/profissionais${nome && '/' + nome}`, requestOptions)
+        fetch(`${base_url}/api/buscarcontatos${nome && '/' + nome}`, requestOptions)
             .then((response) => response.text())
             .then((result) => {
                 result = JSON.parse(result);
                 document.querySelector('.table_admin tbody').innerHTML = '';
                 result.forEach(element => {
                     document.querySelector('.table_admin tbody').innerHTML += `<tr>
-                    <td>${element.id_profissional}</td>
-                    <td>${element.nome}</td>
-                    <td>${element.registroclasseprofissional}</td>
-                    <td>${element.descritivo}</td>
-                    <td>${element.tipo}</td>
-                    <td><a href="${base_url + '/editarprofissional/' + element.id_profissional}" class="btn btn_editar">Editar</a></td>
+                    <td>${element.ID_CONTATO}</td>
+                    <td>${element.NOME}</td>
+                    <td>${element.ASSUNTO}</td>
+                    <td>${element.DESCRICAO}</td>
+                    <td>${element.DATA.split('-').reverse().join('/')}</td>
+                    <td><a href="javascript:openContato(${element.ID_CONTATO})" class="btn btn_editar">Visualizar</a></td>
                     </tr>`;
                     console.log(element);
                 });

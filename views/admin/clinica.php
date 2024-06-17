@@ -46,11 +46,11 @@
         </div>
         <div class="item_form">
             <label for="telefone">Telefone</label>
-            <input type="tel" name="telefone" id="telefone" value="<?= $clinica['TELEFONE'] ?>" required>
+            <input type="tel" name="telefone" id="telefone" value="<?= $clinica['TELEFONE'] ?? null ?>" required>
         </div>
         <div class="item_form">
             <label for="whatsapp">WhatsApp</label>
-            <input type="tel" name="whatsapp" id="whatsapp" value="<?= $clinica['WHATSAPP'] ?>" required>
+            <input type="tel" name="whatsapp" id="whatsapp" value="<?= $clinica['WHATSAPP'] ?? null ?>" required>
         </div>
         <div class="item_form">
             <label for="logradouro">Endereço/Numero</label>

@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  checkMessage();
   document
     .querySelector("#contato_form")
     ?.addEventListener("submit", function (e) {
@@ -12,50 +13,38 @@ document.addEventListener("DOMContentLoaded", function () {
     popularCidades(e.currentTarget.value);
   });
 
-  document
-    .getElementById("profileImage")
-    ?.addEventListener("change", function (event) {
-      debugger;
-      //send image with uploadAvatar and after call reader.onload
-      uploadAvatar(this, document.querySelector("#id_pessoa").value)
-        .then((response) => response.json())
-        .then((result) => {
-          console.log(result);
-          //if result has success, return message
-          alert(result.success);
-        })
-        .catch((error) => console.log("error", error));
-      //show image preview
+  document.getElementById("profileImage")?.addEventListener("change", function (event) {
+    //send image with uploadAvatar and after call reader.onload
+    uploadAvatar(this, document.querySelector("#id_pessoa").value);
+    //show image preview
+    var output = document.querySelector(".imagePreview");
+    output.style.display = "block";
+    //read image with FileReader
+    var reader = new FileReader();
+    reader.onload = function () {
       var output = document.querySelector(".imagePreview");
+      output.src = reader.result;
       output.style.display = "block";
-      //read image with FileReader
-      var reader = new FileReader();
-      reader.onload = function () {
-        var output = document.querySelector(".imagePreview");
-        output.src = reader.result;
-        output.style.display = "block";
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    });
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  });
 
-  document
-    .getElementById("profileLogo")
-    ?.addEventListener("change", function (event) {
-      debugger;
-      //send image with uploadAvatar and after call reader.onload
-      uploadLogo(this, document.querySelector("#id_clinica").value);
-      //show image preview
+  document.getElementById("profileLogo")?.addEventListener("change", function (event) {
+    debugger;
+    //send image with uploadAvatar and after call reader.onload
+    uploadLogo(this, document.querySelector("#id_clinica").value);
+    //show image preview
+    var output = document.querySelector(".imagePreview");
+    output.style.display = "block";
+    //read image with FileReader
+    var reader = new FileReader();
+    reader.onload = function () {
       var output = document.querySelector(".imagePreview");
+      output.src = reader.result;
       output.style.display = "block";
-      //read image with FileReader
-      var reader = new FileReader();
-      reader.onload = function () {
-        var output = document.querySelector(".imagePreview");
-        output.src = reader.result;
-        output.style.display = "block";
-      };
-      reader.readAsDataURL(event.target.files[0]);
-    });
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  });
 
   document.querySelectorAll("[data-profissional]").forEach(function (element) {
     element.addEventListener("click", function (e) {
@@ -65,47 +54,91 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  document
-    .querySelector("#consultaForm")
-    ?.addEventListener("submit", function (e) {
-      e.preventDefault();
-      debugger;
-      //criar fetch post para a url `${base_url}/api/agendar/`, enviar os dados de agendament
-      const form = e.target;
-      const formData = new FormData(form);
-      const url = `${base_url}/api/agendar`;
-      const requestOptions = {
-        method: "POST",
-        body: formData,
-        redirect: "follow",
-      };
+  document.querySelector("#consultaForm")?.addEventListener("submit", function (e) {
+    e.preventDefault();
+    debugger;
+    //criar fetch post para a url `${base_url}/api/agendar/`, enviar os dados de agendament
+    const form = e.target;
+    const formData = new FormData(form);
+    const url = `${base_url}/api/agendar`;
+    const requestOptions = {
+      method: "POST",
+      body: formData,
+      redirect: "follow",
+    };
 
-      //fetch get retorn in json
-      fetch(url, requestOptions)
-        .then((response) => response.json())
-        .then((result) => {
-          console.log(result);
-          //if result has success, return message
-          if (result.success) {
-            debugger;
-            let fileInput = document.querySelector(
-              "#consultaForm [name='upload']"
-            );
-            if (fileInput.files.length > 0) {
-              uploadFile(fileInput, result.id_agenda);
-            }
-            //limpar apenas o input file
-            alert("Consulta agendada com sucesso!");
-          } else {
-            alert("Erro ao agendar consulta!");
+    //fetch get retorn in json
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        //if result has success, return message
+        if (result.success) {
+          debugger;
+          let fileInput = document.querySelector(
+            "#consultaForm [name='upload']"
+          );
+          if (fileInput.files.length > 0) {
+            uploadFile(fileInput, result.id_agenda);
           }
+          //limpar apenas o input file
+          alert("Consulta agendada com sucesso!");
+        } else {
+          alert("Erro ao agendar consulta!");
+        }
 
-          fecharModal();
-        })
-        .catch((error) => console.log("error", error));
-      return false;
-    });
+        fecharModal();
+      })
+      .catch((error) => console.log("error", error));
+    return false;
+  });
+
 });
+
+window.closeMessage = function () {
+  setTimeout(function () {
+    document.querySelector('.float_message')?.remove()
+  }, 500); // Tempo da transição para fechar
+};
+
+function checkMessage() {
+  var url = new URL(window.location);
+  var params = new URLSearchParams(url.search);
+  if (params.has('mensagem_sucesso')) {
+    // Display the success message
+    var message = params.get('mensagem_sucesso');
+    var messageContainer = `<div class="float_message" style="opacity:1">
+                                <p>${decodeURIComponent(message)}</p>
+                                <span class="close" onclick="closeMessage()" style="cursor:pointer">x</span>
+                            </div>`
+    document.body.insertAdjacentHTML('afterbegin', messageContainer);
+    params.delete('mensagem_sucesso');
+    window.history.replaceState({}, document.title, url.pathname);
+    setTimeout(function () {
+      document.querySelector('.float_message')?.remove();
+    }, 5000);
+  }
+  // Create an XMLHttpRequest to fetch the current page headers
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', window.location.href, true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      // Check if the custom header is present
+      var successMessage = xhr.getResponseHeader('X-Success-Message');
+      if (successMessage) {
+        // Display the success message
+        var messageContainer = `<div class="float_message">
+                                    <p>${successMessage}</p>
+                                    <span class="close">x</span>
+                                </div>`
+        messageContainer.textContent = successMessage;
+        document.body.insertBefore(messageContainer, document.body.firstChild);
+      }
+    }
+  };
+  xhr.send();
+}
+
 
 async function popularCidades(estadoSelecionado) {
   debugger;
@@ -154,8 +187,13 @@ async function uploadAvatar(inputFile, id_pessoa) {
 
   fetch(`${base_url}/api/upload`, requestOptions)
     .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.error(error));
+    .then((result) => {
+      alert("Imagem enviada com sucesso!");
+    })
+    .catch((error) => {
+      alert("Erro ao enviar imagem!");
+      console.error(error);
+    });
 }
 
 function uploadLogo(inputFile, id_clinica) {
@@ -181,8 +219,13 @@ function uploadLogo(inputFile, id_clinica) {
 
   fetch(`${base_url}/api/uploadlogo`, requestOptions)
     .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.error(error));
+    .then((result) => {
+      alert("Imagem enviada com sucesso!");
+    })
+    .catch((error) => {
+      alert("Erro ao enviar imagem!");
+      console.error(error);
+    });
 }
 
 function uploadFile(inputFile, id_agenda) {
@@ -309,28 +352,26 @@ function openAgendamentoInfos(id_agendamento = undefined) {
     .then((data) => {
       let html = `<ul>
                       <li>
+                          <b>Nome:</b> ${data.NOME_PESSOA}
+                      </li>
+                      <li>
                           <b>Inicio:</b> ${data.HORA}
                       </li>
                       <li>
-                          <b>Data:</b> ${data.DATA.split("-")
-                            .reverse()
-                            .join("/")}
+                          <b>Data:</b> ${data.DATA.split("-").reverse().join("/")}
                       </li>
                       <li>
-                          <b>Obs:</b> ${
-                            data.OBSERVACOES ? data.OBSERVACOES : "Nenhuma"
-                          }
+                          <b>Obs:</b> ${data.OBSERVACOES ? data.OBSERVACOES : "Nenhuma"}
                       </li>
                       <li class='content_download'>
-                          <b>Anexo: </b> ${
-                            data.UPLOADS.length > 0
-                              ? '<a href="' +
-                                base_url +
-                                "/uploads/documentos/" +
-                                data.UPLOADS[0].URL +
-                                '" target="_blank" class="download_btn">Baixar Arquivo</a>'
-                              : "Nenhum Arquivo"
-                          }
+                          <b>Anexo: </b> ${data.UPLOADS.length > 0
+          ? '<a href="' +
+          base_url +
+          "/uploads/documentos/" +
+          data.UPLOADS[0].URL +
+          '" target="_blank" class="download_btn">Baixar Arquivo</a>'
+          : "Nenhum Arquivo"
+        }
                       </li>
                   </ul>`;
       document.querySelector(".ler_infos").innerHTML = html;
@@ -436,11 +477,10 @@ function filterAtendimentos(date) {
                         <div class="item_agendamento_header">
                             <div class="item_agendamento_header_title">
                                 ${item.DATA.split("-").reverse().join("/")}
-                                <a href="${
-                                  base_url +
-                                  "/editaragendamento/" +
-                                  item.ID_AGENDA
-                                }">editar</a>
+                                <a href="${base_url +
+            "/editaragendamento/" +
+            item.ID_AGENDA
+            }">editar</a>
                             </div>
                         </div>
                         <div class="item_agendamento_body">
@@ -455,21 +495,18 @@ function filterAtendimentos(date) {
                                     <b>Duração</b> : ${item.DURACAO}
                                 </li>
                                 <li>
-                                    <b>Profissional</b> : ${
-                                      item.NOME_PROFISSIONAL
-                                    }
+                                    <b>Profissional</b> : ${item.NOME_PROFISSIONAL
+            }
                                 </li>
                                 <li class="item_obs">
-                                    <b>Obs</b> : ${
-                                      item.OBSERVACOES
-                                        ? item.OBSERVACOES
-                                        : "Nenhuma"
-                                    }
+                                    <b>Obs</b> : ${item.OBSERVACOES
+              ? item.OBSERVACOES
+              : "Nenhuma"
+            }
                                 </li>
                             </ul>
-                            <input type="button" value="ver mais" onclick="openAgendamentoInfos(${
-                              item.ID_AGENDA
-                            })" class="button_ver_mais">
+                            <input type="button" value="ver mais" onclick="openAgendamentoInfos(${item.ID_AGENDA
+            })" class="button_ver_mais">
                         </div>
                     </div>`;
         });
@@ -508,21 +545,18 @@ function filterMeusAtendimentos(id, date) {
                                     <b>Duração</b> : ${item.DURACAO}
                                 </li>
                                 <li>
-                                    <b>Profissional</b> : ${
-                                      item.NOME_PROFISSIONAL
-                                    }
+                                    <b>Profissional</b> : ${item.NOME_PROFISSIONAL
+            }
                                 </li>
                                 <li class="item_obs">
-                                    <b>Obs</b> : ${
-                                      item.OBSERVACOES
-                                        ? item.OBSERVACOES
-                                        : "Nenhuma"
-                                    }
+                                    <b>Obs</b> : ${item.OBSERVACOES
+              ? item.OBSERVACOES
+              : "Nenhuma"
+            }
                                 </li>
                             </ul>
-                            <input type="button" value="ver mais" onclick="openAgendamentoInfos(${
-                              item.ID_AGENDA
-                            })" class="button_ver_mais">
+                            <input type="button" value="ver mais" onclick="openAgendamentoInfos(${item.ID_AGENDA
+            })" class="button_ver_mais">
                         </div>
                     </div>`;
         });
@@ -561,21 +595,18 @@ function filterMeusAgendamentos(id, date) {
                                     <b>Duração</b> : ${item.DURACAO}
                                 </li>
                                 <li>
-                                    <b>Profissional</b> : ${
-                                      item.NOME_PROFISSIONAL
-                                    }
+                                    <b>Profissional</b> : ${item.NOME_PROFISSIONAL
+            }
                                 </li>
                                 <li class="item_obs">
-                                    <b>Obs</b> : ${
-                                      item.OBSERVACOES
-                                        ? item.OBSERVACOES
-                                        : "Nenhuma"
-                                    }
+                                    <b>Obs</b> : ${item.OBSERVACOES
+              ? item.OBSERVACOES
+              : "Nenhuma"
+            }
                                 </li>
                             </ul>
-                            <input type="button" value="ver mais" onclick="openAgendamentoInfos(${
-                              item.ID_AGENDA
-                            })" class="button_ver_mais">
+                            <input type="button" value="ver mais" onclick="openAgendamentoInfos(${item.ID_AGENDA
+            })" class="button_ver_mais">
                         </div>
                     </div>`;
         });

@@ -51,7 +51,7 @@ class AgendamentosController extends layoutAdminController
             $agendamento = new AgendaDAO();
             if ($agendamento->alterar($agenda))
                 // header location for current path
-                header('Location: ' .Utils::base_url('agendamentos'));
+                header('Location: ' . Utils::base_url('agendamentos') . '?mensagem_sucesso=Agendamento Alterado com Sucesso!');
             else
                 echo 'Erro ao atualizar dados!';
         }

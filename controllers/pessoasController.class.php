@@ -35,7 +35,7 @@ class PessoasController extends layoutAdminController
             $pessoaDAO = new PessoaDAO();
             if ($pessoaDAO->inserir($pessoa))
                 // header location for current path
-                header('Location: ' . Utils::base_url('clientes'));
+                header('Location: ' . Utils::base_url('clientes') . '?mensagem_sucesso=Cliente Inserido com Sucesso!');
             else
                 echo 'Erro ao atualizar dados!';
         }
@@ -44,7 +44,7 @@ class PessoasController extends layoutAdminController
     public function editar($id = null)
     {
         if (!$id) {
-            header('Location: perfil');
+            header('Location: ' . Utils::base_url('perfil'));
         }
         $data['title'] = 'Editar Cliente';
         $pessoa = new PessoaDAO();

@@ -372,7 +372,7 @@ class APIController
             $contato->setAssunto($_POST['assunto']);
             $contato->setDescricao($_POST['descricao']);
             $contato->setIdPessoa($_POST['id_pessoa']);
-            
+
             $contatoDAO = new ContatoDAO();
             $retorno = $contatoDAO->inserir($contato);
             if ($retorno > 0) {
@@ -380,6 +380,37 @@ class APIController
             } else {
                 echo json_encode(["error" => "Erro ao enviar"]);
             }
+        }
+    }
+
+    public function verContato($id)
+    {
+        try {
+            if (!$id) {
+                echo json_encode(["error" => "ID não informado"]);
+                exit;
+            }
+            $contatoDAO = new ContatoDAO();
+            $contato = $contatoDAO->buscarID($id);
+            if ($contato) {
+                echo json_encode($contato);
+            }
+        } catch (Exception $e) {
+            echo json_encode(["error" => $e->getMessage()]);
+        }
+    }
+
+    public function buscarContatos($nome = null)
+    {
+        try {
+            $contato = new ContatoDAO();
+            if ($nome) {
+                echo json_encode($contato->buscar($nome));
+                exit;
+            }
+            echo json_encode($contato->listar());
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
     }
 }
