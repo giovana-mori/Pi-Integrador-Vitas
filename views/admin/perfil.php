@@ -76,8 +76,10 @@
             <select name="cidade" id="cidade">
                 <option hidden="true" value="">Selecione uma Cidade</option>
                 <?php
-                foreach ($cidades['cidades'] as $cidade) {
-                    echo "<option value='{$cidade}' " . ($pessoa['CIDADE'] == $cidade ? 'selected' : '') . ">{$cidade}</option>";
+                if (isset($cidades['cidades'])) {
+                    foreach ($cidades['cidades'] as $cidade) {
+                        echo "<option value='{$cidade}' " . ($pessoa['CIDADE'] == $cidade ? 'selected' : '') . ">{$cidade}</option>";
+                    }
                 }
                 ?>
             </select>

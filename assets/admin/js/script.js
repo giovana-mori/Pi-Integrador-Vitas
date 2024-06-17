@@ -6,6 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
       validarFormulario(e);
     });
 
+  document.getElementById("estado")?.addEventListener("change", function (e) {
+    e.preventDefault();
+    // Chama a função para popular as cidades quando o estado é selecionado
+    popularCidades(e.currentTarget.value);
+  });
+
   document
     .getElementById("profileImage")
     ?.addEventListener("change", function (event) {
@@ -254,7 +260,7 @@ $(document).ready(function () {
 
 function initializeCalendar() {
   document.querySelector(".content_calendar").innerHTML =
-  '<div id="calendar"></div>';
+    '<div id="calendar"></div>';
   var calendar = $("#calendar").fullCalendar({
     header: {
       left: "prev,next today",
@@ -429,8 +435,12 @@ function filterAtendimentos(date) {
           html += `<div class="item_agendamento">
                         <div class="item_agendamento_header">
                             <div class="item_agendamento_header_title">
-                                ${item.DATA.split('-').reverse().join('/')}
-                                <a href="${base_url + '/editaragendamento/' + item.ID_AGENDA}">editar</a>
+                                ${item.DATA.split("-").reverse().join("/")}
+                                <a href="${
+                                  base_url +
+                                  "/editaragendamento/" +
+                                  item.ID_AGENDA
+                                }">editar</a>
                             </div>
                         </div>
                         <div class="item_agendamento_body">
