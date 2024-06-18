@@ -50,6 +50,7 @@ class PerfilController extends layoutAdminController
         $data['title'] = 'Meu Agendamento';
         $agendamento = new AgendaDAO();
         $agendamentos = $agendamento->buscarMeusAgendamentos($_SESSION['user_id']);
+
         //foreach nos agendamentos e buscar os uploads
         foreach ($agendamentos as $key => $value) {
             //insere no array do agendamento a chave upload e seu respectivo valo
