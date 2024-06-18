@@ -4,7 +4,7 @@ class PessoasController extends layoutAdminController
 {
     public function index()
     {
-        $data['title'] = 'Lista de Clientes';
+        $data['title'] = 'Lista de Pessoas';
         $pessoa = new PessoaDAO();
         $data['pessoas'] = $pessoa->listar();
         // $data['estados'] = Utils::loadEstados();
@@ -12,7 +12,7 @@ class PessoasController extends layoutAdminController
     }
     public function cadastro()
     {
-        $data['title'] = 'Cadastrar Cliente';
+        $data['title'] = 'Cadastrar Pessoa';
         $data['estados'] = Utils::loadEstados();
         $this->render('views/admin/cadastrarPessoa', $data);
     }
@@ -32,10 +32,13 @@ class PessoasController extends layoutAdminController
             $pessoa->setEstado($_POST['estado']);
             $pessoa->setCidade($_POST['cidade']);
             $pessoa->setEmail($_POST['email']);
+            $pessoa->setTelefone1($_POST['telefone1']);
+            $pessoa->setTelefone2($_POST['telefone2']);
+            
             $pessoaDAO = new PessoaDAO();
             if ($pessoaDAO->inserir($pessoa))
                 // header location for current path
-                header('Location: ' . Utils::base_url('clientes') . '?mensagem_sucesso=Cliente Inserido com Sucesso!');
+                header('Location: ' . Utils::base_url('pessoas') . '?mensagem_sucesso=Pessoa Inserida com Sucesso!');
             else
                 echo 'Erro ao atualizar dados!';
         }
@@ -46,7 +49,7 @@ class PessoasController extends layoutAdminController
         if (!$id) {
             header('Location: ' . Utils::base_url('perfil'));
         }
-        $data['title'] = 'Editar Cliente';
+        $data['title'] = 'Editar Pessoa';
         $pessoa = new PessoaDAO();
         $data['pessoa'] = $pessoa->buscarID((int)$id);
         $data['estados'] = Utils::loadEstados();

@@ -13,6 +13,7 @@
     <div class="box_meus_agendamentos">
         <?php if (count($agendamentos) > 0) : ?>
             <?php foreach ($agendamentos as $key => $value) :
+                $id = $value['ID_AGENDA'];
                 $nomePessoa = $value['NOME_PESSOA'];
                 $hora = $value['HORA'];
                 $duracao = $value['DURACAO'];
@@ -26,8 +27,8 @@
                 <div class="item_agendamento">
                     <div class="item_agendamento_header">
                         <div class="item_agendamento_header_title">
-                            <?php echo $data; ?>                            
-                            <a href="<?= Utils::base_url('editaragendamento/') . $id ?>">editar</a>
+                            <?php echo $data; ?>
+                            <a href="javascript:deleteAgendamnto(<?= $id ?>)">deletar</a>
                         </div>
                     </div>
                     <div class="item_agendamento_body">
@@ -75,3 +76,26 @@
     </div>
     <div class="modal_footer"></div>
 </div>
+
+<script>
+    function deleteAgendamnto(id) {
+        if (confirm("Deseja realmente deletar esse agendamento?")) {
+            debugger;
+            const requestOptions = {
+                method: "GET",
+                redirect: "follow"
+            };
+
+            fetch(`${base_url}/api/deletaragendamento${id && '/' + id}`, requestOptions)
+                .then((response) => response.json())
+                .then((result) => {
+                    if (result.success) {
+                        alert('Agendamento deletado com sucesso!')
+                        window.location.reload();
+                    }
+
+                })
+                .catch((error) => console.error(error));
+        }
+    }
+</script>

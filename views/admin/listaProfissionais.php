@@ -21,33 +21,35 @@
         <?php
         if (isset($profissionais) && count($profissionais) > 0) :
         ?>
-            <table class="table_admin">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Registro (nº)</th>
-                        <th>Descritivo</th>
-                        <th>Tipo</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    //$pessoas é a variavel que recebeu as pessoas do banco, e $p é a variavel auxiliar do foreach que contem a pessoa
-                    foreach ($profissionais as $p) {
-                        echo '<tr>';
-                        echo '<td>' . $p['id_profissional'] . '</td>';
-                        echo '<td>' . $p['nome'] . '</td>';
-                        echo '<td>' . $p['registroclasseprofissional'] . '</td>';
-                        echo '<td>' . $p['descritivo'] . '</td>';
-                        echo '<td>' . $p['tipo'] . '</td>';
-                        echo '<td><a href="' . Utils::base_url('editarprofissional/' . $p['id_profissional']) . '" class="btn btn_editar">Editar</a></td>';
-                        echo '</tr>';
-                    }
-                    ?>
-                </tbody>
-            </table>
+            <div class="wrapper_table">
+                <table class="table_admin">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Registro (nº)</th>
+                            <th>Descritivo</th>
+                            <th>Tipo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        //$pessoas é a variavel que recebeu as pessoas do banco, e $p é a variavel auxiliar do foreach que contem a pessoa
+                        foreach ($profissionais as $p) {
+                            echo '<tr>';
+                            echo '<td>' . $p['id_profissional'] . '</td>';
+                            echo '<td>' . $p['nome'] . '</td>';
+                            echo '<td>' . $p['registroclasseprofissional'] . '</td>';
+                            echo '<td>' . $p['descritivo'] . '</td>';
+                            echo '<td>' . $p['tipo'] . '</td>';
+                            echo '<td><a href="' . Utils::base_url('editarprofissional/' . $p['id_profissional']) . '" class="btn btn_editar">Editar</a></td>';
+                            echo '</tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         <?php
         else :
             echo '<p class="text-center">Nenhum profissional cadastrado</p>';

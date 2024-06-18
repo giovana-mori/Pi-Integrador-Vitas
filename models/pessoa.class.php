@@ -6,18 +6,20 @@ class Pessoa
     private $convenios;
     private int $id_pessoa;
     private string $nome;
-    private string $cpf ;
-    private string $dataNasc ;
-    private string $genero ;
-    private string $email ;
-    private string $senha ;
-    private string $foto ;
-    private string $cep ;
-    private string $logradouro ;
-    private string $bairro ;
-    private string $estado ;
-    private string $cidade ;
-    public function __construct(int $id_pessoa = 0, string $nome = "", string $cpf = "", string $dataNasc = "", string $genero = "", string $email = "", string $senha = "", string $foto = "", string $cep = "", string $logradouro = "", string $bairro = "", string $estado = "", string $cidade = "")
+    private string $cpf;
+    private string $dataNasc;
+    private string $genero;
+    private string $email;
+    private string $senha;
+    private string $foto;
+    private string $cep;
+    private string $logradouro;
+    private string $bairro;
+    private string $estado;
+    private string $cidade;
+    private string $telefone1;
+    private string $telefone2;
+    public function __construct(int $id_pessoa = 0, string $nome = "", string $cpf = "", string $dataNasc = "", string $genero = "", string $email = "", string $senha = "", string $foto = "", string $cep = "", string $logradouro = "", string $bairro = "", string $estado = "", string $cidade = "", string $telefone1 = "", string $telefone2 = "")
     {
         $this->id_pessoa = $id_pessoa;
         $this->nome = $nome;
@@ -32,7 +34,10 @@ class Pessoa
         $this->bairro = $bairro;
         $this->estado = $estado;
         $this->cidade = $cidade;
+        $this->telefone1 = $telefone1;
+        $this->telefone2 = $telefone2;
     }
+
     public function getId_pessoa()
     {
         return $this->id_pessoa;
@@ -86,9 +91,13 @@ class Pessoa
     {
         return $this->cidade;
     }
-    public function getTelefones()
+    public function getTelefone1()
     {
-        return $this->telefones;
+        return $this->telefone1;
+    }
+    public function getTelefone2()
+    {
+        return $this->telefone2;
     }
     public function getConvenios()
     {
@@ -147,15 +156,18 @@ class Pessoa
     {
         $this->cidade = $cidade;
     }
-    public function setTelefones($ddd, $numero)
+    public function setTelefone1($telefone1)
     {
-        $telefone = new Telefone($ddd, $numero);
-        $this->telefones[] = $telefone;
+        $this->telefone1 = $telefone1;
+    }
+
+    public function setTelefone2($telefone2)
+    {
+        $this->telefone2 = $telefone2;
     }
     public function setConvenios($nome)
     {
         $convenio = new Convenio($nome);
         $this->convenios[] = $convenio;
     }
-
 }

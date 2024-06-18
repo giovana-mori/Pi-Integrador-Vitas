@@ -3,11 +3,11 @@
     <h3 class="title_admin">
       <?= $title ?>
     </h3>
+    <small>Selecione um profissional para agendar uma consulta</small>
   </div>
 
   <?php if (count($profissionais) > 0) : ?>
     <div class="box_profissionais">
-      <span>SELECIONE UM PROFISSIONAL:</span>
       <div class="profissionais">
         <div class="optimization-content-style">
           <?php
@@ -15,10 +15,10 @@
           ?>
             <div class="optimization-content-desc" data-profissional="<?= $value['id_profissional'] ?>" class="">
               <div class="simbolo">
-                <img src="https://static.vecteezy.com/system/resources/previews/013/042/571/original/default-avatar-profile-icon-social-media-user-photo-in-flat-style-vector.jpg">
+                <img width="100px" height="100px" src="<?= $value['foto'] ? Utils::base_url('uploads/') . $value['foto'] : 'https://static.vecteezy.com/system/resources/previews/013/042/571/original/default-avatar-profile-icon-social-media-user-photo-in-flat-style-vector.jpg' ?>">
               </div>
               <h2><?= $value['nome'] ?></h2>
-              <small><?= $value['tipo_profissional'] ?> - <?= $value['descritivo'] ?></small>
+              <small class="text-center"><?= $value['tipo_profissional'] ?> - <?= $value['descritivo'] ?></small>
             </div>
           <?php
           endforeach;

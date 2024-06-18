@@ -4,7 +4,7 @@ class ContatoController extends layoutAdminController
 {
     public function index()
     {
-        //render view
+        $data['title'] = 'Contato';
         $this->render('views/admin/contato');
     }
 
@@ -32,18 +32,6 @@ class ContatoController extends layoutAdminController
                 header('Location: ' . Utils::base_url('contato') . '?mensagem_sucesso=Contato Inserido com Sucesso!');
             else
                 echo 'Erro ao atualizar dados!';
-        }
-    }
-
-    public function sendEmail()
-    {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $message = $_POST['message'];
-            Utils::enviarEmailSMTP($name, $email, $message);
-            $this->render('views/admin/contato');
         }
     }
 }

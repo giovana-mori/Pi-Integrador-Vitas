@@ -95,6 +95,12 @@ menu {
   justify-content: center;
 }
 
+.singleForm {
+  max-width: 100% !important;
+  width: auto !important;
+  margin: auto;
+}
+
 menu li {
   font-family: mulish;
   list-style-type: none;
@@ -102,6 +108,30 @@ menu li {
   width: auto;
   height: 23px;
   flex-grow: 0;
+}
+
+.float_message {
+  position: fixed;
+  right: 15px;
+  top: 150px;
+  border-radius: 15px;
+  background-color: var(--c-verde-forte);
+  padding: 15px;
+  color: white;
+  gap: 1em;
+  font-weight: 600;
+  min-width: 100px;
+  transition: opacity 0.5s ease-in; /* Especifica apenas a transição da opacidade */
+  opacity: 0; /* Começa invisível */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.float_message.error {
+  background-color: orangered;
 }
 
 menu li a {
@@ -227,6 +257,7 @@ header {
 
 .simbolo img {
   border-radius: 50%;
+  object-fit: cover;
 }
 
 section {
@@ -690,7 +721,7 @@ footer .container .footer_contact {
   height: auto;
 }
 
-.content_check_mail{
+.content_check_mail {
   border-radius: 10px;
   display: table;
   margin: auto;
@@ -711,10 +742,27 @@ footer li {
   header .container {
     height: auto;
   }
-  
-.header-info > * {
-  flex: 1;
-}
+  .content_forms {
+    padding: 10px;
+  }
+  .flex_card {
+    flex-direction: column !important;
+    align-items: unset !important;
+  }
+  .division_left {
+    padding: 10px;
+  }
+  .header-info span {
+    margin: 0 auto 10px;
+  }
+  .division_left,
+  .content_form {
+    width: auto !important;
+    max-width: 100% !important;
+  }
+  .header-info > * {
+    flex: 1;
+  }
   .all_contacts_footer {
     display: flex;
     flex-direction: column;
@@ -731,6 +779,7 @@ footer li {
     align-items: center;
     width: 100%;
     justify-content: space-between;
+    flex-direction: column;
   }
 
   .optimization-content-desc {
@@ -769,7 +818,7 @@ footer li {
     align-items: center;
     flex-direction: column;
     width: 100%;
-    gap: 1em;
+    gap: 0.51em;
     padding: 15px 0;
   }
 

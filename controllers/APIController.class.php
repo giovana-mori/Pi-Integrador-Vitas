@@ -120,12 +120,6 @@ class APIController
                 exit;
             }
 
-            // Verifica se o arquivo já existe
-            if (file_exists($targetFile)) {
-                echo json_encode(["error" => "Arquivo já existe"]);
-                exit;
-            }
-
             // Verifica o tamanho do arquivo
             if ($_FILES["profileImage"]["size"] > 5000000) {
                 echo json_encode(["error" => "Arquivo muito grande"]);
@@ -176,12 +170,6 @@ class APIController
             } else {
                 // echo "Arquivo não é uma imagem.";
                 echo json_encode(["error" => "Arquivo não é uma imagem"]);
-                exit;
-            }
-
-            // Verifica se o arquivo já existe
-            if (file_exists($targetFile)) {
-                echo json_encode(["error" => "Arquivo já existe"]);
                 exit;
             }
 
@@ -399,8 +387,13 @@ class APIController
 
             $contatoDAO = new ContatoDAO();
             $retorno = $contatoDAO->inserir($contato);
+
+            $pessoaDAO = new PessoaDAO();
+            $pessoa = $pessoaDAO->buscarID($_POST['id_pessoa']);
+
             if ($retorno > 0) {
                 echo json_encode(["success" => "Agendamento realizado com sucesso", "id_contato" => $retorno]);
+                Utils::sendEmailPHPMailer($pessoa["NOME"], $pessoa["EMAIL"], $contato->getAssunto(), $contato->getDescricao());
             } else {
                 echo json_encode(["error" => "Erro ao enviar"]);
             }
@@ -435,6 +428,24 @@ class APIController
             echo json_encode($contato->listar());
         } catch (Exception $e) {
             echo $e->getMessage();
+        }
+    }
+
+    public function deletarAgendamento($id)
+    {
+        try {
+            if (!$id) {
+                echo json_encode(["error" => "ID não informado"]);
+                exit;
+            }
+            $agendamento = new AgendaDAO();
+            if ($agendamento->remove($id)) {
+                echo json_encode(["success" => "Agendamento deletado com sucesso"]);
+            } else {
+                echo json_encode(["error" => "Erro ao deletar"]);
+            }
+        } catch (Exception $e) {
+            echo json_encode(["error" => $e->getMessage()]);
         }
     }
 }

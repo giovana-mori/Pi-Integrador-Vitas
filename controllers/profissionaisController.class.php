@@ -20,6 +20,7 @@ class ProfissionaisController extends layoutAdminController
         $data['especialidades'] = $especialidades->listarEspecilidades();
         $clinica = new ClinicaDAO();
         $data['clinica'] = $clinica->buscarID(1);
+
         $data['clinica']['SEGUNDA'] = Utils::splitHourClinica($data['clinica']['SEGUNDA']);
         $data['clinica']['TERCA'] = Utils::splitHourClinica($data['clinica']['TERCA']);
         $data['clinica']['QUARTA'] = Utils::splitHourClinica($data['clinica']['QUARTA']);

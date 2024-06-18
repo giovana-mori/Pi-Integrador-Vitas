@@ -47,6 +47,16 @@
                 </div>
             </div>
         </div>
+        <div class="itens_split">
+            <div class="item_form">
+                <label for="name">Telefone 1</label>
+                <input type="tel" name="telefone1" id="telefone1" value="" required>
+            </div>
+            <div class="item_form">
+                <label for="name">Telefone 2</label>
+                <input type="tel" name="telefone2" id="telefone2" value="">
+            </div>
+        </div>
         <div class="item_form">
             <label for="cep">CEP</label>
             <input type="text" name="cep" id="cep" value="" required>
@@ -76,6 +86,6 @@
                 <option hidden="true" value="">Selecione uma Cidade</option>
             </select>
         </div>
-        <button class="btn center" type="submit">Cadastrar Cliente</button>
+        <button class="btn center" type="submit">Cadastrar Pessoa</button>
     </form>
 </div>

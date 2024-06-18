@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  checkMessage();
   popularEstados();
   document.getElementById("estado")?.addEventListener("change", function (e) {
     e.preventDefault();
@@ -35,6 +36,49 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+window.closeMessage = function () {
+  setTimeout(function () {
+    document.querySelector(".float_message")?.remove();
+  }, 500); // Tempo da transição para fechar
+};
+
+function checkMessage() {
+  var url = new URL(window.location);
+  var params = new URLSearchParams(url.search);
+  if (params.has("mensagem_sucesso")) {
+    // Display the success message
+    var message = params.get("mensagem_sucesso");
+    var messageContainer = `<div class="float_message" style="opacity:1">
+                                <p>${decodeURIComponent(message)}</p>
+                                <span class="close" onclick="closeMessage()" style="cursor:pointer">x</span>
+                            </div>`;
+    document.body.insertAdjacentHTML("afterbegin", messageContainer);
+    params.delete("mensagem_sucesso");
+    window.history.replaceState({}, document.title, url.pathname);
+    setTimeout(function () {
+      document.querySelector(".float_message")?.remove();
+    }, 5000);
+  }
+  // Create an XMLHttpRequest to fetch the current page headers
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", window.location.href, true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      // Check if the custom header is present
+      var successMessage = xhr.getResponseHeader("X-Success-Message");
+      if (successMessage) {
+        // Display the success message
+        var messageContainer = `<div class="float_message">
+                                    <p>${successMessage}</p>
+                                    <span class="close">x</span>
+                                </div>`;
+        messageContainer.textContent = successMessage;
+        document.body.insertBefore(messageContainer, document.body.firstChild);
+      }
+    }
+  };
+  xhr.send();
+}
 
 function anchorScrolling(e) {
   console.log(e.currentTarget.dataset.target);
@@ -84,7 +128,6 @@ async function popularCidades(estadoSelecionado) {
 }
 
 function performLogin() {
-  debugger;
   var username = document.getElementById("email").value;
   var password = document.getElementById("senha").value;
 

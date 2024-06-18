@@ -32,6 +32,8 @@ class PerfilController extends layoutAdminController
             $pessoa->setEstado($_POST['estado']);
             $pessoa->setCidade($_POST['cidade']);
             $pessoa->setEmail($_POST['email']);
+            $pessoa->setTelefone1($_POST['telefone1']);
+            $pessoa->setTelefone2($_POST['telefone2']);
 
             $pessoaDAO = new PessoaDAO();
             if ($pessoaDAO->alterar($pessoa)) {

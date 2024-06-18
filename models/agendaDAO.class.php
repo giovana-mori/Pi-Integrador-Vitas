@@ -288,4 +288,47 @@ class AgendaDAO extends Conexao
             return [];
         }
     }
+
+    public function remove($id)
+    {
+        // Verificação se o ID existe na tabela AGENDA_UPLOADS
+        $checkUploadSql = "SELECT COUNT(*) FROM AGENDA_UPLOADS WHERE AGENDA_ID = ?";
+        // SQL para deletar os uploads relacionados
+        $deleteUploadsSql = "DELETE FROM AGENDA_UPLOADS WHERE AGENDA_ID = ?";
+        // SQL para deletar a agenda
+        $deleteAgendaSql = "DELETE FROM AGENDAS WHERE ID_AGENDA = ?";
+
+        try {
+            // Preparar e executar a verificação na tabela AGENDA_UPLOADS
+            $checkUploadStm = $this->db->prepare($checkUploadSql);
+            $checkUploadStm->bindValue(1, $id, PDO::PARAM_INT);
+            $checkUploadStm->execute();
+
+            // Obter o resultado da verificação
+            $uploadCount = $checkUploadStm->fetchColumn();
+
+            if ($uploadCount > 0) {
+                // Se existirem uploads, deletar os uploads relacionados
+                $deleteUploadsStm = $this->db->prepare($deleteUploadsSql);
+                $deleteUploadsStm->bindValue(1, $id, PDO::PARAM_INT);
+                $deleteUploadsStm->execute();
+            }
+
+            // Depois de deletar os uploads (se houver), deletar a agenda
+            $deleteAgendaStm = $this->db->prepare($deleteAgendaSql);
+            $deleteAgendaStm->bindValue(1, $id, PDO::PARAM_INT);
+            $deleteAgendaStm->execute();
+
+            // Verifica se a deleção da agenda foi bem-sucedida
+            if ($deleteAgendaStm->rowCount() > 0) {
+                $this->db = null;
+                return 1;
+            } else {
+                return 0; // Nenhuma linha afetada, deleção falhou
+            }
+        } catch (PDOException $e) {
+            error_log($e->getMessage());
+            return 0;
+        }
+    }
 }

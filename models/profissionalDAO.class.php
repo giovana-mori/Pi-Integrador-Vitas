@@ -116,7 +116,7 @@ class ProfissionalDAO extends Conexao
 
     public function listarProfissionais()
     {
-        $sql = "SELECT PROF.id_profissional, PE.nome, PROF.registroclasseprofissional, TPROF.nome AS tipo, ESP.descritivo, ESP.TIPO AS tipo_profissional
+        $sql = "SELECT PROF.id_profissional, PE.nome, PE.foto, PROF.registroclasseprofissional, TPROF.nome AS tipo, ESP.descritivo, ESP.TIPO AS tipo_profissional
                 FROM PESSOAS PE
                 LEFT JOIN PROFISSIONAIS PROF ON PROF.PESSOA_ID = PE.ID_PESSOA
                 LEFT JOIN TIPO_PROFISSIONAL TPROF ON TPROF.ID_TIPO_PROFISSIONAL = PROF.TIPO_PROFISSIONAL_ID

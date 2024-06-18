@@ -26,12 +26,14 @@ $currentpage = $uri[sizeof($uri) - 1];
         <div class="container">
             <div class="content_nav">
                 <div class="logo-top">
-                    <img src="<?= Utils::base_url('static/images/Logo-vitas.svg') ?>" />
+                    <a href="<?= Utils::base_url('perfil') ?>">
+                        <img src="<?= Utils::base_url('static/images/Logo-vitas.svg') ?>" />
+                    </a>
                 </div>
                 <div class="header-info">
                     <span>
                         <img src="<?= Utils::base_url('static/images/zapp.svg') ?>" />
-                        <a href="https://api.whatsapp.com/send?phone=55<?= str_replace(['(', ')', '-', ' '], '', $clinica['WHATSAPP']) ?? '1234567890' ?>"><?= $clinica['WHATSAPP'] ?? '123-456-7890' ?></a>
+                        <a href="https://api.whatsapp.com/send?phone=55<?= str_replace(['(', ')', '-', ' '], '', $clinicainfos['WHATSAPP']) ?? '1234567890' ?>"><?= $clinicainfos['WHATSAPP'] ?? '123-456-7890' ?></a>
                     </span>
                     <span class="bem_vindo"><small>Bem vindo! <u><?= $_SESSION['user_name'] ?></u> <a href="logout">(sair)</a></small></span>
                 </div>
@@ -45,6 +47,13 @@ $currentpage = $uri[sizeof($uri) - 1];
         <div class="container">
             <div class="conteudo_admin">
                 <div class="menu_content">
+                    <div class="mobile_box">
+                        <div class="menu_mobi">
+                            <div class="menu-btn-1" onclick="menuBtnFunction(this)">
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="menu">
                         <ul>
                             <?php foreach ($this->menu as $item) : ?>

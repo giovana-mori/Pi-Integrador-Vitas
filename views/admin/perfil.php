@@ -48,6 +48,16 @@
                 </div>
             </div>
         </div>
+        <div class="itens_split">
+            <div class="item_form">
+                <label for="name">Telefone 1</label>
+                <input type="tel" name="telefone1" id="telefone1" value="<?= $pessoa['TELEFONE1'] ?? null ?>" required>
+            </div>
+            <div class="item_form">
+                <label for="name">Telefone 2</label>
+                <input type="tel" name="telefone2" id="telefone2" value="<?= $pessoa['TELEFONE2'] ?? null  ?>">
+            </div>
+        </div>
         <div class="item_form">
             <label for="cep">CEP</label>
             <input type="text" name="cep" id="cep" value="<?= $pessoa['CEP'] ?>" required>

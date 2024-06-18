@@ -9,7 +9,7 @@ class PessoaDAO extends Conexao
 
     public function inserir($usuario)
     {
-        $sql = "INSERT INTO pessoas (nome, cpf, dataNasc, genero, email, senha, cep, logradouro, bairro, estado, cidade) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO pessoas (nome, cpf, dataNasc, genero, email, senha, cep, logradouro, bairro, estado, cidade, telefone1, telefone2) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $usuario->getNome());
@@ -24,6 +24,8 @@ class PessoaDAO extends Conexao
             $stm->bindValue(9, $usuario->getBairro());
             $stm->bindValue(10, $usuario->getEstado());
             $stm->bindValue(11, $usuario->getCidade());
+            $stm->bindValue(12, $usuario->getTelefone1());
+            $stm->bindValue(13, $usuario->getTelefone2());
             $stm->execute();
             $id_pessoa = $this->db->lastInsertId();
             $this->db = null;
@@ -34,7 +36,7 @@ class PessoaDAO extends Conexao
     }
     public function alterar($usuario)
     {
-        $sql = "UPDATE pessoas SET nome = ?, cpf = ?, dataNasc = ?, genero = ?, email = ?, cep = ?, logradouro = ?, bairro = ?, estado = ?, cidade = ? WHERE id_pessoa = ?";
+        $sql = "UPDATE pessoas SET nome = ?, cpf = ?, dataNasc = ?, genero = ?, email = ?, cep = ?, logradouro = ?, bairro = ?, estado = ?, cidade = ?, telefone1 = ?, telefone2 = ? WHERE id_pessoa = ?";
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $usuario->getNome());
@@ -47,9 +49,10 @@ class PessoaDAO extends Conexao
             $stm->bindValue(8, $usuario->getBairro());
             $stm->bindValue(9, $usuario->getEstado());
             $stm->bindValue(10, $usuario->getCidade());
-            $stm->bindValue(11, $usuario->getId_pessoa());
+            $stm->bindValue(11, $usuario->getTelefone1());
+            $stm->bindValue(12, $usuario->getTelefone2());
+            $stm->bindValue(13, $usuario->getId_pessoa());
             $stm->execute();
-            $this->db = null;
             return true;
         } catch (PDOException $e) {
             return false;
@@ -77,6 +80,19 @@ class PessoaDAO extends Conexao
         try {
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $id);
+            $stm->execute();
+            $this->db = null;
+            return $stm->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    public function buscarToken($token)
+    {
+        $sql = "SELECT * FROM pessoas WHERE token = ?";
+        try {
+            $stm = $this->db->prepare($sql);
+            $stm->bindValue(1, $token);
             $stm->execute();
             $this->db = null;
             return $stm->fetch(PDO::FETCH_ASSOC);
@@ -168,8 +184,37 @@ class PessoaDAO extends Conexao
             $stm = $this->db->prepare($sql);
             $stm->bindValue(1, $email);
             $stm->execute();
-            $this->db = null;
             return $stm->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function generateToken($id)
+    {
+        $token = bin2hex(random_bytes(32));
+        $sql = "UPDATE pessoas SET token = ? WHERE id_pessoa = ?";
+        try {
+            $stm = $this->db->prepare($sql);
+            $stm->bindValue(1, $token);
+            $stm->bindValue(2, $id);
+            $stm->execute();
+            return $token;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    //update senha
+    public function updateSenha($id, $senha)
+    {
+        $sql = "UPDATE pessoas SET senha = ? WHERE id_pessoa = ?";
+        try {
+            $stm = $this->db->prepare($sql);
+            $stm->bindValue(1, $senha);
+            $stm->bindValue(2, $id);
+            $stm->execute();
+            return true;
         } catch (PDOException $e) {
             return false;
         }

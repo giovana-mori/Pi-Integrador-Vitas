@@ -51,6 +51,8 @@ $router->get("/login", [LoginController::class, "index"]);
 $router->post("/auth", [LoginController::class, "auth"]);
 $router->get("/logout", [LoginController::class, "logout"]);
 $router->get("/esquecisenha", [LoginController::class, "forgot"]);
+$router->get("/redifinirsenha", [LoginController::class, "redifinirSenha"]);
+$router->post("/redifinirsenha", [LoginController::class, "alterarSenha"]);
 
 $router->get("/registro", [RegisterController::class, "index"]);
 $router->post("/registro", [RegisterController::class, "registrar"]);
@@ -71,7 +73,7 @@ $router->get("/agendamentos", [ProfissionaisController::class, "listarAgendament
 $router->get("/editaragendamento/{id}", [AgendamentosController::class, "editarAgendamento"]);
 $router->post("/editaragendamento/{id}", [AgendamentosController::class, "updateAgendamento"]);
 
-$router->get("/clientes", [PessoasController::class, "index"]);
+$router->get("/pessoas", [PessoasController::class, "index"]);
 $router->get("/novocadastro", [PessoasController::class, "cadastro"]);
 $router->post("/novocadastro", [PessoasController::class, "inserir"]);
 $router->get("/editarcadastro/{id}", [PessoasController::class, "editar"]);
@@ -109,3 +111,4 @@ $router->post("/api/enviarcontato", [APIController::class, "sendContato"]);
 $router->get("/api/vermensagem/{id}", [APIController::class, "verContato"]);
 $router->get("/api/buscarcontatos", [APIController::class, "buscarContatos"]);
 $router->get("/api/buscarcontatos/{nome}", [APIController::class, "buscarContatos"]);
+$router->get("/api/deletaragendamento/{id}", [APIController::class, "deletarAgendamento"]);

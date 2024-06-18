@@ -148,38 +148,70 @@ class Utils
 
         return $diasDisponiveis;
     }
-    
+
     //send email with phpmailer
-    public static function sendEmailPHPMailer(){        
+    public static function sendEmailPHPMailer($nome, $email, $assunto, $message)
+    {
         $mail = new PHPMailer(true);
-        
+
         try {
             // Configurações do servidor
             $mail->isSMTP();
-            $mail->SMTPDebug = 2;
+            // $mail->SMTPDebug = 2;
             $mail->Debugoutput = 'html'; // Formato de saída do debug
             $mail->Host       = 'email-ssl.com.br';
             $mail->SMTPAuth   = true;
             $mail->Username   = 'contato@vitas.servicos.ws';
             $mail->Password   = '@7A1b2c3d4';
+            $mail->CharSet    = "UTF-8";
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = 587;
-        
+
+
             // Destinatários
+            $mail->addCustomHeader("Content-type", "text/html; charset=UTF-8");
             $mail->setFrom('contato@vitas.servicos.ws', 'Contato Vitas');
-            $mail->addAddress('andrericardosilva26@gmail.com', 'TESTE do Destinatário');
-        
+            $mail->addAddress($email, $nome);
+
             // Conteúdo
             $mail->isHTML(true);
-            $mail->Subject = 'Assunto do Email';
-            $mail->Body    = 'Corpo do email em <b>HTML</b>';
-            $mail->AltBody = 'Corpo do email em texto simples';
-        
+            $mail->WordWrap = 50;
+            $mail->Subject = html_entity_decode($assunto);
+            $mail->Body    = $message;
+            // $mail->AltBody = 'Corpo do email em texto simples';
+
             $mail->send();
-            echo 'Email enviado com sucesso';
+            // echo 'Email enviado com sucesso';
         } catch (Exception $e) {
-            echo "Email não pôde ser enviado. Mailer Error: {$mail->ErrorInfo} - {$e}";
+            // echo "Email não pôde ser enviado. Mailer Error: {$mail->ErrorInfo} - {$e}";
         }
-        
+    }
+
+    public static function getTemplateRecuperacaoSenha($token = null)
+    {
+        $template = '
+                <div style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
+                    <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                        <div style="text-align: center; padding-bottom: 20px;">
+                            <h1 style="color: #333333; margin: 0; font-size: 24px;">Recuperação de Senha</h1>
+                        </div>
+                        <div style="font-size: 16px; color: #555555; line-height: 1.6; margin: 20px 0;">
+                            <p>Olá,</p>
+                            <p>Recebemos uma solicitação para redefinir a senha da sua conta. Se você não fez essa solicitação, pode ignorar este e-mail.</p>
+                            <p>Para redefinir sua senha, clique no botão abaixo:</p>
+                            <div style="text-align: center; margin: 30px 0;">
+                                <a href="' . Utils::base_url('redifinirsenha') . '?token=' . $token . '" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-decoration: none; border-radius: 5px; font-size: 16px; display: inline-block;">Redefinir Senha</a>
+                            </div>
+                            <p>Se o botão acima não funcionar, copie e cole o seguinte link no seu navegador:</p>
+                            <p><a href="' . Utils::base_url('redifinirsenha') . '?token=' . $token . '" style="color: #4CAF50;">' . Utils::base_url('redifinirsenha') . '?token=' . $token . 'I</a></p>
+                            <p>Atenciosamente,<br>Sua Equipe de Suporte</p>
+                        </div>
+                        <div style="text-align: center; color: #999999; font-size: 14px; margin-top: 20px;">
+                            <p>&copy; 2024 Vitas. Todos os direitos reservados.</p>
+                        </div>
+                    </div>
+                </div>';
+
+        return $template;
     }
 }

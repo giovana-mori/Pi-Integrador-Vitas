@@ -2,15 +2,19 @@
 
 class Telefone
 {
-    public function __construct(private string $ddd = "", private string $numero = "")
+    public function __construct(private string $ddd = "", private string $numero = "", private int $pessoa_id)
     {
-       
         $this->ddd = $ddd;
         $this->numero = $numero;
+        $this->pessoa_id = $pessoa_id;
     }
     public function getDdd()
     {
         return $this->ddd;
+    }
+    public function getPessoaId()
+    {
+        return $this->pessoa_id;
     }
     public function setDdd($ddd)
     {
@@ -24,7 +28,10 @@ class Telefone
     {
         $this->numero = $numero;
     }
-
+    public function setPessoaId($pessoa_id)
+    {
+        $this->pessoa_id = $pessoa_id;
+    }
 }
 
 // Composição

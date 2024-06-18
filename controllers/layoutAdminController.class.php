@@ -15,14 +15,14 @@ abstract class layoutAdminController extends AuthController
     {
         $clinica = new ClinicaDAO();
         $clinicaInfos = $clinica->buscar();
-        $data['clinica'] = $clinicaInfos;
+        $data['clinicainfos'] = $clinicaInfos;
 
         $this->menu = array(
             array('Perfil', 'perfil', ['PACIENTE', 'ADM GERAL', 'PROFISSIONAL SAÚDE']),
             array('Agendar', 'agendar', ['PACIENTE']),
             array('Criar Agendamento', 'agendarpresencial', ['ADM GERAL']),
             array('Agendamentos', 'agendamentos', ['ADM GERAL']),
-            array('Clientes', 'clientes', ['ADM GERAL']),
+            array('Pessoas', 'pessoas', ['ADM GERAL']),
             array('Profissionais', 'profissionais', ['ADM GERAL']),
             array('Configurações', 'clinica', ['ADM GERAL']),
             array('Meus Agendamentos', 'meusagendamentos', ['PACIENTE']),

@@ -17,33 +17,36 @@
         <?php
         if (isset($contatos) && count($contatos) > 0) :
         ?>
-            <table class="table_admin">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Assunto</th>
-                        <th>Descrição</th>
-                        <th>Data</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    //$pessoas é a variavel que recebeu as pessoas do banco, e $p é a variavel auxiliar do foreach que contem a pessoa
-                    foreach ($contatos as $p) {
-                        echo '<tr>';
-                        echo '<td>' . $p['ID_CONTATO'] . '</td>';
-                        echo '<td>' . $p['NOME'] . '</td>';
-                        echo '<td>' . $p['ASSUNTO'] . '</td>';
-                        echo '<td>' . $p['DESCRICAO'] . '</td>';
-                        echo '<td>' . Utils::formatarData($p['DATA']) . '</td>';
-                        echo '<td><a href="javascript:openContato(' . $p['ID_CONTATO'] . ')" class="btn btn_editar">Visualizar</a></td>';
-                        echo '</tr>';
-                    }
-                    ?>
-                </tbody>
-            </table>
+
+            <div class="wrapper_table">
+                <table class="table_admin">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Assunto</th>
+                            <th>Descrição</th>
+                            <th>Data</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        //$pessoas é a variavel que recebeu as pessoas do banco, e $p é a variavel auxiliar do foreach que contem a pessoa
+                        foreach ($contatos as $p) {
+                            echo '<tr>';
+                            echo '<td>' . $p['ID_CONTATO'] . '</td>';
+                            echo '<td>' . $p['NOME'] . '</td>';
+                            echo '<td>' . $p['ASSUNTO'] . '</td>';
+                            echo '<td>' . $p['DESCRICAO'] . '</td>';
+                            echo '<td>' . Utils::formatarData($p['DATA']) . '</td>';
+                            echo '<td><a href="javascript:openContato(' . $p['ID_CONTATO'] . ')" class="btn btn_editar">Visualizar</a></td>';
+                            echo '</tr>';
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         <?php
         else :
             echo '<p class="text-center">Nenhum Contato cadastrado</p>';
